@@ -22,6 +22,17 @@ class ListActivity : AppCompatActivity() {
         setContentView(R.layout.activity_list)
         setSupportActionBar(toolbar)
 
+        // MemoListFragment를 화면에 표시
+        val fragmentTransation = supportFragmentManager.beginTransaction()
+        fragmentTransation.replace(R.id.contentLayout, MemoListFragment())
+        fragmentTransation.commit()
+
+        // ListViewModel을 가져오는 코드    app에서 생성된다   provider 생성필요
+        viewModel = application!!.let {
+            ViewModelProvider(viewModelStore, ViewModelProvider.AndroidViewModelFactory(it))
+                .get(ListViewModel::class.java) // get으로 받는다
+        }
+
         //추가 클릭하면 DetailActivity로 이동
         fab.setOnClickListener { view ->
             //val intent = Intent(applicationContext, DetailActivity::class.java)
@@ -35,17 +46,6 @@ class ListActivity : AppCompatActivity() {
                 it.addMemo(memoData)
             }
         }
-
-        // MemoListFragment를 화면에 표시
-        val fragmentTransation = supportFragmentManager.beginTransaction()
-        fragmentTransation.replace(R.id.contentLayout, MemoListFragment())
-        fragmentTransation.commit()
-        // ListViewModel을 가져오는 코드    app에서 생성된다   provider 생성필요
-        viewModel = application!!.let {
-            ViewModelProvider(viewModelStore, ViewModelProvider.AndroidViewModelFactory(it))
-                .get(ListViewModel::class.java) // get으로 받는다
-        }
-
     }
 
 }
