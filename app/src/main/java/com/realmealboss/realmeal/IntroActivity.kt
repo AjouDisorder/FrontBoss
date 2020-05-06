@@ -18,7 +18,7 @@ class IntroActivity : AppCompatActivity() {
         // Runnable이 실행되면 ListActivity로 이동하는 코드
         //                      LoginActivity
         runnable = Runnable {
-            val intent = Intent(applicationContext, LoginActivity::class.java)
+            val intent = Intent(applicationContext, ListActivity::class.java)
             startActivity(intent)
         }
         // Handler를 생성하고 2000ms(2초)후 runnable을 실행
