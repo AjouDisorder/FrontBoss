@@ -13,6 +13,20 @@ class IntroActivity : AppCompatActivity() {
     var handler: Handler? = null
     var runnable: Runnable? = null
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_intro)
+
+        //첫 인트로 화면 띄울때 전체 화면으로 띄우기
+        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LOW_PROFILE or
+                View.SYSTEM_UI_FLAG_FULLSCREEN or
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
+                View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY or
+                View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION or
+                View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+        //
+    }
+
     override fun onResume() {
         super.onResume()
         // Runnable이 실행되면 ListActivity로 이동하는 코드
@@ -27,25 +41,10 @@ class IntroActivity : AppCompatActivity() {
             postDelayed(runnable, 2000)
         }
     }
+
     override fun onPause() {// Activity Pause 상태일 때 runnable도 중단
         super.onPause()
 
         handler?.removeCallbacks(runnable)
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_intro)
-
-        //첫 인트로 화면 띄울때 전체 화면으로 띄우기
-        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LOW_PROFILE or
-                View.SYSTEM_UI_FLAG_FULLSCREEN or
-                View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
-                View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY or
-                View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION or
-                View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-        //
-
-
     }
 }

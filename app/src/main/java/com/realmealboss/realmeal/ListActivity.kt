@@ -15,7 +15,8 @@ import java.util.*
 
 class ListActivity : AppCompatActivity() {
 
-    private var viewModel: ListViewModel? = null // ListViewModel을 담을 변수를 추가
+    // ListViewModel을 담을 변수를 추가
+    private var viewModel: ListViewModel? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
