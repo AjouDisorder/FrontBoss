@@ -13,8 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".KakaoInfoActivity"></activity>
-        <!-- 카카오 -->
+        <activity android:name=".KakaoAddressActivity" />
+        <activity android:name=".KakaoInfoActivity" /> <!-- 카카오 -->
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/KAKAO_APP_KEY" />
