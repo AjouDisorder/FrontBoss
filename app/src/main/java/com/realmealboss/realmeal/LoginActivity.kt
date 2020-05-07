@@ -157,7 +157,7 @@ class LoginActivity : AppCompatActivity() {
             UserManagement.getInstance().me( object : MeV2ResponseCallback() {
                 override fun onSuccess(result: MeV2Response?) {
                     // 로그인이 성공했을 때
-                    var intent = Intent(this@LoginActivity, ListActivity::class.java)
+                    var intent = Intent(this@LoginActivity, KakaoInfoActivity::class.java)
                     intent.putExtra("name", result!!.getNickname())
                     intent.putExtra("profile", result!!.getProfileImagePath())
                     startActivity(intent)

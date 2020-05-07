@@ -1,10 +1,10 @@
 <resources>
     <string name="app_name">RealMeal</string>
     <string name="title_activity_list">ListActivity</string>
-    
+
     <!-- 카카오 APP KEY -->
     <string name="KAKAO_APP_KEY">abfa37d4b5bb169145a0780b33b6652e</string>
-    
+
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
