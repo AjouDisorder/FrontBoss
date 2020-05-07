@@ -1,9 +1,16 @@
 package com.realmealboss.realmeal
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.content.pm.PackageInfo
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Handler
+import android.util.Base64
+import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
+import java.security.MessageDigest
+import java.security.NoSuchAlgorithmException
+
 
 class SplashScreenActivity : AppCompatActivity() {
 
@@ -17,5 +24,28 @@ class SplashScreenActivity : AppCompatActivity() {
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
         }, SPLASH_TIME_OUT)
+
+        getHashKey()
+    }
+
+    // API 활용을 위한 KeyHash 구하기
+    private fun getHashKey() {
+        var packageInfo: PackageInfo? = null
+        try {
+            packageInfo =
+                packageManager.getPackageInfo(packageName, PackageManager.GET_SIGNATURES)
+        } catch (e: PackageManager.NameNotFoundException) {
+            e.printStackTrace()
+        }
+        if (packageInfo == null) Log.e("KeyHash", "KeyHash:null")
+        for (signature in packageInfo!!.signatures) {
+            try {
+                val md: MessageDigest = MessageDigest.getInstance("SHA")
+                md.update(signature.toByteArray())
+                Log.d("KeyHash", Base64.encodeToString(md.digest(), Base64.DEFAULT))
+            } catch (e: NoSuchAlgorithmException) {
+                Log.e("KeyHash", "Unable to get MessageDigest. signature=$signature", e)
+            }
+        }
     }
 }
