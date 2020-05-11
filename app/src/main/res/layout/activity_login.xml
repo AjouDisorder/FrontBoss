@@ -28,6 +28,7 @@
             <TextView
                 android:id="@+id/txt_create_account"
                 android:text="그 때, 그 밥 (사장님)"
+                android:textSize="30sp"
                 android:textStyle="bold"
                 android:textColor="@android:color/white"
                 android:layout_margin="16dp"
@@ -47,11 +48,11 @@
 
         <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/edt_email"
-            android:hint="이메일"
+            android:hint="아이디"
             android:inputType="textEmailAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:met_iconRight="@drawable/ic_email"
+            app:met_iconRight="@drawable/ic_id"
             app:met_primaryColor="@color/myTextColor"
             app:met_baseColor="@color/myTextColor"
             app:met_textColorHint="@color/myTextColor"
@@ -73,35 +74,45 @@
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/login_button"
-        android:text="로 그 인"
-        android:textColor="@android:color/white"
-        android:textSize="20dp"
-        android:background="#431F63"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_margin="16dp"
-        style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
+        android:padding="16dp"
+        android:background="@android:color/white"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content">
 
-    <com.kakao.usermgmt.LoginButton
-        android:id="@+id/kakao_login_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:layout_marginBottom="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp" />
+        <Button
+            android:id="@+id/login_button"
+            android:text="로 그 인"
+            android:textColor="@android:color/white"
+            android:textSize="20dp"
+            android:background="#431F63"
+            android:layout_margin="16dp"
+            style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-    <Button
-        android:id="@+id/join_button"
-        android:text="회 원 가 입"
-        android:textColor="#431F63"
-        android:textSize="20dp"
-        android:background="#FFFFFF"
-        android:layout_margin="16dp"
-        style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        <com.kakao.usermgmt.LoginButton
+            android:id="@+id/kakao_login_button"
+            android:text="카카오 로그인"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginBottom="64dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp" />
 
+        <Button
+            android:id="@+id/join_button"
+            android:text="회 원 가 입"
+            android:textColor="#431F63"
+            android:textSize="20dp"
+            android:background="#FF9FF3"
+            android:layout_margin="16dp"
+            style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
 </LinearLayout>
