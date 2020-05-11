@@ -13,6 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".RtrofitTestActivity"></activity>
         <activity android:name=".KakaoAddressActivity" />
         <activity android:name=".KakaoInfoActivity" /> <!-- 카카오 -->
         <meta-data
