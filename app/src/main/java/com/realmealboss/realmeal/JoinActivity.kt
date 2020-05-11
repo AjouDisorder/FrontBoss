@@ -27,12 +27,12 @@ class JoinActivity : AppCompatActivity() {
         // click button
         join_accept_button.setOnClickListener {
 
-            var id = join_id.text.toString()
+            var bossId = join_id.text.toString()
             var password = join_password.text.toString()
             var name = join_name.text.toString()
 
             //Check empty
-            if(TextUtils.isEmpty(id)){
+            if(TextUtils.isEmpty(bossId)){
                 Toast.makeText(this,"Email can not be null or empty", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
@@ -44,7 +44,7 @@ class JoinActivity : AppCompatActivity() {
                 Toast.makeText(this,"Name can not be null or empty", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            iMyService.joinBoss(id, password, name).enqueue(object : Callback<ResponseDTO> {
+            iMyService.joinBoss(bossId, password, name).enqueue(object : Callback<ResponseDTO> {
                 override fun onFailure(call: Call<ResponseDTO>?, t: Throwable?) {
 
                 }
@@ -53,6 +53,7 @@ class JoinActivity : AppCompatActivity() {
                     call: Call<ResponseDTO>?,
                     response: Response<ResponseDTO>?
                 ) {
+                    Toast.makeText(this@JoinActivity,response?.body().toString(), Toast.LENGTH_SHORT).show()
                     println(response?.body().toString())
                 }
             })

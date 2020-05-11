@@ -24,6 +24,7 @@ interface IMyService{
     fun loginBoss(@Field("bossId") email: String,
                   @Field("password") password: String): Call<ResponseDTO>
 */
+    @FormUrlEncoded
     @POST("boss/signup")
     fun joinBoss(@Field("bossId") bossId: String,
                  @Field("password") password: String,
