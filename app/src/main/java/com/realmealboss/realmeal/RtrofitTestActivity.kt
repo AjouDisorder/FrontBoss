@@ -2,7 +2,7 @@ package com.realmealboss.realmeal
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.realmealboss.realmeal.Retrofit.ResponseDTO
+import com.realmealboss.realmeal.Retrofit.ResponseDTOex
 import com.realmealboss.realmeal.Retrofit.TestService
 import kotlinx.android.synthetic.main.activity_rtrofit_test.*
 import retrofit2.Call
@@ -27,23 +27,23 @@ class RtrofitTestActivity : AppCompatActivity() {
         var server =retrofit.create(TestService::class.java)
 
         button_get.setOnClickListener{
-            server.getRequest("messi").enqueue(object:Callback<ResponseDTO>{
-                override fun onFailure(call: Call<ResponseDTO>?, t: Throwable?) {
+            server.getRequest("messi").enqueue(object:Callback<ResponseDTOex>{
+                override fun onFailure(call: Call<ResponseDTOex>?, t: Throwable?) {
 
                 }
-                override fun onResponse(call: Call<ResponseDTO>?, response: Response<ResponseDTO>?) {
+                override fun onResponse(call: Call<ResponseDTOex>?, response: Response<ResponseDTOex>?) {
                     println(response?.body().toString())
                 }
             })
         }
 
         button_get_param.setOnClickListener{
-            server.getParamRequest("board01").enqueue(object:Callback<ResponseDTO>{
-                override fun onFailure(call: Call<ResponseDTO>?, t: Throwable?) {
+            server.getParamRequest("board01").enqueue(object:Callback<ResponseDTOex>{
+                override fun onFailure(call: Call<ResponseDTOex>?, t: Throwable?) {
 
                 }
 
-                override fun onResponse(call: Call<ResponseDTO>?, response: Response<ResponseDTO>?) {
+                override fun onResponse(call: Call<ResponseDTOex>?, response: Response<ResponseDTOex>?) {
                     println(response?.body().toString())
                 }
 
@@ -51,12 +51,12 @@ class RtrofitTestActivity : AppCompatActivity() {
         }
 
         button_post.setOnClickListener{
-            server.postRequest("test","1234").enqueue(object:Callback<ResponseDTO>{
-                override fun onFailure(call: Call<ResponseDTO>?, t: Throwable?) {
+            server.postRequest("test","1234").enqueue(object:Callback<ResponseDTOex>{
+                override fun onFailure(call: Call<ResponseDTOex>?, t: Throwable?) {
 
                 }
 
-                override fun onResponse(call: Call<ResponseDTO>?, response: Response<ResponseDTO>?) {
+                override fun onResponse(call: Call<ResponseDTOex>?, response: Response<ResponseDTOex>?) {
                     println(response?.body().toString())
                 }
 
@@ -64,12 +64,12 @@ class RtrofitTestActivity : AppCompatActivity() {
         }
 
         button_update.setOnClickListener{
-            server.putRequest("board01", "Edit Edit").enqueue(object:Callback<ResponseDTO>{
-                override fun onFailure(call: Call<ResponseDTO>?, t: Throwable?) {
+            server.putRequest("board01", "Edit Edit").enqueue(object:Callback<ResponseDTOex>{
+                override fun onFailure(call: Call<ResponseDTOex>?, t: Throwable?) {
 
                 }
 
-                override fun onResponse(call: Call<ResponseDTO>?, response: Response<ResponseDTO>?) {
+                override fun onResponse(call: Call<ResponseDTOex>?, response: Response<ResponseDTOex>?) {
                     println(response?.body().toString())
                 }
 
@@ -77,12 +77,12 @@ class RtrofitTestActivity : AppCompatActivity() {
         }
 
         button_delete.setOnClickListener{
-            server.deleteRequest("board01").enqueue(object:Callback<ResponseDTO>{
-                override fun onFailure(call: Call<ResponseDTO>?, t: Throwable?) {
+            server.deleteRequest("board01").enqueue(object:Callback<ResponseDTOex>{
+                override fun onFailure(call: Call<ResponseDTOex>?, t: Throwable?) {
 
                 }
 
-                override fun onResponse(call: Call<ResponseDTO>?, response: Response<ResponseDTO>?) {
+                override fun onResponse(call: Call<ResponseDTOex>?, response: Response<ResponseDTOex>?) {
                     println(response?.body().toString())
                 }
 

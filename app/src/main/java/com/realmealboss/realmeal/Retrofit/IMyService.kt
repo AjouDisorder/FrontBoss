@@ -3,11 +3,12 @@ package com.realmealboss.realmeal.Retrofit
 import android.provider.ContactsContract
 import io.reactivex.Observable
 import retrofit2.Call
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.POST
+import retrofit2.http.*
+
+data class ResponseDTO(var result:String? = null)
 
 interface IMyService{
+    /*
     @FormUrlEncoded
     @POST("boss/signup")
     fun joinBoss(@Field("bossId") bossId: String,
@@ -22,6 +23,21 @@ interface IMyService{
     @POST("boss/login")
     fun loginBoss(@Field("bossId") email: String,
                   @Field("password") password: String): Call<ResponseDTO>
+*/
+    @POST("boss/signup")
+    fun joinBoss(@Field("bossId") bossId: String,
+                 @Field("password") password: String,
+                 @Field("name") name: String
+        //@Field("age") age: String,
+        //@Field("sex") sex: String,
+        //@Field("phone") phone: String
+    ): Call<ResponseDTO>
+
+    @FormUrlEncoded
+    @POST("boss/login")
+    fun loginBoss(@Field("bossId") email: String,
+                  @Field("password") password: String): Call<ResponseDTO>
+
 
 
 }
