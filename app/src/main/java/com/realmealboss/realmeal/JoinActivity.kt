@@ -1,5 +1,6 @@
 package com.realmealboss.realmeal
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
@@ -33,15 +34,15 @@ class JoinActivity : AppCompatActivity() {
 
             //Check empty
             if(TextUtils.isEmpty(bossId)){
-                Toast.makeText(this,"Email can not be null or empty", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,"아이디를 입력해주세요", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
             if(TextUtils.isEmpty(password)){
-                Toast.makeText(this,"Password can not be null or empty", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,"비밀번호를 입력해주세요", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
             if(TextUtils.isEmpty(name)){
-                Toast.makeText(this,"Name can not be null or empty", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,"이름을 입력해주세요", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
             iMyService.joinBoss(bossId, password, name).enqueue(object : Callback<ResponseDTO> {
@@ -55,6 +56,8 @@ class JoinActivity : AppCompatActivity() {
                 ) {
                     Toast.makeText(this@JoinActivity,response?.body().toString(), Toast.LENGTH_SHORT).show()
                     println(response?.body().toString())
+                    val intent = Intent(this@JoinActivity, LoginActivity::class.java)
+                    startActivity(intent)
                 }
             })
         }

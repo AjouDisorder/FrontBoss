@@ -50,13 +50,14 @@ class KakaoInfoActivity : AppCompatActivity() {
         super.onDestroy()
         Session.getCurrentSession().removeCallback(callback)
     }
+
     private inner class SessionCallback : ISessionCallback {
         override fun onSessionOpened() {
             // 로그인 세션이 열렸을 때
             UserManagement.getInstance().me( object : MeV2ResponseCallback() {
                 override fun onSuccess(result: MeV2Response?) {
                     // 로그인이 성공했을 때
-                    var intent = Intent(this@KakaoInfoActivity, KakaoInfoActivity::class.java)
+                    var intent = Intent(this@KakaoInfoActivity, ListActivity::class.java)
                     intent.putExtra("name", result!!.getNickname())
                     intent.putExtra("profile", result!!.getProfileImagePath())
                     startActivity(intent)

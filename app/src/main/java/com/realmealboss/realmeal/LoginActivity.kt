@@ -20,12 +20,16 @@ import com.kakao.usermgmt.callback.MeV2ResponseCallback
 import com.kakao.usermgmt.response.MeV2Response
 import com.kakao.util.exception.KakaoException
 import com.realmealboss.realmeal.Retrofit.IMyService
+import com.realmealboss.realmeal.Retrofit.ResponseDTO
 import com.realmealboss.realmeal.Retrofit.RetrofitClient
 import com.rengwuxian.materialedittext.MaterialEditText
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_login.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.security.MessageDigest
 
 class LoginActivity : AppCompatActivity() {
@@ -48,14 +52,13 @@ class LoginActivity : AppCompatActivity() {
 
         //event
         login_button.setOnClickListener{
-            loginUser(edt_email.text.toString(),edt_password.text.toString())
+            loginUser(login_id.text.toString(),login_password.text.toString())
         }
 
-        kakao_login_button.setOnClickListener {
-            Toast.makeText(this,"Kakao",Toast.LENGTH_SHORT).show()
+        kakao_button.setOnClickListener {
+            //Toast.makeText(this,"Kakao",Toast.LENGTH_SHORT).show()
             val intent = Intent(this, KakaoInfoActivity::class.java)
             startActivity(intent)
-            finish()
         }
 
         join_button.setOnClickListener {
@@ -65,16 +68,35 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun loginUser(id: String, password: String) {
-
         //Check empty
         if(TextUtils.isEmpty(id)){
-            Toast.makeText(this,"Email can not be null or empty",Toast.LENGTH_SHORT).show()
+            Toast.makeText(this,"아이디를 입력해 주세요",Toast.LENGTH_SHORT).show()
             return;
         }
         if(TextUtils.isEmpty(password)){
-            Toast.makeText(this,"Password can not be null or empty",Toast.LENGTH_SHORT).show()
+            Toast.makeText(this,"비밀번호를 입력해 주세요",Toast.LENGTH_SHORT).show()
             return;
         }
+
+        iMyService.loginBoss(id, password).enqueue(object : Callback<ResponseDTO> {
+            override fun onFailure(call: Call<ResponseDTO>?, t: Throwable?) {
+
+            }
+
+            override fun onResponse(
+                call: Call<ResponseDTO>?,
+                response: Response<ResponseDTO>?
+            ) {
+                println(response?.body().toString())
+                if(response?.body().toString() == "ResponseDTO(result=login success)") {
+                    val intent = Intent(this@LoginActivity, ListActivity::class.java)
+                    startActivity(intent)
+                }else{
+                    Toast.makeText(this@LoginActivity,"없는 회원입니다",Toast.LENGTH_SHORT).show()
+                }
+            }
+        })
+
     }
 
     // 앱의 해쉬 키 얻는 함수
