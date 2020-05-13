@@ -13,7 +13,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".JoinActivity"></activity>
+        <activity android:name=".Home.MenuInfoActivity"></activity>
+        <activity android:name=".Home.MartInfoActivity" />
+        <activity android:name=".Home.HomeActivity" />
+        <activity android:name=".JoinActivity" />
         <activity android:name=".RtrofitTestActivity" />
         <activity android:name=".KakaoAddressActivity" />
         <activity android:name=".KakaoInfoActivity" /> <!-- 카카오 -->

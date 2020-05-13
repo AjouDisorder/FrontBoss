@@ -19,6 +19,7 @@ import com.kakao.usermgmt.UserManagement
 import com.kakao.usermgmt.callback.MeV2ResponseCallback
 import com.kakao.usermgmt.response.MeV2Response
 import com.kakao.util.exception.KakaoException
+import com.realmealboss.realmeal.Home.HomeActivity
 import com.realmealboss.realmeal.Retrofit.IMyService
 import com.realmealboss.realmeal.Retrofit.ResponseDTO
 import com.realmealboss.realmeal.Retrofit.RetrofitClient
@@ -89,7 +90,7 @@ class LoginActivity : AppCompatActivity() {
             ) {
                 println(response?.body().toString())
                 if(response?.body().toString() == "ResponseDTO(result=login success)") {
-                    val intent = Intent(this@LoginActivity, ListActivity::class.java)
+                    val intent = Intent(this@LoginActivity, HomeActivity::class.java)
                     startActivity(intent)
                 }else{
                     Toast.makeText(this@LoginActivity,"없는 회원입니다",Toast.LENGTH_SHORT).show()
