@@ -7,26 +7,11 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.util.Base64
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
 import android.widget.Toast
-import com.afollestad.materialdialogs.MaterialDialog
-import com.github.javiersantos.materialstyleddialogs.MaterialStyledDialog
-import com.kakao.auth.ISessionCallback
-import com.kakao.auth.Session
-import com.kakao.network.ErrorResult
-import com.kakao.usermgmt.UserManagement
-import com.kakao.usermgmt.callback.MeV2ResponseCallback
-import com.kakao.usermgmt.response.MeV2Response
-import com.kakao.util.exception.KakaoException
 import com.realmealboss.realmeal.Home.HomeActivity
 import com.realmealboss.realmeal.Retrofit.IMyService
 import com.realmealboss.realmeal.Retrofit.ResponseDTO
 import com.realmealboss.realmeal.Retrofit.RetrofitClient
-import com.rengwuxian.materialedittext.MaterialEditText
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_login.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -90,6 +75,7 @@ class LoginActivity : AppCompatActivity() {
             ) {
                 println(response?.body().toString())
                 if(response?.body().toString() == "ResponseDTO(result=login success)") {
+                    BossData.setBid(id)
                     val intent = Intent(this@LoginActivity, HomeActivity::class.java)
                     startActivity(intent)
                 }else{
