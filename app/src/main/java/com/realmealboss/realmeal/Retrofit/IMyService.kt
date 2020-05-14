@@ -31,5 +31,19 @@ interface IMyService{
                          @Field("phone") phone: String
     ): Call<ResponseDTO>
 
+    @FormUrlEncoded
+    @POST("boss/createOriginMenu")
+    fun createOriginMenu(@Field("bossId") id: String,
+                         @Field("title") title: String,
+                         @Field("price") price: String,
+                         @Field("description") description: String
+    ): Call<ResponseDTO>
+
+    @FormUrlEncoded
+    @POST("boss/createMenu")
+    fun createMenu(@Field("bossId") id: String,
+                   @Field("title") title: String,
+                   @Field("discount") price: String,
+                   @Field("quantity") quantity: String): Call<ResponseDTO>
 
 }
