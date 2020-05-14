@@ -12,6 +12,7 @@ import com.kakao.usermgmt.UserManagement
 import com.kakao.usermgmt.callback.MeV2ResponseCallback
 import com.kakao.usermgmt.response.MeV2Response
 import com.kakao.util.exception.KakaoException
+import com.realmealboss.realmeal.Home.HomeActivity
 import kotlinx.android.synthetic.main.activity_kakao_info.*
 
 class KakaoInfoActivity : AppCompatActivity() {
@@ -34,7 +35,7 @@ class KakaoInfoActivity : AppCompatActivity() {
             .into(imgProfile)
 
         kakao_info_button.setOnClickListener{
-            val intent = Intent(this, ListActivity::class.java)
+            val intent = Intent(this, HomeActivity::class.java)
             startActivity(intent)
         }
     }
@@ -57,7 +58,7 @@ class KakaoInfoActivity : AppCompatActivity() {
             UserManagement.getInstance().me( object : MeV2ResponseCallback() {
                 override fun onSuccess(result: MeV2Response?) {
                     // 로그인이 성공했을 때
-                    var intent = Intent(this@KakaoInfoActivity, ListActivity::class.java)
+                    var intent = Intent(this@KakaoInfoActivity, HomeActivity::class.java)
                     intent.putExtra("name", result!!.getNickname())
                     intent.putExtra("profile", result!!.getProfileImagePath())
                     startActivity(intent)
