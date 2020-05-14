@@ -6,6 +6,7 @@ import retrofit2.Call
 import retrofit2.http.*
 
 data class ResponseDTO(var result:String? = null)
+data class Restaurant(var result:ArrayList<String>? = null)
 
 interface IMyService{
     @FormUrlEncoded
@@ -23,11 +24,12 @@ interface IMyService{
                   @Field("password") password: String): Call<ResponseDTO>
 
     @FormUrlEncoded
-    @POST("boss/login")
-    fun menuBoss(@Field("bossId") id: String,
-                  @Field("password") password: String): Call<ResponseDTO>
-
-
+    @POST("boss/createRestaurant")
+    fun createRestaurant(@Field("bossId") id: String,
+                         @Field("title") title: String,
+                         @Field("address") address: String,
+                         @Field("phone") phone: String
+    ): Call<ResponseDTO>
 
 
 }

@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Home.MartInfoActivity">
+    tools:context=".Home.PromoteActivity">
 
     <TextView
         android:id="@+id/home_title"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:text=" 가게 정보 등록 "
+        android:text=" 메뉴 홍보글 등록 "
         android:textStyle="bold"
         android:textSize="40sp"
         android:layout_margin="16dp"
@@ -28,14 +28,14 @@
         app:layout_constraintTop_toBottomOf="@+id/home_title">
 
         <TextView
-            android:text="가게명"
+            android:text="메뉴명"
             android:textSize="20sp"
             android:textStyle="bold"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
         <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/mart_name"
-            android:hint="가게이름"
+            android:id="@+id/pro_menu_name"
+            android:hint="메뉴이름"
             android:layout_marginBottom="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -46,14 +46,14 @@
         </com.rengwuxian.materialedittext.MaterialEditText>
 
         <TextView
-            android:text="가게주소"
+            android:text="할인가격"
             android:textSize="20sp"
             android:textStyle="bold"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
         <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/mart_address"
-            android:hint="가게주소"
+            android:id="@+id/pro_menu_price"
+            android:hint="할인된 가격"
             android:layout_marginBottom="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -64,14 +64,26 @@
         </com.rengwuxian.materialedittext.MaterialEditText>
 
         <TextView
-            android:text="가게소개"
+            android:text="제한 날짜 설정"
             android:textSize="20sp"
             android:textStyle="bold"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
         <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/mart_intro"
-            android:hint="가게 소개글"
+            android:id="@+id/pro_menu_aseason"
+            android:hint="ex)2020.05.16"
+            android:inputType="date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:met_primaryColor="@color/myTextColor"
+            app:met_baseColor="@color/myTextColor"
+            app:met_textColorHint="@color/myTextColor"
+            app:met_iconPadding="0dp">
+        </com.rengwuxian.materialedittext.MaterialEditText>
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/pro_menu_bseason"
+            android:hint="ex)2020.05.30"
+            android:inputType="datetime"
             android:layout_marginBottom="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -80,9 +92,59 @@
             app:met_textColorHint="@color/myTextColor"
             app:met_iconPadding="0dp">
         </com.rengwuxian.materialedittext.MaterialEditText>
+
+        <TextView
+            android:text="제한 시간 설정"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/pro_menu_atime"
+            android:hint="ex)14:00"
+            android:inputType="datetime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:met_primaryColor="@color/myTextColor"
+            app:met_baseColor="@color/myTextColor"
+            app:met_textColorHint="@color/myTextColor"
+            app:met_iconPadding="0dp">
+        </com.rengwuxian.materialedittext.MaterialEditText>
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/pro_menu_btime"
+            android:hint="ex)16:00"
+            android:inputType="datetime"
+            android:layout_marginBottom="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:met_primaryColor="@color/myTextColor"
+            app:met_baseColor="@color/myTextColor"
+            app:met_textColorHint="@color/myTextColor"
+            app:met_iconPadding="0dp">
+        </com.rengwuxian.materialedittext.MaterialEditText>
+
+        <TextView
+            android:text="제한수량"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/pro_menu_limit"
+            android:hint="제한 수량"
+            android:inputType="number"
+            android:layout_marginBottom="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:met_primaryColor="@color/myTextColor"
+            app:met_baseColor="@color/myTextColor"
+            app:met_textColorHint="@color/myTextColor"
+            app:met_iconPadding="0dp">
+        </com.rengwuxian.materialedittext.MaterialEditText>
+
         <Button
-            android:id="@+id/mart_info_submit"
-            android:text="가게 정보 등록"
+            android:id="@+id/pro_menu_submit"
+            android:text="메뉴 홍보글 등록"
             android:textColor="@android:color/white"
             android:textSize="20sp"
             android:textStyle="bold"
@@ -91,6 +153,7 @@
             style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+
 
     </LinearLayout>
 
