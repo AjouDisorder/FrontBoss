@@ -10,6 +10,7 @@ import android.util.Log
 import android.widget.Toast
 import com.realmealboss.realmeal.Home.HomeActivity
 import com.realmealboss.realmeal.Retrofit.IMyService
+import com.realmealboss.realmeal.Retrofit.ResponseBInfo
 import com.realmealboss.realmeal.Retrofit.ResponseDTO
 import com.realmealboss.realmeal.Retrofit.RetrofitClient
 import kotlinx.android.synthetic.main.activity_login.*
@@ -64,20 +65,22 @@ class LoginActivity : AppCompatActivity() {
             return;
         }
 
-        iMyService.loginBoss(id, password).enqueue(object : Callback<ResponseDTO> {
-            override fun onFailure(call: Call<ResponseDTO>?, t: Throwable?) {
-
+        iMyService.loginBoss(id, password).enqueue(object : Callback<ResponseBInfo> {
+            override fun onFailure(call: Call<ResponseBInfo>?, t: Throwable?) {
+                Toast.makeText(this@LoginActivity,"연결 오류!!",Toast.LENGTH_SHORT).show()
             }
 
             override fun onResponse(
-                call: Call<ResponseDTO>?,
-                response: Response<ResponseDTO>?
+                call: Call<ResponseBInfo>?,
+                response: Response<ResponseBInfo>?
             ) {
                 println(response?.body().toString())
-                if(response?.body().toString() == "ResponseDTO(result=login failed)") {
-                    Toast.makeText(this@LoginActivity,"없는 회원입니다",Toast.LENGTH_SHORT).show()
+                if(response?.body()?.result.toString() == "login failed") {
+                    Toast.makeText(this@LoginActivity,"로그인 정보가 없거나 일치하지 않습니다.",Toast.LENGTH_SHORT).show()
                 }else{
-                    BossData.setBid(id)
+                    BossData.setOid(response?.body()?._id.toString())
+                    BossData.setBid(response?.body()?.bossId.toString())
+
                     Toast.makeText(this@LoginActivity,response?.body().toString(),Toast.LENGTH_SHORT).show()
                     val intent = Intent(this@LoginActivity, HomeActivity::class.java)
                     startActivity(intent)
