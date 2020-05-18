@@ -37,12 +37,20 @@
 
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/dup_text"
+        android:textSize="10sp"
+        android:textColor="#FF0000"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
     <com.rengwuxian.materialedittext.MaterialEditText
         android:id="@+id/join_id"
         android:hint="아이디"
         android:inputType="textEmailAddress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:background="@drawable/white_edittext"
         app:met_iconRight="@drawable/ic_id"
         app:met_primaryColor="@color/myTextColor"
         app:met_baseColor="@color/myTextColor"
@@ -50,13 +58,13 @@
         app:met_iconPadding="0dp">
     </com.rengwuxian.materialedittext.MaterialEditText>
 
-
     <com.rengwuxian.materialedittext.MaterialEditText
         android:id="@+id/join_password"
         android:hint="비밀번호"
         android:inputType="textPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
         app:met_iconRight="@drawable/ic_lock"
         app:met_primaryColor="@color/myTextColor"
         app:met_baseColor="@color/myTextColor"
@@ -70,6 +78,7 @@
         android:inputType="text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
         app:met_iconRight="@drawable/ic_user"
         app:met_primaryColor="@color/myTextColor"
         app:met_baseColor="@color/myTextColor"

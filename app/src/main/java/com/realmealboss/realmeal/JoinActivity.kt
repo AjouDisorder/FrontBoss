@@ -56,8 +56,15 @@ class JoinActivity : AppCompatActivity() {
                 ) {
                     Toast.makeText(this@JoinActivity,response?.body().toString(), Toast.LENGTH_SHORT).show()
                     println(response?.body().toString())
-                    val intent = Intent(this@JoinActivity, LoginActivity::class.java)
-                    startActivity(intent)
+                    if(response?.body()?.result == "signup success") {
+                        dup_text.text = ""
+                        join_id.setBackgroundResource(R.drawable.white_edittext)
+                        val intent = Intent(this@JoinActivity, LoginActivity::class.java)
+                        startActivity(intent)
+                    }else{
+                        dup_text.text = "이미 존재하는 아이디 입니다."
+                        join_id.setBackgroundResource(R.drawable.red_edittext)
+                    }
                 }
             })
         }
