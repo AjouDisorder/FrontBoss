@@ -13,7 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Home.PromoteActivity"></activity>
+        <activity android:name=".Home.SalesActivity"></activity>
+        <activity android:name=".Home.OrderActivity" />
+        <activity android:name=".Home.PromoteActivity" />
         <activity android:name=".Home.MenuInfoActivity" />
         <activity android:name=".Home.MartInfoActivity" />
         <activity android:name=".Home.HomeActivity" />

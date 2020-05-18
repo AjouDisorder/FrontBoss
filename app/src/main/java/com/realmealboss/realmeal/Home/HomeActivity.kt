@@ -26,10 +26,12 @@ class HomeActivity : AppCompatActivity() {
             startActivity(intent)
         }
         order_details_button.setOnClickListener{
-
+            val intent = Intent(this, OrderActivity::class.java)
+            startActivity(intent)
         }
         sales_details_button.setOnClickListener{
-            
+            val intent = Intent(this, SalesActivity::class.java)
+            startActivity(intent)
         }
     }
 }

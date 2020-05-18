@@ -58,7 +58,7 @@ class KakaoInfoActivity : AppCompatActivity() {
             UserManagement.getInstance().me( object : MeV2ResponseCallback() {
                 override fun onSuccess(result: MeV2Response?) {
                     // 로그인이 성공했을 때
-                    var intent = Intent(this@KakaoInfoActivity, HomeActivity::class.java)
+                    var intent = Intent(this@KakaoInfoActivity, KakaoInfoActivity::class.java)
                     intent.putExtra("name", result!!.getNickname())
                     intent.putExtra("profile", result!!.getProfileImagePath())
                     startActivity(intent)
@@ -88,7 +88,7 @@ class KakaoInfoActivity : AppCompatActivity() {
     }
 
     private fun redirectSignupActivity() {
-        val intent = Intent(this, LoginActivity::class.java)
+        val intent = Intent(this, KakaoInfoActivity::class.java)
         startActivity(intent)
         finish()
     }

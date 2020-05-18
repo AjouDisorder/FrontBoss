@@ -74,16 +74,16 @@ class LoginActivity : AppCompatActivity() {
                 response: Response<ResponseDTO>?
             ) {
                 println(response?.body().toString())
-                if(response?.body().toString() == "ResponseDTO(result=login success)") {
+                if(response?.body().toString() == "ResponseDTO(result=login failed)") {
+                    Toast.makeText(this@LoginActivity,"없는 회원입니다",Toast.LENGTH_SHORT).show()
+                }else{
                     BossData.setBid(id)
+                    Toast.makeText(this@LoginActivity,response?.body().toString(),Toast.LENGTH_SHORT).show()
                     val intent = Intent(this@LoginActivity, HomeActivity::class.java)
                     startActivity(intent)
-                }else{
-                    Toast.makeText(this@LoginActivity,"없는 회원입니다",Toast.LENGTH_SHORT).show()
                 }
             }
         })
-
     }
 
     // 앱의 해쉬 키 얻는 함수

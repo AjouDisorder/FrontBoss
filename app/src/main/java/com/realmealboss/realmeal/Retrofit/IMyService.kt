@@ -5,7 +5,7 @@ import io.reactivex.Observable
 import retrofit2.Call
 import retrofit2.http.*
 
-data class ResponseDTO(var result:String? = null)
+data class ResponseDTO(var result:String? = null, var bossId: String? = null)
 data class Restaurant(var result:ArrayList<String>? = null)
 
 interface IMyService{
@@ -25,7 +25,7 @@ interface IMyService{
 
     @FormUrlEncoded
     @POST("boss/createRestaurant")
-    fun createRestaurant(@Field("bossId") id: String,
+    fun createRestaurant(@Field("boss_id") id: String,
                          @Field("title") title: String,
                          @Field("address") address: String,
                          @Field("phone") phone: String
@@ -33,7 +33,7 @@ interface IMyService{
 
     @FormUrlEncoded
     @POST("boss/createOriginMenu")
-    fun createOriginMenu(@Field("bossId") id: String,
+    fun createOriginMenu(@Field("boss_id") id: String,
                          @Field("title") title: String,
                          @Field("price") price: String,
                          @Field("description") description: String
@@ -41,9 +41,9 @@ interface IMyService{
 
     @FormUrlEncoded
     @POST("boss/createMenu")
-    fun createMenu(@Field("bossId") id: String,
+    fun createMenu(@Field("boss_id") id: String,
                    @Field("title") title: String,
-                   @Field("discount") price: String,
+                   @Field("discountedPrice") price: String,
                    @Field("quantity") quantity: String): Call<ResponseDTO>
 
 }
