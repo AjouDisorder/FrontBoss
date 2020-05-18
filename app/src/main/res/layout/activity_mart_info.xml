@@ -54,7 +54,6 @@
         <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/mart_address"
             android:hint="가게주소"
-            android:layout_marginBottom="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:met_primaryColor="@color/myTextColor"
@@ -63,6 +62,17 @@
             app:met_iconPadding="0dp">
         </com.rengwuxian.materialedittext.MaterialEditText>
 
+        <Button
+            android:id="@+id/mart_address_button"
+            android:text="주소 검색 하기"
+            android:layout_marginBottom="20dp"
+            android:textColor="@android:color/white"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:background="#FF9FF3"
+            style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
+            android:layout_width="match_parent"
+            android:layout_height="30dp" />
         <TextView
             android:text="전화번호"
             android:textSize="20sp"

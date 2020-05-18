@@ -10,6 +10,7 @@ data class ResponseBInfo(var result: String? = null, var _id: String? = null, va
 data class Restaurant(var result:ArrayList<String>? = null)
 
 interface IMyService{
+    //회원가입 로그인
     @FormUrlEncoded
     @POST("boss/signup")
     fun joinBoss(@Field("bossId") bossId: String,
@@ -24,6 +25,7 @@ interface IMyService{
     fun loginBoss(@Field("bossId") id: String,
                   @Field("password") password: String): Call<ResponseBInfo>
 
+    //가게정보관리
     @FormUrlEncoded
     @POST("boss/createRestaurant")
     fun createRestaurant(@Field("boss_id") id: String,
@@ -32,6 +34,8 @@ interface IMyService{
                          @Field("phone") phone: String
     ): Call<ResponseDTO>
 
+
+    //가게메뉴관리
     @FormUrlEncoded
     @POST("boss/createOriginMenu")
     fun createOriginMenu(@Field("boss_id") id: String,
@@ -40,11 +44,15 @@ interface IMyService{
                          @Field("description") description: String
     ): Call<ResponseDTO>
 
+    //홍보글 관리
     @FormUrlEncoded
     @POST("boss/createMenu")
     fun createMenu(@Field("boss_id") id: String,
                    @Field("title") title: String,
                    @Field("discountedPrice") price: String,
                    @Field("quantity") quantity: String): Call<ResponseDTO>
+
+    //주문관리
+    //판매내역관리
 
 }

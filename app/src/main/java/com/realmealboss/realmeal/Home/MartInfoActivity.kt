@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.widget.Toast
 import com.realmealboss.realmeal.BossData
+import com.realmealboss.realmeal.KakaoAddressActivity
 import com.realmealboss.realmeal.LoginActivity
 import com.realmealboss.realmeal.R
 import com.realmealboss.realmeal.Retrofit.IMyService
@@ -29,6 +30,11 @@ class MartInfoActivity : AppCompatActivity() {
         // Init API
         val retrofit = RetrofitClient.getInstance()
         iMyService = retrofit.create(IMyService::class.java)
+
+        mart_address.setOnClickListener{
+            val intent = Intent(this, KakaoAddressActivity::class.java)
+            startActivity(intent)
+        }
 
         mart_info_submit.setOnClickListener{
             var name = mart_name.text.toString()
