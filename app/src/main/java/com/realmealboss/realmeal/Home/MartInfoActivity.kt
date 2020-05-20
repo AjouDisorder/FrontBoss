@@ -3,18 +3,17 @@ package com.realmealboss.realmeal.Home
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
 import android.text.TextUtils
 import android.widget.Toast
-import com.realmealboss.realmeal.BossData
-import com.realmealboss.realmeal.KakaoAddressActivity
-import com.realmealboss.realmeal.LoginActivity
-import com.realmealboss.realmeal.R
+import com.realmealboss.realmeal.*
 import com.realmealboss.realmeal.Retrofit.IMyService
 import com.realmealboss.realmeal.Retrofit.ResponseDTO
 import com.realmealboss.realmeal.Retrofit.RetrofitClient
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.activity_join.*
 import kotlinx.android.synthetic.main.activity_mart_info.*
+import kotlinx.android.synthetic.main.activity_search_address.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -31,8 +30,13 @@ class MartInfoActivity : AppCompatActivity() {
         val retrofit = RetrofitClient.getInstance()
         iMyService = retrofit.create(IMyService::class.java)
 
+        if (intent.hasExtra("address")){
+            val address = intent.getStringExtra("address")
+            mart_address.setText(address)
+        }else{}
+
         mart_address_button.setOnClickListener{
-            val intent = Intent(this, KakaoAddressActivity::class.java)
+            val intent = Intent(this, SearchAddressActivity::class.java)
             startActivity(intent)
         }
 

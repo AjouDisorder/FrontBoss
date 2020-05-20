@@ -3,20 +3,19 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/kakao_address"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="5"
-    tools:context=".KakaoAddressActivity">
+    tools:context=".SearchAddressActivity">
 
     <WebView
-        android:id="@+id/webView_address"
+        android:id="@+id/webview_address"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="4"/>
     <TextView
-        android:id="@+id/txt_address"
+        android:id="@+id/text_address"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
