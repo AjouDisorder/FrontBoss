@@ -31,7 +31,7 @@ class MartInfoActivity : AppCompatActivity() {
         val retrofit = RetrofitClient.getInstance()
         iMyService = retrofit.create(IMyService::class.java)
 
-        mart_address.setOnClickListener{
+        mart_address_button.setOnClickListener{
             val intent = Intent(this, KakaoAddressActivity::class.java)
             startActivity(intent)
         }
