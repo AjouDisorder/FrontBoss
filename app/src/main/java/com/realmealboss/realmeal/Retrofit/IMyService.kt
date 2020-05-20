@@ -2,12 +2,14 @@ package com.realmealboss.realmeal.Retrofit
 
 import android.provider.ContactsContract
 import io.reactivex.Observable
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.*
 
 data class ResponseDTO(var result:String? = null, var bossId: String? = null)
 data class ResponseBInfo(var result: String? = null, var _id: String? = null, var bossId: String? = null)
 data class Restaurant(var result:ArrayList<String>? = null)
+data class ResPosition(var documents:String? = null, var address:String? = null, var y: String? = null, var x:String? = null)
 
 interface IMyService{
     //회원가입 로그인
@@ -30,10 +32,13 @@ interface IMyService{
     @POST("boss/createRestaurant")
     fun createRestaurant(@Field("boss_id") id: String,
                          @Field("title") title: String,
+                         @Field("type") type: String,
                          @Field("address") address: String,
-                         @Field("phone") phone: String
+                         @Field("phone") phone: String,
+                         @Field("description") intro: String,
+                         @Field("lat") lat : String,
+                         @Field("lng") lng : String
     ): Call<ResponseDTO>
-
 
     //가게메뉴관리
     @FormUrlEncoded

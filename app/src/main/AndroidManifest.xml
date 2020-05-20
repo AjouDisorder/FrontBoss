@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.realmealboss.realmeal">
 
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -22,7 +23,6 @@
         <activity android:name=".Home.HomeActivity" />
         <activity android:name=".JoinActivity" />
         <activity android:name=".RtrofitTestActivity" />
-        <activity android:name=".KakaoAddressActivity" />
         <activity android:name=".KakaoInfoActivity" /> <!-- 카카오 -->
         <meta-data
             android:name="com.kakao.sdk.AppKey"

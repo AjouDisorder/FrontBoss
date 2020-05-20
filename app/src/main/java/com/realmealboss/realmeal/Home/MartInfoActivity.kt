@@ -7,13 +7,12 @@ import android.text.Editable
 import android.text.TextUtils
 import android.widget.Toast
 import com.realmealboss.realmeal.*
-import com.realmealboss.realmeal.Retrofit.IMyService
-import com.realmealboss.realmeal.Retrofit.ResponseDTO
-import com.realmealboss.realmeal.Retrofit.RetrofitClient
+import com.realmealboss.realmeal.Retrofit.*
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.activity_join.*
 import kotlinx.android.synthetic.main.activity_mart_info.*
 import kotlinx.android.synthetic.main.activity_search_address.*
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -35,6 +34,19 @@ class MartInfoActivity : AppCompatActivity() {
             mart_address.setText(address)
         }else{}
 
+        //---------
+        var lat = "37.537187"
+        var lng = "127.005476"
+
+        if (intent.hasExtra("lat")){
+            lat = intent.getStringExtra("lat")
+        }else{}
+        if (intent.hasExtra("lng")){
+            lng = intent.getStringExtra("lng")
+        }else{}
+
+        //---------
+
         mart_address_button.setOnClickListener{
             val intent = Intent(this, SearchAddressActivity::class.java)
             startActivity(intent)
@@ -42,6 +54,7 @@ class MartInfoActivity : AppCompatActivity() {
 
         mart_info_submit.setOnClickListener{
             var name = mart_name.text.toString()
+            var type = "meal"
             var address = mart_address.text.toString()
             var phone = mart_phone.text.toString()
             var intro = mart_intro.text.toString()
@@ -59,12 +72,13 @@ class MartInfoActivity : AppCompatActivity() {
                 Toast.makeText(this,"전화번호를 입력해주세요", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
+            Toast.makeText(this, lat +","+ lng, Toast.LENGTH_SHORT).show()
 
-            iMyService.createRestaurant(BossData.getBid(), name, address, phone).enqueue(object : Callback<ResponseDTO> {
+            /*
+            iMyService.createRestaurant(BossData.getBid(), name, type, address, phone, intro, lat, lng).enqueue(object : Callback<ResponseDTO> {
                 override fun onFailure(call: Call<ResponseDTO>?, t: Throwable?) {
 
                 }
-
                 override fun onResponse(
                     call: Call<ResponseDTO>?,
                     response: Response<ResponseDTO>?
@@ -74,8 +88,12 @@ class MartInfoActivity : AppCompatActivity() {
                     val intent = Intent(this@MartInfoActivity, HomeActivity::class.java)
                     startActivity(intent)
                 }
-            })
+            })*/
+
+
         }
 
     }
+
+
 }

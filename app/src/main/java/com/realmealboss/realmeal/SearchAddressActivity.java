@@ -49,22 +49,28 @@ public class SearchAddressActivity extends AppCompatActivity {
         webView.setWebChromeClient(new WebChromeClient());
 
         // webview url load. php 파일 주소
-        webView.loadUrl("http://49.50.172.13/kakao_address.php");
+        webView.loadUrl("http://49.50.172.13/kakao_address2.php");
 
     }
 
     private class AndroidBridge {
         @JavascriptInterface
-        public void setAddress(final String arg1, final String arg2, final String arg3) {
+        public void setAddress(final String arg1, final String arg2, final String arg3
+                , final String arg4, final String arg5
+        ) {
             handler.post(new Runnable() {
                 @Override
                 public void run() {
-                    address.setText(String.format("(%s) %s %s", arg1, arg2, arg3));
+                    //address.setText(String.format("(%s) %s %s", arg1, arg2, arg3));
+                    address.setText(String.format("%s %s", arg2, arg3));
 
                     // WebView를 초기화 하지않으면 재사용할 수 없음
                     init_webView();
                     Intent intent = new Intent(getApplicationContext(), MartInfoActivity.class);
                     intent.putExtra("address", address.getText().toString());
+                    intent.putExtra("lat", arg4);
+                    intent.putExtra("lng", arg5);
+                    onBackPressed();
                     startActivity(intent);
                 }
             });
