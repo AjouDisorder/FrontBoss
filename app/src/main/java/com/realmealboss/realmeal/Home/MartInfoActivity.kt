@@ -46,8 +46,10 @@ class MartInfoActivity : AppCompatActivity() {
         }else{}
 
         //---------
+        println(BossData.getOid())
 
         mart_address_button.setOnClickListener{
+            println(BossData.getOid())
             val intent = Intent(this, SearchAddressActivity::class.java)
             startActivity(intent)
         }
@@ -73,9 +75,10 @@ class MartInfoActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
             Toast.makeText(this, lat +","+ lng, Toast.LENGTH_SHORT).show()
+            println(BossData.getOid())
 
-            /*
-            iMyService.createRestaurant(BossData.getBid(), name, type, address, phone, intro, lat, lng).enqueue(object : Callback<ResponseDTO> {
+
+            iMyService.createRestaurant(BossData.getOid(), name, type, address, phone, intro, lat.toDouble(), lng.toDouble()).enqueue(object : Callback<ResponseDTO> {
                 override fun onFailure(call: Call<ResponseDTO>?, t: Throwable?) {
 
                 }
@@ -88,7 +91,7 @@ class MartInfoActivity : AppCompatActivity() {
                     val intent = Intent(this@MartInfoActivity, HomeActivity::class.java)
                     startActivity(intent)
                 }
-            })*/
+            })
 
 
         }

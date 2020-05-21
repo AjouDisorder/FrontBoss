@@ -36,8 +36,8 @@ interface IMyService{
                          @Field("address") address: String,
                          @Field("phone") phone: String,
                          @Field("description") intro: String,
-                         @Field("lat") lat : String,
-                         @Field("lng") lng : String
+                         @Field("lat") lat : Double,
+                         @Field("lng") lng : Double
     ): Call<ResponseDTO>
 
     //가게메뉴관리
