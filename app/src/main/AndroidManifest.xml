@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.realmealboss.realmeal">
 
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".SearchAddressActivity"></activity>
+        <activity android:name=".SearchAddressActivity" />
         <activity android:name=".Home.SalesActivity" />
         <activity android:name=".Home.OrderActivity" />
         <activity android:name=".Home.PromoteActivity" />
