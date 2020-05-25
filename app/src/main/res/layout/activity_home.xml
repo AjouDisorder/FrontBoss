@@ -7,16 +7,16 @@
     tools:context=".Home.HomeActivity">
 
     <TextView
-        android:id="@+id/home_title"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:text=" 그 때, 그 밥 "
-        android:textStyle="bold"
-        android:textSize="40sp"
-        android:layout_margin="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    android:id="@+id/home_title"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:text=" 가게 관리 "
+    android:textStyle="bold"
+    android:textSize="40sp"
+    android:layout_margin="16dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:orientation="vertical"
@@ -29,7 +29,7 @@
 
         <Button
             android:id="@+id/mart_info_button"
-            android:text="가게 기본 정보 등록"
+            android:text="가게 기본 정보 수정"
             android:textColor="@android:color/white"
             android:textSize="30sp"
             android:textStyle="bold"

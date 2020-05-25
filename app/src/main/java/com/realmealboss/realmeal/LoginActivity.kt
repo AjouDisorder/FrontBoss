@@ -9,6 +9,7 @@ import android.util.Base64
 import android.util.Log
 import android.widget.Toast
 import com.realmealboss.realmeal.Home.HomeActivity
+import com.realmealboss.realmeal.Home.MartCreateActivity
 import com.realmealboss.realmeal.Retrofit.IMyService
 import com.realmealboss.realmeal.Retrofit.ResponseBInfo
 import com.realmealboss.realmeal.Retrofit.ResponseDTO
@@ -82,7 +83,7 @@ class LoginActivity : AppCompatActivity() {
                     BossData.setBid(response?.body()?.bossId.toString())
 
                     Toast.makeText(this@LoginActivity,response?.body().toString(),Toast.LENGTH_SHORT).show()
-                    val intent = Intent(this@LoginActivity, HomeActivity::class.java)
+                    val intent = Intent(this@LoginActivity, MartCreateActivity::class.java)
                     startActivity(intent)
                 }
             }

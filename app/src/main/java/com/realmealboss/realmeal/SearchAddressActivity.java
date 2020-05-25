@@ -72,6 +72,7 @@ public class SearchAddressActivity extends AppCompatActivity {
                     intent.putExtra("lng", arg5);
                     onBackPressed();
                     startActivity(intent);
+                    finish();
                 }
             });
         }
