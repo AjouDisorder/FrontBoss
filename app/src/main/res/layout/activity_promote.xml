@@ -54,6 +54,25 @@
             </com.rengwuxian.materialedittext.MaterialEditText>
 
             <TextView
+                android:text="메뉴 타입"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/pro_menu_type"
+                android:hint="메뉴 타입"
+                android:layout_marginBottom="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:met_primaryColor="@color/myTextColor"
+                app:met_baseColor="@color/myTextColor"
+                app:met_textColorHint="@color/myTextColor"
+                app:met_iconPadding="0dp">
+            </com.rengwuxian.materialedittext.MaterialEditText>
+
+
+            <TextView
                 android:text="할인가격"
                 android:textSize="20sp"
                 android:textStyle="bold"
@@ -149,6 +168,25 @@
                 app:met_textColorHint="@color/myTextColor"
                 app:met_iconPadding="0dp">
             </com.rengwuxian.materialedittext.MaterialEditText>
+
+            <TextView
+                android:text="메뉴 설명"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/pro_menu_detail"
+                android:hint="메뉴 설명"
+                android:layout_marginBottom="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:met_primaryColor="@color/myTextColor"
+                app:met_baseColor="@color/myTextColor"
+                app:met_textColorHint="@color/myTextColor"
+                app:met_iconPadding="0dp">
+            </com.rengwuxian.materialedittext.MaterialEditText>
+
 
             <Button
                 android:id="@+id/pro_menu_submit"

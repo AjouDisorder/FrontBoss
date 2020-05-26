@@ -28,7 +28,6 @@ class MenuInfoActivity : AppCompatActivity() {
         val retrofit = RetrofitClient.getInstance()
         iMyService = retrofit.create(IMyService::class.java)
 
-
         menu_info_submit.setOnClickListener{
             var name = menu_name.text.toString()
             var price = menu_price.text.toString()

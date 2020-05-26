@@ -22,37 +22,23 @@ class MartCreateActivity : AppCompatActivity() {
         }
 
         val martList = listOf(
-            MartModel(
-                R.drawable.dume,
-                "두메산골"
-            ),
-            MartModel(
-                R.drawable.oddugi,
-                "오뚜기"
-            ),
-            MartModel(
-                R.drawable.shyepo,
-                "셰프의포차"
-            ),
-            MartModel(
-                R.drawable.ta_u,
-                "커피타유"
-            )
+            MartModel(R.drawable.dume, "두메산골"),
+            MartModel(R.drawable.oddugi, "오뚜기"),
+            MartModel(R.drawable.shyepo, "셰프의포차"),
+            MartModel(R.drawable.ta_u, "커피타유")
             )
 
-        val adapter = MartAdapter(
-            martList,
-            R.layout.item_mart
-        )
+        val adapter = MartAdapter(martList, R.layout.item_mart)
+
+        adapter.onItemSelectionChangedListener = {
+            println("select : $it")
+            val intent = Intent(this, HomeActivity::class.java)
+            startActivity(intent)
+        }
 
         martListView.adapter = adapter
         martListView.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
         //martListView.layoutManager = GridLayoutManager(this, 2)
-
-        martListView.setOnClickListener {
-            val intent = Intent(this, HomeActivity::class.java)
-            startActivity(intent)
-        }
 
     }
 }
