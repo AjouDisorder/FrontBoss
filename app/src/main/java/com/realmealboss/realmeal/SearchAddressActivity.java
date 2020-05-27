@@ -31,6 +31,13 @@ public class SearchAddressActivity extends AppCompatActivity {
         // 핸들러를 통한 JavaScript 이벤트 반응
         handler = new Handler();
     }
+    @Override
+    public void onBackPressed(){
+        super.onBackPressed();
+        Intent intent = new Intent(getApplicationContext(), MartAddActivity.class);
+        startActivity(intent);
+        finish();
+    }
     public void init_webView() {
         // WebView 설정
         webView = (WebView) findViewById(R.id.webview_address);
@@ -70,7 +77,6 @@ public class SearchAddressActivity extends AppCompatActivity {
                     intent.putExtra("address", address.getText().toString());
                     intent.putExtra("lat", arg4);
                     intent.putExtra("lng", arg5);
-                    onBackPressed();
                     startActivity(intent);
                     finish();
                 }

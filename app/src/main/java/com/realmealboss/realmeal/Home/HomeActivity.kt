@@ -37,4 +37,11 @@ class HomeActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        val intent = Intent(this, MartListActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
 }

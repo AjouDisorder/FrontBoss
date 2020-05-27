@@ -61,6 +61,7 @@ class JoinActivity : AppCompatActivity() {
                         join_id.setBackgroundResource(R.drawable.white_edittext)
                         val intent = Intent(this@JoinActivity, LoginActivity::class.java)
                         startActivity(intent)
+                        finish()
                     }else{
                         dup_text.text = "이미 존재하는 아이디 입니다."
                         join_id.setBackgroundResource(R.drawable.red_edittext)

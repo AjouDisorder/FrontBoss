@@ -10,7 +10,6 @@ import com.realmealboss.realmeal.R
 import com.realmealboss.realmeal.Retrofit.IMyService
 import com.realmealboss.realmeal.Retrofit.ResponseDTO
 import com.realmealboss.realmeal.Retrofit.RetrofitClient
-import kotlinx.android.synthetic.main.activity_mart_add.*
 import kotlinx.android.synthetic.main.activity_menu_info.*
 import retrofit2.Call
 import retrofit2.Callback

@@ -14,7 +14,7 @@ import java.security.NoSuchAlgorithmException
 
 class SplashScreenActivity : AppCompatActivity() {
 
-    val SPLASH_TIME_OUT: Long = 3000 // 3초
+    val SPLASH_TIME_OUT: Long = 2000 // 3초
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

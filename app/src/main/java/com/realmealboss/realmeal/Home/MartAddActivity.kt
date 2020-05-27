@@ -49,6 +49,7 @@ class MartAddActivity : AppCompatActivity() {
             println(BossData.getOid())
             val intent = Intent(this, SearchAddressActivity::class.java)
             startActivity(intent)
+            finish()
         }
 
         mart_info_submit.setOnClickListener{
@@ -86,17 +87,24 @@ class MartAddActivity : AppCompatActivity() {
                     var result = response?.body()?.string()
                     var jsonObject = JSONObject(result)
                     var _id = jsonObject.getString("_id")
-                    BossData.setROid(_id)
+                    var title = jsonObject.getString("title")
 
-                    val intent = Intent(this@MartAddActivity, MartListActivity::class.java)
+                    BossData.setROid(_id)
+                    BossData.setRTitle(title)
+
+                    val intent = Intent(this@MartAddActivity, HomeActivity::class.java)
                     startActivity(intent)
                     finish()
                 }
             })
-
-
         }
+    }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+        val intent = Intent(this@MartAddActivity, MartListActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 
 

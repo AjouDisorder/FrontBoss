@@ -82,6 +82,7 @@ class LoginActivity : AppCompatActivity() {
 
                     val intent = Intent(this@LoginActivity, MartListActivity::class.java)
                     startActivity(intent)
+                    finish()
                 }
             }
         })

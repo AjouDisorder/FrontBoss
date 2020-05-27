@@ -3,11 +3,13 @@ package com.realmealboss.realmeal.Home
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.realmealboss.realmeal.BossData
 import com.realmealboss.realmeal.Home.Mart.MartAdapter
 import com.realmealboss.realmeal.Home.Mart.MartModel
+import com.realmealboss.realmeal.LoginActivity
 import com.realmealboss.realmeal.R
 import com.realmealboss.realmeal.Retrofit.IMyService
 import com.realmealboss.realmeal.Retrofit.RetrofitClient
@@ -45,6 +47,8 @@ class MartListActivity : AppCompatActivity() {
             //, MartModel(R.drawable.ta_u, "커피타유")
         )
 
+        val adapter = MartAdapter(martList, R.layout.item_mart)
+
         iMyService.getRestaurant(BossData.getOid()).enqueue(object : Callback<ResponseBody> {
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                 println("실패")
@@ -59,17 +63,15 @@ class MartListActivity : AppCompatActivity() {
                     var jsonObject:JSONObject = jsonArray.getJSONObject(i)
                     var _id = jsonObject.getString("_id")
                     var title = jsonObject.getString("title")
-                    println(_id)
                     resIdList.add(_id)
                     resTitleList.add(title)
-                    martList.add(i, MartModel(R.drawable.dume, title))
-                    println(resIdList)
-                    println(resTitleList)
+                    martList.add(i, MartModel(R.drawable.img_bob, title))
+                    martListView.adapter = adapter
+                    martListView.layoutManager = LinearLayoutManager(this@MartListActivity, RecyclerView.VERTICAL, false)
+                    //martListView.layoutManager = GridLayoutManager(this, 2)
                 }
             }
         })
-
-        val adapter = MartAdapter(martList, R.layout.item_mart)
 
         adapter.onItemSelectionChangedListener = {
             println("select : $it")
@@ -77,11 +79,20 @@ class MartListActivity : AppCompatActivity() {
             BossData.setRTitle(resTitleList.get(it.toInt()))
             val intent = Intent(this, HomeActivity::class.java)
             startActivity(intent)
+            finish()
         }
 
-        martListView.adapter = adapter
-        martListView.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
+        //martListView.adapter = adapter
+        //martListView.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
         //martListView.layoutManager = GridLayoutManager(this, 2)
 
+    }
+
+    override fun onBackPressed() {
+        //super.onBackPressed()
+        println("nope")
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 }
