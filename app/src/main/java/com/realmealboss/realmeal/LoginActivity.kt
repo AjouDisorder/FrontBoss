@@ -8,7 +8,7 @@ import android.text.TextUtils
 import android.util.Base64
 import android.util.Log
 import android.widget.Toast
-import com.realmealboss.realmeal.Home.MartCreateActivity
+import com.realmealboss.realmeal.Home.MartListActivity
 import com.realmealboss.realmeal.Retrofit.IMyService
 import com.realmealboss.realmeal.Retrofit.ResponseBInfo
 import com.realmealboss.realmeal.Retrofit.RetrofitClient
@@ -80,8 +80,7 @@ class LoginActivity : AppCompatActivity() {
                     BossData.setOid(response?.body()?._id.toString())
                     BossData.setBid(response?.body()?.bossId.toString())
 
-                    Toast.makeText(this@LoginActivity,response?.body().toString(),Toast.LENGTH_SHORT).show()
-                    val intent = Intent(this@LoginActivity, MartCreateActivity::class.java)
+                    val intent = Intent(this@LoginActivity, MartListActivity::class.java)
                     startActivity(intent)
                 }
             }

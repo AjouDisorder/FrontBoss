@@ -90,6 +90,7 @@ class MartInfoActivity : AppCompatActivity() {
                     println(response?.body().toString())
                     val intent = Intent(this@MartInfoActivity, HomeActivity::class.java)
                     startActivity(intent)
+                    finish()
                 }
             })
 

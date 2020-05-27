@@ -8,7 +8,8 @@ import retrofit2.http.*
 
 data class ResponseDTO(var result:String? = null, var bossId: String? = null)
 data class ResponseBInfo(var result: String? = null, var _id: String? = null, var bossId: String? = null)
-data class Restaurant(var result:ArrayList<String>? = null)
+data class Restaurant(var documents: List<ResDocument>)
+data class ResDocument(var _id: String? = null)
 data class ResPosition(var documents:String? = null, var address:String? = null, var y: String? = null, var x:String? = null)
 
 interface IMyService{
@@ -39,6 +40,10 @@ interface IMyService{
                          @Field("lat") lat : Double,
                          @Field("lng") lng : Double
     ): Call<ResponseDTO>
+
+    @GET("/boss/getRestaurantList")
+    fun getRestaurant(@Query("boss_id") id:String): Call<ResponseBody>
+
 
     //가게메뉴관리
     @FormUrlEncoded
