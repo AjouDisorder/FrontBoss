@@ -26,7 +26,7 @@
         <activity android:name=".Home.OrderActivity" />
         <activity android:name=".Home.PromoteActivity" />
         <activity android:name=".Home.MenuInfoActivity" />
-        <activity android:name=".Home.MartInfoActivity" />
+        <activity android:name=".Home.MartAddActivity" />
         <activity android:name=".Home.HomeActivity" />
         <activity android:name=".JoinActivity" />
         <activity android:name=".RtrofitTestActivity" />

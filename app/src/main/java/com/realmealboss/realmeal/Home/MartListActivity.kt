@@ -10,9 +10,8 @@ import com.realmealboss.realmeal.Home.Mart.MartAdapter
 import com.realmealboss.realmeal.Home.Mart.MartModel
 import com.realmealboss.realmeal.R
 import com.realmealboss.realmeal.Retrofit.IMyService
-import com.realmealboss.realmeal.Retrofit.Restaurant
 import com.realmealboss.realmeal.Retrofit.RetrofitClient
-import kotlinx.android.synthetic.main.activity_mart_create.*
+import kotlinx.android.synthetic.main.activity_mart_list.*
 import okhttp3.ResponseBody
 import org.json.JSONArray
 import org.json.JSONObject
@@ -26,19 +25,25 @@ class MartListActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_mart_create)
+        setContentView(R.layout.activity_mart_list)
 
         // Init API
         val retrofit = RetrofitClient.getInstance()
         iMyService = retrofit.create(IMyService::class.java)
 
         mart_add_button.setOnClickListener{
-            val intent = Intent(this, MartInfoActivity::class.java)
+            val intent = Intent(this, MartAddActivity::class.java)
             startActivity(intent)
             finish()
         }
         val resIdList = ArrayList<String>()
         val resTitleList = ArrayList<String>()
+        val martList = ArrayList<MartModel>(
+            //MartModel(R.drawable.dume, "두메산골")
+            //, MartModel(R.drawable.oddugi, "오뚜기")
+            //, MartModel(R.drawable.shyepo, "셰프의포차")
+            //, MartModel(R.drawable.ta_u, "커피타유")
+        )
 
         iMyService.getRestaurant(BossData.getOid()).enqueue(object : Callback<ResponseBody> {
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
@@ -57,25 +62,19 @@ class MartListActivity : AppCompatActivity() {
                     println(_id)
                     resIdList.add(_id)
                     resTitleList.add(title)
+                    martList.add(i, MartModel(R.drawable.dume, title))
                     println(resIdList)
                     println(resTitleList)
                 }
             }
-
         })
-
-        val martList = listOf(
-            MartModel(R.drawable.dume, "두메산골")
-            //, MartModel(R.drawable.oddugi, "오뚜기")
-            //, MartModel(R.drawable.shyepo, "셰프의포차")
-            //, MartModel(R.drawable.ta_u, "커피타유")
-            )
 
         val adapter = MartAdapter(martList, R.layout.item_mart)
 
         adapter.onItemSelectionChangedListener = {
             println("select : $it")
             BossData.setROid(resIdList.get(it.toInt()))
+            BossData.setRTitle(resTitleList.get(it.toInt()))
             val intent = Intent(this, HomeActivity::class.java)
             startActivity(intent)
         }

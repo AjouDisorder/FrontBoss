@@ -3,27 +3,24 @@ package com.realmealboss.realmeal.Home
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Editable
 import android.text.TextUtils
 import android.widget.Toast
 import com.realmealboss.realmeal.*
 import com.realmealboss.realmeal.Retrofit.*
-import kotlinx.android.synthetic.main.activity_home.*
-import kotlinx.android.synthetic.main.activity_join.*
-import kotlinx.android.synthetic.main.activity_mart_info.*
-import kotlinx.android.synthetic.main.activity_search_address.*
+import kotlinx.android.synthetic.main.activity_mart_add.*
 import okhttp3.ResponseBody
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MartInfoActivity : AppCompatActivity() {
+class MartAddActivity : AppCompatActivity() {
 
     lateinit var iMyService: IMyService
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_mart_info)
+        setContentView(R.layout.activity_mart_add)
 
         // Init API
         val retrofit = RetrofitClient.getInstance()
@@ -78,17 +75,20 @@ class MartInfoActivity : AppCompatActivity() {
             println(BossData.getOid())
 
 
-            iMyService.createRestaurant(BossData.getOid(), name, type, address, phone, intro, lat.toDouble(), lng.toDouble()).enqueue(object : Callback<ResponseDTO> {
-                override fun onFailure(call: Call<ResponseDTO>?, t: Throwable?) {
+            iMyService.createRestaurant(BossData.getOid(), name, type, address, phone, intro, lat.toDouble(), lng.toDouble()).enqueue(object : Callback<ResponseBody> {
+                override fun onFailure(call: Call<ResponseBody>?, t: Throwable?) {
 
                 }
                 override fun onResponse(
-                    call: Call<ResponseDTO>?,
-                    response: Response<ResponseDTO>?
+                    call: Call<ResponseBody>?,
+                    response: Response<ResponseBody>?
                 ) {
-                    Toast.makeText(this@MartInfoActivity,response?.body().toString(), Toast.LENGTH_SHORT).show()
-                    println(response?.body().toString())
-                    val intent = Intent(this@MartInfoActivity, HomeActivity::class.java)
+                    var result = response?.body()?.string()
+                    var jsonObject = JSONObject(result)
+                    var _id = jsonObject.getString("_id")
+                    BossData.setROid(_id)
+
+                    val intent = Intent(this@MartAddActivity, MartListActivity::class.java)
                     startActivity(intent)
                     finish()
                 }

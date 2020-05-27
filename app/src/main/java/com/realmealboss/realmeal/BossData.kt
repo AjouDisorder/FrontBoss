@@ -7,6 +7,8 @@ class BossData{
         private lateinit var bossId: String
         private lateinit var name: String
         private lateinit var restaurantOid: String
+        private lateinit var restaurantTitle: String
+
 
         fun setOid(id:String){
             objectId = id
@@ -27,6 +29,13 @@ class BossData{
         }
         fun getROid() : String{
             return restaurantOid
+        }
+
+        fun setRTitle(title:String){
+            restaurantTitle = title
+        }
+        fun getRTitle() : String{
+            return restaurantTitle
         }
 
     }

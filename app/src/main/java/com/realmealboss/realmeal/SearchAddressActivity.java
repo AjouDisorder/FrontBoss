@@ -10,7 +10,7 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.widget.TextView;
 
-import com.realmealboss.realmeal.Home.MartInfoActivity;
+import com.realmealboss.realmeal.Home.MartAddActivity;
 
 public class SearchAddressActivity extends AppCompatActivity {
 
@@ -66,7 +66,7 @@ public class SearchAddressActivity extends AppCompatActivity {
 
                     // WebView를 초기화 하지않으면 재사용할 수 없음
                     init_webView();
-                    Intent intent = new Intent(getApplicationContext(), MartInfoActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), MartAddActivity.class);
                     intent.putExtra("address", address.getText().toString());
                     intent.putExtra("lat", arg4);
                     intent.putExtra("lng", arg5);

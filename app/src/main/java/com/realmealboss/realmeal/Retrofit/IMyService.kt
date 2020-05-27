@@ -39,7 +39,7 @@ interface IMyService{
                          @Field("description") intro: String,
                          @Field("lat") lat : Double,
                          @Field("lng") lng : Double
-    ): Call<ResponseDTO>
+    ): Call<ResponseBody>
 
     @GET("/boss/getRestaurantList")
     fun getRestaurant(@Query("boss_id") id:String): Call<ResponseBody>

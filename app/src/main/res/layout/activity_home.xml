@@ -27,6 +27,27 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/home_title">
 
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginBottom="16dp">
+            <ImageView
+                android:id="@+id/mart_home_img"
+                android:src="@drawable/img_bob"
+                android:scaleType="centerCrop"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+            <TextView
+                android:id="@+id/mart_home_title"
+                android:text=""
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:layout_margin="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </FrameLayout>
+
         <Button
             android:id="@+id/mart_info_button"
             android:text="가게 기본 정보 수정"
