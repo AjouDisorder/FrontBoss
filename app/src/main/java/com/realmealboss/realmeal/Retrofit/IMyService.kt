@@ -2,9 +2,11 @@ package com.realmealboss.realmeal.Retrofit
 
 import android.provider.ContactsContract
 import io.reactivex.Observable
+import okhttp3.MultipartBody
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.*
+import java.io.File
 
 data class ResponseDTO(var result:String? = null, var bossId: String? = null)
 data class ResponseBInfo(var result: String? = null, var _id: String? = null, var bossId: String? = null)
@@ -44,6 +46,9 @@ interface IMyService{
     @GET("/boss/getRestaurantList")
     fun getRestaurant(@Query("boss_id") id:String): Call<ResponseBody>
 
+    @Multipart
+    @POST("/createPicture")
+    fun createPicture(@Part img: MultipartBody.Part?): Call<ResponseBody>
 
     //가게메뉴관리
     @FormUrlEncoded

@@ -4,8 +4,11 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.gun0912.tedpermission.PermissionListener
+import com.gun0912.tedpermission.TedPermission
 import com.realmealboss.realmeal.BossData
 import com.realmealboss.realmeal.Home.Mart.MartAdapter
 import com.realmealboss.realmeal.Home.Mart.MartModel
@@ -28,6 +31,8 @@ class MartListActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_mart_list)
+
+        settingPermission()
 
         // Init API
         val retrofit = RetrofitClient.getInstance()
@@ -86,6 +91,32 @@ class MartListActivity : AppCompatActivity() {
         //martListView.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
         //martListView.layoutManager = GridLayoutManager(this, 2)
 
+    }
+
+    fun settingPermission(){
+        var permis = object  : PermissionListener {
+            //            어떠한 형식을 상속받는 익명 클래스의 객체를 생성하기 위해 다음과 같이 작성
+            override fun onPermissionGranted() {
+                Toast.makeText(this@MartListActivity, "권한 허가", Toast.LENGTH_SHORT)
+                    .show()
+            }
+
+            override fun onPermissionDenied(deniedPermissions: MutableList<String>?) {
+                Toast.makeText(this@MartListActivity, "권한 거부", Toast.LENGTH_SHORT)
+                    .show()
+                ActivityCompat.finishAffinity(this@MartListActivity) // 권한 거부시 앱 종료
+            }
+        }
+
+        TedPermission.with(this)
+            .setPermissionListener(permis)
+            .setRationaleMessage("카메라 사진 권한 필요")
+            .setDeniedMessage("카메라 권한 요청 거부")
+            .setPermissions(
+                android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
+//                android.Manifest.permission.READ_EXTERNAL_STORAGE,
+                android.Manifest.permission.CAMERA)
+            .check()
     }
 
     override fun onBackPressed() {

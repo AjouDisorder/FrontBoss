@@ -41,8 +41,9 @@
                 android:layout_height="wrap_content"/>
             <com.rengwuxian.materialedittext.MaterialEditText
                 android:id="@+id/mart_address"
-                android:hint="가게주소"
+                android:hint="주소 검색 사용"
                 android:text=""
+                android:clickable="false"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:met_primaryColor="@color/myTextColor"
@@ -134,13 +135,49 @@
                 app:met_textColorHint="@color/myTextColor"
                 app:met_iconPadding="0dp">
             </com.rengwuxian.materialedittext.MaterialEditText>
+
+            <TextView
+                android:text="가게사진"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <ImageView
+                android:id="@+id/mart_add_img"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"/>
+            <Button
+                android:id="@+id/mart_add_img_button"
+                android:text="사진 고르기"
+                android:layout_marginBottom="20dp"
+                android:textColor="@android:color/white"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:background="#FF9FF3"
+                style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="match_parent"
+                android:layout_height="30dp" />
+            <Button
+                android:id="@+id/mart_add_cam_button"
+                android:text="사진 찍기"
+                android:layout_marginBottom="20dp"
+                android:textColor="@android:color/white"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:background="#FF9FF3"
+                style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="match_parent"
+                android:layout_height="30dp" />
+
             <Button
                 android:id="@+id/mart_info_submit"
-                android:text="가게 정보 등록"
+                android:text="가게 추가"
                 android:textColor="@android:color/white"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:background="#431F63"
+                android:layout_marginTop="32dp"
                 android:layout_marginBottom="32dp"
                 style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
                 android:layout_width="match_parent"
