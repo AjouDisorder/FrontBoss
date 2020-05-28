@@ -13,6 +13,9 @@ import android.os.Environment
 import android.provider.MediaStore
 import android.text.TextUtils
 import android.util.Log
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.FileProvider
@@ -80,9 +83,32 @@ class MartAddActivity : AppCompatActivity() {
             startCapture()
         }
 
+        val items = resources.getStringArray(R.array.res_type)
+        val typeAdapter = ArrayAdapter(applicationContext,android.R.layout.simple_spinner_dropdown_item,items)
+        mart_type.adapter = typeAdapter
+        mart_type.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+
+            }
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                when(position) {
+                    0 -> {
+                    }
+                    1 -> {
+                    }
+                    else -> {
+                    }
+                }
+            }
+        }
         mart_info_submit.setOnClickListener{
             var name = mart_name.text.toString()
-            var type = mart_type.text.toString()
+            var type = mart_type.selectedItem.toString()
             var address = mart_address.text.toString()
             var phone = mart_phone.text.toString()
             var intro = mart_intro.text.toString()

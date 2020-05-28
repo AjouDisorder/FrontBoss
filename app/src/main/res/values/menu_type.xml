@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="menu_type">
+        <item>치킨&amp;피자</item>
+        <item>족발&amp;보쌈</item>
+        <item>돈까스&amp;일식</item>
+        <item>세계음식</item>
+        <item>햄버거</item>
+        <item>밥류</item>
+        <item>카페&amp;빵&amp;디저트</item>
+        <item>육고기</item>
+        <item>면</item>
+        <item>분식&amp;야식</item>
+        <item>찜&amp;탕&amp;찌개</item>
+        <item>반찬&amp;과일</item>
+        <item>샐러드&amp;다이어트</item>
+        <item>편의점</item>
+        <item>떡&amp;기타</item>
+    </string-array>
+</resources>

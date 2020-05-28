@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="res_type">
+        <item>뷔페&amp;샐러드</item>
+        <item>술집</item>
+        <item>편의점</item>
+        <item>한식</item>
+        <item>치킨</item>
+        <item>피자</item>
+        <item>족발&amp;보쌈</item>
+        <item>돈까쓰&amp;일식&amp;회</item>
+        <item>양식&amp;아시안</item>
+        <item>패스트푸드</item>
+        <item>분식</item>
+        <item>카페&amp;디저트</item>
+        <item>찜&amp;탕&amp;찌개</item>
+        <item>도시락</item>
+        <item>중국집</item>
+    </string-array>
+</resources>
