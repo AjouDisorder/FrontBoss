@@ -39,18 +39,13 @@ class MartListActivity : AppCompatActivity() {
         iMyService = retrofit.create(IMyService::class.java)
 
         mart_add_button.setOnClickListener{
-            val intent = Intent(this, MartAddActivity::class.java)
+            val intent = Intent(this, LicenseCheckActivity::class.java)
             startActivity(intent)
             finish()
         }
         val resIdList = ArrayList<String>()
         val resTitleList = ArrayList<String>()
-        val martList = ArrayList<MartModel>(
-            //MartModel(R.drawable.dume, "두메산골")
-            //, MartModel(R.drawable.oddugi, "오뚜기")
-            //, MartModel(R.drawable.shyepo, "셰프의포차")
-            //, MartModel(R.drawable.ta_u, "커피타유")
-        )
+        val martList = ArrayList<MartModel>()
 
         val adapter = MartAdapter(martList, R.layout.item_mart)
 
@@ -70,6 +65,7 @@ class MartListActivity : AppCompatActivity() {
                     var title = jsonObject.getString("title")
                     resIdList.add(_id)
                     resTitleList.add(title)
+                    // 마트정보 GET
                     martList.add(i, MartModel(R.drawable.img_bob, title))
                     martListView.adapter = adapter
                     martListView.layoutManager = LinearLayoutManager(this@MartListActivity, RecyclerView.VERTICAL, false)

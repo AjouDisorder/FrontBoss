@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Home.MenuInfoActivity">
+    tools:context=".Home.LicenseCheckActivity">
 
     <TextView
-        android:id="@+id/home_title"
+        android:id="@+id/license_title"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:text=" 가게 메뉴 등록 "
+        android:text=" 사업자 정보 확인 "
         android:textStyle="bold"
         android:textSize="40sp"
         android:layout_margin="16dp"
@@ -23,25 +23,24 @@
         android:fillViewport="true"
         android:layout_marginTop="0dp"
         android:id="@+id/menu_scroll_view"
-        app:layout_constraintTop_toBottomOf="@+id/home_title">
+        app:layout_constraintTop_toBottomOf="@+id/license_title">
         <LinearLayout
             android:orientation="vertical"
             android:layout_margin="16dp"
             android:padding="16dp"
             android:background="@android:color/white"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/home_title">
+            android:layout_height="wrap_content">
 
             <TextView
-                android:text="메뉴명"
+                android:text="사업자등록번호"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
             <com.rengwuxian.materialedittext.MaterialEditText
-                android:id="@+id/menu_name"
-                android:hint="메뉴이름"
+                android:id="@+id/license_number"
+                android:hint="사업자등록번호를 입력해 주세요."
                 android:layout_marginBottom="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -51,44 +50,9 @@
                 app:met_iconPadding="0dp">
             </com.rengwuxian.materialedittext.MaterialEditText>
 
-            <TextView
-                android:text="메뉴가격"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-            <com.rengwuxian.materialedittext.MaterialEditText
-                android:id="@+id/menu_price"
-                android:hint="메뉴가격"
-                android:layout_marginBottom="20dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:met_primaryColor="@color/myTextColor"
-                app:met_baseColor="@color/myTextColor"
-                app:met_textColorHint="@color/myTextColor"
-                app:met_iconPadding="0dp">
-            </com.rengwuxian.materialedittext.MaterialEditText>
-
-            <TextView
-                android:text="추가설명"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-            <com.rengwuxian.materialedittext.MaterialEditText
-                android:id="@+id/menu_intro"
-                android:hint="추가설명"
-                android:layout_marginBottom="20dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:met_primaryColor="@color/myTextColor"
-                app:met_baseColor="@color/myTextColor"
-                app:met_textColorHint="@color/myTextColor"
-                app:met_iconPadding="0dp">
-            </com.rengwuxian.materialedittext.MaterialEditText>
             <Button
-                android:id="@+id/menu_info_submit"
-                android:text="가게에 메뉴 정보 등록"
+                android:id="@+id/license_submit"
+                android:text="사업자 정보 인증"
                 android:textColor="@android:color/white"
                 android:textSize="20sp"
                 android:textStyle="bold"
@@ -99,4 +63,5 @@
                 android:layout_height="wrap_content" />
         </LinearLayout>
     </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
