@@ -25,6 +25,7 @@ interface IMyService{
         //@Field("sex") sex: String,
         //@Field("phone") phone: String
     ): Call<ResponseDTO>
+
     @FormUrlEncoded
     @POST("boss/login")
     fun loginBoss(@Field("bossId") id: String,
@@ -53,11 +54,12 @@ interface IMyService{
     //가게메뉴관리
     @FormUrlEncoded
     @POST("boss/createOriginMenu")
-    fun createOriginMenu(@Field("boss_id") id: String,
+    fun createOriginMenu(@Field("restaurant_id") id: String,
                          @Field("title") title: String,
-                         @Field("price") price: String,
-                         @Field("description") description: String
-    ): Call<ResponseDTO>
+                         @Field("originPrice") price: Number,
+                         @Field("type") type: String
+    ): Call<ResponseBody>
+
 
     //홍보글 관리
     @FormUrlEncoded

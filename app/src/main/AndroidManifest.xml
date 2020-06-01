@@ -19,7 +19,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Home.LicenseCheckActivity"></activity>
+        <activity android:name=".Home.MenuListActivity"></activity>
+        <activity android:name=".Home.LicenseCheckActivity" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

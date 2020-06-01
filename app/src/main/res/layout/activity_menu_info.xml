@@ -40,7 +40,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
             <com.rengwuxian.materialedittext.MaterialEditText
-                android:id="@+id/menu_name"
+                android:id="@+id/menu_name_txt"
                 android:hint="메뉴이름"
                 android:layout_marginBottom="20dp"
                 android:layout_width="match_parent"
@@ -58,7 +58,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
             <com.rengwuxian.materialedittext.MaterialEditText
-                android:id="@+id/menu_price"
+                android:id="@+id/menu_price_txt"
                 android:hint="메뉴가격"
                 android:layout_marginBottom="20dp"
                 android:layout_width="match_parent"
@@ -76,7 +76,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
             <com.rengwuxian.materialedittext.MaterialEditText
-                android:id="@+id/menu_intro"
+                android:id="@+id/menu_intro_txt"
                 android:hint="추가설명"
                 android:layout_marginBottom="20dp"
                 android:layout_width="match_parent"

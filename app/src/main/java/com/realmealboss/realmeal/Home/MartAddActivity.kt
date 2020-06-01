@@ -39,9 +39,8 @@ class MartAddActivity : AppCompatActivity() {
     var REQUEST_IMAGE_CAPTURE = 2
 
     lateinit var iMyService: IMyService
-    lateinit var currentPhotoPath: String
+    var currentPhotoPath: String = ""
     lateinit var tempSelectFile: File
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -128,6 +127,11 @@ class MartAddActivity : AppCompatActivity() {
             }
             Toast.makeText(this, lat +","+ lng, Toast.LENGTH_SHORT).show()
             println(BossData.getOid())
+
+            if(TextUtils.isEmpty(currentPhotoPath)){
+                Toast.makeText(this,"사진을 입력해주세요", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
 
             val file = File(currentPhotoPath)
             //val requestUserId = RequestBody.create(MediaType.parse("multipart/form-data"),BossData.getROid())

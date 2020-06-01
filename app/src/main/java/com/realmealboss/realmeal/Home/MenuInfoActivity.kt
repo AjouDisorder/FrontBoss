@@ -28,9 +28,9 @@ class MenuInfoActivity : AppCompatActivity() {
         iMyService = retrofit.create(IMyService::class.java)
 
         menu_info_submit.setOnClickListener{
-            var name = menu_name.text.toString()
-            var price = menu_price.text.toString()
-            var description = menu_intro.text.toString()
+            var name = menu_name_txt.text.toString()
+            var price = menu_price_txt.text.toString()
+            var description = menu_intro_txt.text.toString()
 
             //Check empty
             if(TextUtils.isEmpty(name)){
@@ -42,7 +42,7 @@ class MenuInfoActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            iMyService.createOriginMenu(BossData.getBid(), name, price, description).enqueue(object :
+            iMyService.createOriginMenu(BossData.getROid(), name, price.toInt(), description).enqueue(object :
                 Callback<ResponseDTO> {
                 override fun onFailure(call: Call<ResponseDTO>?, t: Throwable?) {
 

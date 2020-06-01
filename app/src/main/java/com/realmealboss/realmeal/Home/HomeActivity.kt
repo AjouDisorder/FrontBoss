@@ -21,7 +21,7 @@ class HomeActivity : AppCompatActivity() {
             startActivity(intent)
         }
         menu_info_button.setOnClickListener{
-            val intent = Intent(this, MenuInfoActivity::class.java)
+            val intent = Intent(this, MenuListActivity::class.java)
             startActivity(intent)
         }
         promotion_info_button.setOnClickListener{

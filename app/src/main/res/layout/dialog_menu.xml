@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="8dp">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_margin="16dp"
+        android:padding="16dp"
+        android:background="@android:color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/home_title">
+
+        <TextView
+            android:text="메뉴명"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/menu_name_edtxt"
+            android:hint="메뉴이름"
+            android:layout_marginBottom="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:met_primaryColor="@color/myTextColor"
+            app:met_baseColor="@color/myTextColor"
+            app:met_textColorHint="@color/myTextColor"
+            app:met_iconPadding="0dp">
+        </com.rengwuxian.materialedittext.MaterialEditText>
+
+        <TextView
+            android:text="메뉴가격"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/menu_price_edtxt"
+            android:hint="메뉴가격"
+            android:layout_marginBottom="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:met_primaryColor="@color/myTextColor"
+            app:met_baseColor="@color/myTextColor"
+            app:met_textColorHint="@color/myTextColor"
+            app:met_iconPadding="0dp">
+        </com.rengwuxian.materialedittext.MaterialEditText>
+
+        <Button
+            android:id="@+id/menu_add_edtxt"
+            android:text="가게에 메뉴 정보 등록"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:background="#431F63"
+            android:layout_marginBottom="32dp"
+            style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
