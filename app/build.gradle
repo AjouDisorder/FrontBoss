@@ -79,4 +79,7 @@ dependencies {
     // Ted Permission 사용
     implementation 'gun0912.ted:tedpermission:2.2.3'
 
+    // Zxing QR코드
+    implementation 'com.journeyapps:zxing-android-embedded:4.1.0'
+
 }

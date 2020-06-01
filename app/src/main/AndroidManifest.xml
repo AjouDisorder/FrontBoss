@@ -18,6 +18,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
+        android:ahrdwareAccelerated="true"
         android:usesCleartextTraffic="true">
         <activity android:name=".Home.MenuListActivity"></activity>
         <activity android:name=".Home.LicenseCheckActivity" />
@@ -37,7 +38,6 @@
         <activity android:name=".Home.SalesActivity" />
         <activity android:name=".Home.OrderActivity" />
         <activity android:name=".Home.PromoteActivity" />
-        <activity android:name=".Home.MenuInfoActivity" />
         <activity android:name=".Home.MartAddActivity" />
         <activity android:name=".Home.HomeActivity" />
         <activity android:name=".JoinActivity" />
