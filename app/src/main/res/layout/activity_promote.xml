@@ -36,14 +36,14 @@
             app:layout_constraintTop_toBottomOf="@+id/home_title">
 
             <TextView
-                android:text="메뉴명"
+                android:text="홍보글 타이틀"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
             <com.rengwuxian.materialedittext.MaterialEditText
                 android:id="@+id/pro_menu_name"
-                android:hint="메뉴이름"
+                android:hint="홍보글 타이틀"
                 android:layout_marginBottom="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -54,33 +54,28 @@
             </com.rengwuxian.materialedittext.MaterialEditText>
 
             <TextView
-                android:text="메뉴 타입"
+                android:text="기존 메뉴 선택"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
-            <com.rengwuxian.materialedittext.MaterialEditText
-                android:id="@+id/pro_menu_type"
-                android:hint="메뉴 타입"
+            <Spinner
+                android:id="@+id/promote_menu_select"
+                android:hint=" 메뉴명 "
                 android:layout_marginBottom="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:met_primaryColor="@color/myTextColor"
-                app:met_baseColor="@color/myTextColor"
-                app:met_textColorHint="@color/myTextColor"
-                app:met_iconPadding="0dp">
-            </com.rengwuxian.materialedittext.MaterialEditText>
-
+                />
 
             <TextView
-                android:text="할인가격"
+                android:text="할인율 (단위:%)"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
             <com.rengwuxian.materialedittext.MaterialEditText
                 android:id="@+id/pro_menu_price"
-                android:hint="할인된 가격"
+                android:hint="ex)30"
                 android:layout_marginBottom="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -186,7 +181,6 @@
                 app:met_textColorHint="@color/myTextColor"
                 app:met_iconPadding="0dp">
             </com.rengwuxian.materialedittext.MaterialEditText>
-
 
             <Button
                 android:id="@+id/pro_menu_submit"

@@ -60,14 +60,28 @@ interface IMyService{
                          @Field("type") type: String
     ): Call<ResponseBody>
 
+    @DELETE("deleteOriginMenu")
+    fun deleteOriginMenu(@Query("originMenu_id") id: String): Call<ResponseBody>
+
 
     //홍보글 관리
     @FormUrlEncoded
     @POST("boss/createMenu")
-    fun createMenu(@Field("boss_id") id: String,
-                   @Field("title") title: String,
-                   @Field("discountedPrice") price: String,
-                   @Field("quantity") quantity: String): Call<ResponseDTO>
+    fun createMenu(@Field("originMenu_id") id: String,
+                   @Field("discount") discount: String,
+                   @Field("quantity") quantity: String,
+                   @Field("method") method: String,
+                   @Field("start_year") start_year: String,
+                   @Field("start_month") start_month: String,
+                   @Field("start_date") start_date: String,
+                   @Field("start_hour") start_hour: String,
+                   @Field("start_min") start_min: String,
+                   @Field("end_year") end_year: String,
+                   @Field("end_month") end_month: String,
+                   @Field("end_date") end_date: String,
+                   @Field("end_hour") end_hour: String,
+                   @Field("end_min") end_min: String
+                   ): Call<ResponseBody>
 
     //주문관리
     //판매내역관리

@@ -10,7 +10,7 @@
         android:id="@+id/promote_select_title"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:text=" 가게 목록 "
+        android:text=" 메뉴 홍보글 "
         android:textStyle="bold"
         android:textSize="40sp"
         android:layout_margin="16dp"
@@ -40,13 +40,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <Button
-            android:id="@+id/mart_add_button"
+            android:id="@+id/promote_add_button"
             style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="8dp"
             android:background="#431F63"
-            android:text="가게 추가"
+            android:text="홍보글 추가"
             android:textColor="@android:color/white"
             android:textSize="30sp"
             android:textStyle="bold" />
