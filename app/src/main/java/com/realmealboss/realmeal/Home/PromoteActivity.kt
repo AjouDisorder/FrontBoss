@@ -31,6 +31,7 @@ class PromoteActivity : AppCompatActivity() {
         pro_menu_submit.setOnClickListener{
             var name = pro_menu_name.text.toString()
             var price = pro_menu_price.text.toString()
+            var type = pro_menu_type
             var quantity = pro_menu_limit.text.toString()
 
             //Check empty
