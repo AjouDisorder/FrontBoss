@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
@@ -70,7 +71,7 @@ public class SearchAddressActivity extends AppCompatActivity {
                 public void run() {
                     //address.setText(String.format("(%s) %s %s", arg1, arg2, arg3));
                     address.setText(String.format("%s %s", arg2, arg3));
-
+                    System.out.println(address.getText().toString());
                     // WebView를 초기화 하지않으면 재사용할 수 없음
                     init_webView();
                     Intent intent = new Intent(getApplicationContext(), MartAddActivity.class);

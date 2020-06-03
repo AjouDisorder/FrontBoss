@@ -1,5 +1,6 @@
 package com.realmealboss.realmeal.Home
 
+import android.app.DatePickerDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -25,6 +26,8 @@ import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.*
+import kotlin.collections.ArrayList
 
 data class OriginMenuModel(val id:String, val title:String, val price:Number, val type:String)
 class PromoteActivity : AppCompatActivity() {
@@ -41,7 +44,7 @@ class PromoteActivity : AppCompatActivity() {
 
         val menuList = ArrayList<OriginMenuModel>()
         val titleList = ArrayList<String>()
-        val selected:Int = 0
+        var selected:Int = 0
 
         iMyService.getRestaurant(BossData.getOid()).enqueue(object : Callback<ResponseBody> {
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
@@ -55,7 +58,6 @@ class PromoteActivity : AppCompatActivity() {
                 var title:String
                 var price:Number
                 var type:String
-
 
                 var jsonArray = JSONArray(result)
                 for (i in 0..(jsonArray.length()-1)){
@@ -100,29 +102,68 @@ class PromoteActivity : AppCompatActivity() {
             }
         }
 
+        //pro_datePicker_a.minDate = System.currentTimeMillis()
+        //pro_datePicker_b.minDate = System.currentTimeMillis()
+        val calendar: Calendar = Calendar.getInstance()
+        val currentTime = calendar.timeInMillis
+
+        calendar.add(Calendar.YEAR, 1)
+        val nextYear = calendar.timeInMillis
+
+        pro_datePicker_a.minDate = currentTime
+        pro_datePicker_b.minDate = currentTime
+        pro_datePicker_a.maxDate = nextYear
+        pro_datePicker_b.maxDate = nextYear
+
         pro_menu_submit.setOnClickListener{
-            var title: String
-            var price: Number
-            var type: String
-            var id: String
-            var discount: String
-            var quantity: String = pro_menu_limit.text.toString()
+            var title: String = promote_menu_select.selectedItem.toString()
+            selected = titleList.indexOf(title)
+            var price: Number = menuList[selected].price.toInt()
+            var type: String = menuList[selected].type
+            var id: String = menuList[selected].id
+            var discount: Number = pro_menu_price.text.toString().toInt()
+            var quantity: Number = pro_menu_quantity.text.toString().toInt()
             var method: String
-            var start_year: String
-            var start_month: String
-            var start_date: String
-            var start_hour: String
-            var start_min: String
-            var end_year: String
-            var end_month: String
-            var end_date: String
-            var end_hour: String
-            var end_min: String
-            //Check empty
+            if (pro_menu_forhere.isChecked && pro_menu_takeout.isChecked){
+                method = "both"
+            }else if (pro_menu_takeout.isChecked){
+                method = "takeout"
+            }else if (pro_menu_forhere.isChecked){
+                method = "forhere"
+            }else{ return@setOnClickListener }
+            var start_year: String = pro_datePicker_a.year.toString()
+            var start_month: String = (pro_datePicker_a.month+1).toString()
+            var start_date: String = (pro_datePicker_a.dayOfMonth+1).toString()
+            var start_hour: String = pro_timePicker_a.hour.toString()
+            var start_min: String = pro_timePicker_a.minute.toString()
+            var end_year: String = pro_datePicker_b.year.toString()
+            var end_month: String = (pro_datePicker_b.month+1).toString()
+            var end_date: String = (pro_datePicker_b.dayOfMonth+1).toString()
+            var end_hour: String = pro_timePicker_b.hour.toString()
+            var end_min: String = pro_timePicker_a.minute.toString()
 
+            iMyService.createMenu(id,discount,quantity,method,start_year,start_month,start_date,start_hour,start_min,end_year,end_month,end_date,end_hour,end_min)
+                .enqueue(object : Callback<ResponseBody>{
+                    override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                    }
+                    override fun onResponse(
+                        call: Call<ResponseBody>,
+                        response: Response<ResponseBody>
+                    ) {
+                        val intent = Intent(this@PromoteActivity, PromoteListActivity::class.java)
+                        startActivity(intent)
+                        finish()
+                    }
 
+                })
         }
 
+    }
+    override fun onBackPressed() {
+        //super.onBackPressed()
+        val intent = Intent(this, PromoteListActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 
 

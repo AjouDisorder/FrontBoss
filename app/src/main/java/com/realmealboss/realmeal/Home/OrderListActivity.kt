@@ -6,18 +6,17 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.zxing.integration.android.IntentIntegrator
 import com.realmealboss.realmeal.R
-import kotlinx.android.synthetic.main.activity_order.*
 
 
-class OrderActivity : AppCompatActivity() {
+class OrderListActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_order)
+        setContentView(R.layout.activity_order_list)
 
-        qrScan.setOnClickListener{
-            IntentIntegrator(this).initiateScan()
-        }
+//        qrScan.setOnClickListener{
+//            IntentIntegrator(this).initiateScan()
+//        }
     }
 
     // Get the results:

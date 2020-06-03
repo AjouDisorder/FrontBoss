@@ -92,20 +92,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
             <com.rengwuxian.materialedittext.MaterialEditText
-                android:id="@+id/pro_menu_aseason"
-                android:hint="ex)2020.05.16"
-                android:inputType="date"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:met_primaryColor="@color/myTextColor"
-                app:met_baseColor="@color/myTextColor"
-                app:met_textColorHint="@color/myTextColor"
-                app:met_iconPadding="0dp">
-            </com.rengwuxian.materialedittext.MaterialEditText>
-            <com.rengwuxian.materialedittext.MaterialEditText
-                android:id="@+id/pro_menu_bseason"
-                android:hint="ex)2020.05.30"
-                android:inputType="datetime"
+                android:id="@+id/pro_menu_price"
+                android:hint="ex)30"
                 android:layout_marginBottom="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -115,35 +103,75 @@
                 app:met_iconPadding="0dp">
             </com.rengwuxian.materialedittext.MaterialEditText>
 
+            <RelativeLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="#ffffff">
+                <DatePicker
+                    android:id="@+id/pro_datePicker_a"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:datePickerMode="spinner"
+                    android:calendarViewShown="false"/>
+
+            </RelativeLayout>
+            <TextView
+                android:text="                                   ~"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <RelativeLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="#ffffff"
+                android:layout_marginBottom="20dp">
+                <DatePicker
+                    android:id="@+id/pro_datePicker_b"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:datePickerMode="spinner"
+                    android:calendarViewShown="false"/>
+
+            </RelativeLayout>
+
             <TextView
                 android:text="제한 시간 설정"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
-            <com.rengwuxian.materialedittext.MaterialEditText
-                android:id="@+id/pro_menu_atime"
-                android:hint="ex)14:00"
-                android:inputType="datetime"
+            <RelativeLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:met_primaryColor="@color/myTextColor"
-                app:met_baseColor="@color/myTextColor"
-                app:met_textColorHint="@color/myTextColor"
-                app:met_iconPadding="0dp">
-            </com.rengwuxian.materialedittext.MaterialEditText>
-            <com.rengwuxian.materialedittext.MaterialEditText
-                android:id="@+id/pro_menu_btime"
-                android:hint="ex)16:00"
-                android:inputType="datetime"
-                android:layout_marginBottom="20dp"
+                android:layout_height="100dp"
+                android:background="#ffffff">
+                <TimePicker
+                    android:id="@+id/pro_timePicker_a"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:datePickerMode="spinner"
+                    android:timePickerMode="spinner"/>
+            </RelativeLayout>
+            <TextView
+                android:text="                                  ~"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <RelativeLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:met_primaryColor="@color/myTextColor"
-                app:met_baseColor="@color/myTextColor"
-                app:met_textColorHint="@color/myTextColor"
-                app:met_iconPadding="0dp">
-            </com.rengwuxian.materialedittext.MaterialEditText>
+                android:layout_height="100dp"
+                android:background="#ffffff"
+                android:layout_marginBottom="20dp">
+                <TimePicker
+                    android:id="@+id/pro_timePicker_b"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:datePickerMode="spinner"
+                    android:timePickerMode="spinner"/>
+            </RelativeLayout>
 
             <TextView
                 android:text="제한수량"
@@ -152,7 +180,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
             <com.rengwuxian.materialedittext.MaterialEditText
-                android:id="@+id/pro_menu_limit"
+                android:id="@+id/pro_menu_quantity"
                 android:hint="제한 수량"
                 android:inputType="number"
                 android:layout_marginBottom="20dp"
@@ -165,6 +193,33 @@
             </com.rengwuxian.materialedittext.MaterialEditText>
 
             <TextView
+                android:text="식사방식"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="20dp">
+                <CheckBox
+                    android:id="@+id/pro_menu_forhere"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:text="매장식사"
+                    android:textSize="20sp"/>
+                <CheckBox
+                    android:id="@+id/pro_menu_takeout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:text="방문포장"
+                    android:textSize="20sp"/>
+            </RadioGroup>
+
+            <TextView
                 android:text="메뉴 설명"
                 android:textSize="20sp"
                 android:textStyle="bold"
@@ -173,6 +228,7 @@
             <com.rengwuxian.materialedittext.MaterialEditText
                 android:id="@+id/pro_menu_detail"
                 android:hint="메뉴 설명"
+                android:inputType="textMultiLine"
                 android:layout_marginBottom="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

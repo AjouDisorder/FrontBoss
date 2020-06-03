@@ -68,8 +68,8 @@ interface IMyService{
     @FormUrlEncoded
     @POST("boss/createMenu")
     fun createMenu(@Field("originMenu_id") id: String,
-                   @Field("discount") discount: String,
-                   @Field("quantity") quantity: String,
+                   @Field("discount") discount: Number,
+                   @Field("quantity") quantity: Number,
                    @Field("method") method: String,
                    @Field("start_year") start_year: String,
                    @Field("start_month") start_month: String,

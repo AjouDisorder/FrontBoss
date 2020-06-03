@@ -25,10 +25,10 @@ class MenuAdapter (val list: List<MenuModel>): RecyclerView.Adapter<MenuViewHold
     }
 
     override fun onBindViewHolder(holder: MenuViewHolder, position: Int) {
-        holder.containerView.iv_menuPicture.setImageResource(menuTypeToIcons[list[position].type]!!)
-        holder.containerView.tv_menuTitle.text = list[position].title
-        holder.containerView.tv_menuType.text = list[position].type
-        holder.containerView.tv_originPrice.text = list[position].price.toString()
+        holder.containerView.iv_menuPictureOrigin.setImageResource(menuTypeToIcons[list[position].type]!!)
+        holder.containerView.tv_menuTitleOrigin.text = list[position].title
+        holder.containerView.tv_menuTypeOrigin.text = list[position].type
+        holder.containerView.tv_originPriceOrigin.text = list[position].price.toString()
 
     }
 

@@ -3,6 +3,8 @@ package com.realmealboss.realmeal.Home
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
+import com.google.zxing.integration.android.IntentIntegrator
 import com.realmealboss.realmeal.BossData
 import com.realmealboss.realmeal.R
 import kotlinx.android.synthetic.main.activity_home.*
@@ -25,16 +27,40 @@ class HomeActivity : AppCompatActivity() {
             startActivity(intent)
         }
         promotion_info_button.setOnClickListener{
-            val intent = Intent(this, PromoteActivity::class.java)
+            val intent = Intent(this, PromoteListActivity::class.java)
             startActivity(intent)
         }
         order_details_button.setOnClickListener{
-            val intent = Intent(this, OrderActivity::class.java)
+            val intent = Intent(this, OrderListActivity::class.java)
             startActivity(intent)
         }
         sales_details_button.setOnClickListener{
             val intent = Intent(this, SalesActivity::class.java)
             startActivity(intent)
+        }
+
+        qrCodeScan.setOnClickListener{
+            IntentIntegrator(this).initiateScan()
+        }
+    }
+
+    // Get the results:
+    override fun onActivityResult(
+        requestCode: Int,
+        resultCode: Int,
+        data: Intent?
+    ) {
+        val result =
+            IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
+        if (result != null) {
+            if (result.contents == null) {
+                Toast.makeText(this, "취소!!", Toast.LENGTH_LONG).show()
+            } else {
+                //Toast.makeText(this, "Scanned: " + result.contents, Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "식권인증완료", Toast.LENGTH_LONG).show()
+            }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data)
         }
     }
 

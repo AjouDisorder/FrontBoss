@@ -16,98 +16,117 @@
     android:layout_margin="16dp"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent" />
+    app:layout_constraintTop_toTopOf="parent"/>
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_margin="16dp"
-        android:padding="16dp"
-        android:background="@android:color/white"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fillViewport="true"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="50dp"
+        android:id="@+id/home_scroll_view"
         app:layout_constraintTop_toBottomOf="@+id/home_title">
-
-        <FrameLayout
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_margin="16dp"
+            android:padding="16dp"
+            android:background="@android:color/white"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_marginBottom="16dp">
-            <ImageView
-                android:id="@+id/mart_home_img"
-                android:src="@drawable/img_bob"
-                android:scaleType="centerCrop"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/home_title">
+
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-            <TextView
-                android:id="@+id/mart_home_title"
-                android:text=""
+                android:layout_height="100dp"
+                android:layout_marginBottom="16dp">
+                <ImageView
+                    android:id="@+id/mart_home_img"
+                    android:src="@drawable/img_bob"
+                    android:scaleType="centerCrop"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+                <TextView
+                    android:id="@+id/mart_home_title"
+                    android:text=""
+                    android:textSize="30sp"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/white"
+                    android:layout_margin="16dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </FrameLayout>
+
+            <Button
+                android:id="@+id/mart_info_button"
+                android:text="가게 기본 정보 수정"
+                android:textColor="@android:color/white"
                 android:textSize="30sp"
                 android:textStyle="bold"
+                android:background="#431F63"
+                android:layout_marginBottom="32dp"
+                style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/menu_info_button"
+                android:text="가게 메뉴 등록"
                 android:textColor="@android:color/white"
-                android:layout_margin="16dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-        </FrameLayout>
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:background="#431F63"
+                android:layout_marginBottom="32dp"
+                style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-        <Button
-            android:id="@+id/mart_info_button"
-            android:text="가게 기본 정보 수정"
-            android:textColor="@android:color/white"
-            android:textSize="30sp"
-            android:textStyle="bold"
-            android:background="#431F63"
-            android:layout_marginBottom="32dp"
-            style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            <Button
+                android:id="@+id/promotion_info_button"
+                android:text="메뉴 홍보글 등록"
+                android:textColor="@android:color/white"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:background="#431F63"
+                android:layout_marginBottom="32dp"
+                style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-        <Button
-            android:id="@+id/menu_info_button"
-            android:text="가게 메뉴 등록"
-            android:textColor="@android:color/white"
-            android:textSize="30sp"
-            android:textStyle="bold"
-            android:background="#431F63"
-            android:layout_marginBottom="32dp"
-            style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            <Button
+                android:id="@+id/order_details_button"
+                android:text="주문 내역"
+                android:textColor="@android:color/white"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:background="#FF9FF3"
+                android:layout_marginBottom="32dp"
+                style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-        <Button
-            android:id="@+id/promotion_info_button"
-            android:text="메뉴 홍보글 등록"
-            android:textColor="@android:color/white"
-            android:textSize="30sp"
-            android:textStyle="bold"
-            android:background="#431F63"
-            android:layout_marginBottom="32dp"
-            style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            <Button
+                android:id="@+id/sales_details_button"
+                android:text="판매 내역"
+                android:textColor="@android:color/white"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:background="#FF9FF3"
+                android:layout_marginBottom="32dp"
+                style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-        <Button
-            android:id="@+id/order_details_button"
-            android:text="주문 내역"
-            android:textColor="@android:color/white"
-            android:textSize="30sp"
-            android:textStyle="bold"
-            android:background="#FF9FF3"
-            android:layout_marginBottom="32dp"
-            style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <Button
-            android:id="@+id/sales_details_button"
-            android:text="판매 내역"
-            android:textColor="@android:color/white"
-            android:textSize="30sp"
-            android:textStyle="bold"
-            android:background="#FF9FF3"
-            android:layout_marginBottom="32dp"
-            style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-
-    </LinearLayout>
+            <Button
+                android:id="@+id/qrCodeScan"
+                android:text="QR 코드로 식권인증"
+                android:textColor="@android:color/white"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:background="#4febe3"
+                android:layout_marginBottom="32dp"
+                style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
