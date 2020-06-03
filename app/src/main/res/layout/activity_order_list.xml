@@ -7,7 +7,7 @@
     tools:context=".Home.OrderListActivity">
 
     <TextView
-        android:id="@+id/home_title"
+        android:id="@+id/order_title"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:text=" 주문 내역 "
@@ -17,5 +17,21 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/martListLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/order_title">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/orderListView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="150dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mart_select_title" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

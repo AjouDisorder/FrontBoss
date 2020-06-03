@@ -19,29 +19,32 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
+        android:id="@+id/mart_scroll_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:fillViewport="true"
-        android:layout_marginTop="0dp"
-        android:id="@+id/mart_scroll_view">
+        app:layout_constraintTop_toBottomOf="@+id/home_title">
+
         <LinearLayout
-            android:orientation="vertical"
-            android:layout_margin="16dp"
-            android:padding="16dp"
-            android:background="@android:color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:background="@android:color/white"
+            android:orientation="vertical"
+            android:padding="16dp"
             app:layout_constraintTop_toBottomOf="@+id/home_title">
 
             <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:text="가게주소"
                 android:textSize="20sp"
-                android:textStyle="bold"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:textStyle="bold" />
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp">
 
                 <com.rengwuxian.materialedittext.MaterialEditText
                     android:id="@+id/mart_address"
@@ -56,13 +59,14 @@
                     app:met_iconPadding="0dp"
                     app:met_primaryColor="@color/myTextColor"
                     app:met_textColorHint="@color/myTextColor"></com.rengwuxian.materialedittext.MaterialEditText>
+
                 <Button
                     android:id="@+id/mart_address_button"
                     style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="#00ff0000"
-                    android:text="주소 검색 하기"
+                    android:text=""
                     android:textColor="@android:color/white"
                     android:textSize="15sp"
                     android:textStyle="bold"
@@ -71,121 +75,124 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:text="가게명"
                 android:textSize="20sp"
-                android:textStyle="bold"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:textStyle="bold" />
+
             <com.rengwuxian.materialedittext.MaterialEditText
                 android:id="@+id/mart_name"
-                android:hint="가게이름"
-                android:layout_marginBottom="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:met_primaryColor="@color/myTextColor"
+                android:layout_marginBottom="20dp"
+                android:hint="가게이름"
                 app:met_baseColor="@color/myTextColor"
-                app:met_textColorHint="@color/myTextColor"
-                app:met_iconPadding="0dp">
-            </com.rengwuxian.materialedittext.MaterialEditText>
+                app:met_iconPadding="0dp"
+                app:met_primaryColor="@color/myTextColor"
+                app:met_textColorHint="@color/myTextColor"></com.rengwuxian.materialedittext.MaterialEditText>
 
             <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:text="가게타입"
                 android:textSize="20sp"
-                android:textStyle="bold"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:textStyle="bold" />
+
             <Spinner
                 android:id="@+id/mart_type"
-                android:hint="가게타입"
-                android:layout_marginBottom="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                />
+                android:layout_marginBottom="20dp"
+                android:hint="가게타입" />
 
             <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:text="전화번호"
                 android:textSize="20sp"
-                android:textStyle="bold"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:textStyle="bold" />
+
             <com.rengwuxian.materialedittext.MaterialEditText
                 android:id="@+id/mart_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
                 android:hint="전화번호"
                 android:inputType="phone"
-                android:layout_marginBottom="20dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:met_primaryColor="@color/myTextColor"
                 app:met_baseColor="@color/myTextColor"
-                app:met_textColorHint="@color/myTextColor"
-                app:met_iconPadding="0dp">
-            </com.rengwuxian.materialedittext.MaterialEditText>
+                app:met_iconPadding="0dp"
+                app:met_primaryColor="@color/myTextColor"
+                app:met_textColorHint="@color/myTextColor"></com.rengwuxian.materialedittext.MaterialEditText>
 
             <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:text="가게소개"
                 android:textSize="20sp"
-                android:textStyle="bold"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:textStyle="bold" />
+
             <com.rengwuxian.materialedittext.MaterialEditText
                 android:id="@+id/mart_intro"
-                android:hint="가게 소개글"
-                android:inputType="textMultiLine"
-                android:layout_marginBottom="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:met_primaryColor="@color/myTextColor"
+                android:layout_marginBottom="20dp"
+                android:hint="가게 소개글"
+                android:inputType="textMultiLine"
                 app:met_baseColor="@color/myTextColor"
-                app:met_textColorHint="@color/myTextColor"
-                app:met_iconPadding="0dp">
-            </com.rengwuxian.materialedittext.MaterialEditText>
+                app:met_iconPadding="0dp"
+                app:met_primaryColor="@color/myTextColor"
+                app:met_textColorHint="@color/myTextColor"></com.rengwuxian.materialedittext.MaterialEditText>
 
             <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:text="가게사진"
                 android:textSize="20sp"
-                android:textStyle="bold"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:textStyle="bold" />
+
             <ImageView
                 android:id="@+id/mart_add_img"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"/>
+                android:layout_marginBottom="8dp" />
+
             <Button
                 android:id="@+id/mart_add_img_button"
-                android:text="사진 고르기"
-                android:layout_marginBottom="20dp"
-                android:textColor="@android:color/white"
-                android:textSize="15sp"
-                android:textStyle="bold"
-                android:background="#FF9FF3"
                 style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
                 android:layout_width="match_parent"
-                android:layout_height="30dp" />
+                android:layout_height="30dp"
+                android:layout_marginBottom="20dp"
+                android:background="#FF9FF3"
+                android:text="사진 고르기"
+                android:textColor="@android:color/white"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
             <Button
                 android:id="@+id/mart_add_cam_button"
-                android:text="사진 찍기"
-                android:layout_marginBottom="20dp"
-                android:textColor="@android:color/white"
-                android:textSize="15sp"
-                android:textStyle="bold"
-                android:background="#FF9FF3"
                 style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
                 android:layout_width="match_parent"
-                android:layout_height="30dp" />
+                android:layout_height="30dp"
+                android:layout_marginBottom="20dp"
+                android:background="#FF9FF3"
+                android:text="사진 찍기"
+                android:textColor="@android:color/white"
+                android:textSize="15sp"
+                android:textStyle="bold" />
 
             <Button
                 android:id="@+id/mart_info_submit"
+                style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:layout_marginBottom="32dp"
+                android:background="#431F63"
                 android:text="가게 추가"
                 android:textColor="@android:color/white"
                 android:textSize="20sp"
-                android:textStyle="bold"
-                android:background="#431F63"
-                android:layout_marginTop="32dp"
-                android:layout_marginBottom="32dp"
-                style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:textStyle="bold" />
 
         </LinearLayout>
     </ScrollView>

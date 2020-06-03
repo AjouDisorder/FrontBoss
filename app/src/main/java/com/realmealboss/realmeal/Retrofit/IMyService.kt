@@ -86,8 +86,10 @@ interface IMyService{
     @GET("/boss/getMenuList")
     fun getMenu(@Query("restaurant_id") id:String): Call<ResponseBody>
 
-
     //주문관리
+    @GET("/boss/getPaidTicketList")
+    fun getPaidTicketList(@Query("restaurant_id") id: String): Call<ResponseBody>
+
     //판매내역관리
 
 }

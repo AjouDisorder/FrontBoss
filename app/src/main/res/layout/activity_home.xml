@@ -59,9 +59,9 @@
             <Button
                 android:id="@+id/mart_info_button"
                 android:text="가게 기본 정보 수정"
-                android:textColor="@android:color/white"
                 android:textSize="30sp"
                 android:textStyle="bold"
+                android:textColor="@android:color/white"
                 android:background="#431F63"
                 android:layout_marginBottom="32dp"
                 style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
