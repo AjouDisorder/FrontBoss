@@ -35,6 +35,7 @@ class OrderListActivity : AppCompatActivity() {
         iMyService = retrofit.create(IMyService::class.java)
 
         val orderList = ArrayList<OrderModel>()
+        val valueList = ArrayList<String>()
 
         val adapter = OrderAdapter(orderList)
 
@@ -78,30 +79,34 @@ class OrderListActivity : AppCompatActivity() {
         })
 
 
-//        qrScan.setOnClickListener{
-//            IntentIntegrator(this).initiateScan()
-//        }
+        qrScan.setOnClickListener{
+            IntentIntegrator(this).initiateScan()
+        }
     }
 
 
+    // Get the results:
+    override fun onActivityResult(
+        requestCode: Int,
+        resultCode: Int,
+        data: Intent?
+    ) {
+        val result =
+            IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
+        if (result != null) {
+            if (result.contents == null) {
+                Toast.makeText(this, "취소!!", Toast.LENGTH_LONG).show()
+            } else {
+                val result = result.contents
+                Toast.makeText(this, "Scanned: " + result, Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "인증 완료", Toast.LENGTH_LONG).show()
 
-//    // Get the results:
-//    override fun onActivityResult(
-//        requestCode: Int,
-//        resultCode: Int,
-//        data: Intent?
-//    ) {
-//        val result =
-//            IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
-//        if (result != null) {
-//            if (result.contents == null) {
-//                Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show()
-//            } else {
-//                Toast.makeText(this, "Scanned: " + result.contents, Toast.LENGTH_LONG).show()
-//            }
-//        } else {
-//            super.onActivityResult(requestCode, resultCode, data)
-//        }
-//    }
+                result
+
+            }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data)
+        }
+    }
 
 }

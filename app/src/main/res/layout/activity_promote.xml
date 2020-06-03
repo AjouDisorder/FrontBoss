@@ -76,6 +76,7 @@
             <com.rengwuxian.materialedittext.MaterialEditText
                 android:id="@+id/pro_menu_price"
                 android:hint="ex)30"
+                android:inputType="number"
                 android:layout_marginBottom="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -91,50 +92,103 @@
                 android:textStyle="bold"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
-            <com.rengwuxian.materialedittext.MaterialEditText
-                android:id="@+id/pro_menu_price"
-                android:hint="ex)30"
-                android:layout_marginBottom="20dp"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/pro_date_a"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:hint="시작 날짜 설정"
+                    android:inputType="none"
+                    android:text=""
+                    app:layout_constraintTop_toTopOf="@+id/pro_date_a_button"
+                    app:met_baseColor="@color/myTextColor"
+                    app:met_iconPadding="0dp"
+                    app:met_primaryColor="@color/myTextColor"
+                    app:met_textColorHint="@color/myTextColor">
+                </com.rengwuxian.materialedittext.MaterialEditText>
+                <Button
+                    android:id="@+id/pro_date_a_button"
+                    style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#00ff0000"
+                    android:text=""
+                    android:textColor="@android:color/white"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:met_primaryColor="@color/myTextColor"
-                app:met_baseColor="@color/myTextColor"
-                app:met_textColorHint="@color/myTextColor"
-                app:met_iconPadding="0dp">
-            </com.rengwuxian.materialedittext.MaterialEditText>
-
-            <RelativeLayout
-                xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:background="#ffffff">
-                <DatePicker
-                    android:id="@+id/pro_datePicker_a"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:datePickerMode="spinner"
-                    android:calendarViewShown="false"/>
-
-            </RelativeLayout>
-            <TextView
-                android:text="                                   ~"
-                android:textStyle="bold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <RelativeLayout
-                xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:background="#ffffff"
                 android:layout_marginBottom="20dp">
-                <DatePicker
-                    android:id="@+id/pro_datePicker_b"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:datePickerMode="spinner"
-                    android:calendarViewShown="false"/>
 
-            </RelativeLayout>
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/pro_date_b"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:hint="종료 날짜 설정"
+                    android:inputType="none"
+                    android:text=""
+                    app:layout_constraintTop_toTopOf="@+id/pro_date_b_button"
+                    app:met_baseColor="@color/myTextColor"
+                    app:met_iconPadding="0dp"
+                    app:met_primaryColor="@color/myTextColor"
+                    app:met_textColorHint="@color/myTextColor"></com.rengwuxian.materialedittext.MaterialEditText>
+
+                <Button
+                    android:id="@+id/pro_date_b_button"
+                    style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#00ff0000"
+                    android:text=""
+                    android:textColor="@android:color/white"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+<!--            <RelativeLayout-->
+<!--                xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="100dp"-->
+<!--                android:background="#ffffff">-->
+<!--                <DatePicker-->
+<!--                    android:id="@+id/pro_datePicker_a"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:datePickerMode="spinner"-->
+<!--                    android:calendarViewShown="false"/>-->
+
+<!--            </RelativeLayout>-->
+<!--            <TextView-->
+<!--                android:text="                                   ~"-->
+<!--                android:textStyle="bold"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content" />-->
+<!--            <RelativeLayout-->
+<!--                xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="100dp"-->
+<!--                android:background="#ffffff"-->
+<!--                android:layout_marginBottom="20dp">-->
+<!--                <DatePicker-->
+<!--                    android:id="@+id/pro_datePicker_b"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:datePickerMode="spinner"-->
+<!--                    android:calendarViewShown="false"/>-->
+
+<!--            </RelativeLayout>-->
 
             <TextView
                 android:text="제한 시간 설정"
@@ -142,36 +196,101 @@
                 android:textStyle="bold"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
-            <RelativeLayout
-                xmlns:android="http://schemas.android.com/apk/res/android"
+
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:background="#ffffff">
-                <TimePicker
-                    android:id="@+id/pro_timePicker_a"
-                    android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/pro_time_a"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:datePickerMode="spinner"
-                    android:timePickerMode="spinner"/>
-            </RelativeLayout>
-            <TextView
-                android:text="                                  ~"
-                android:textStyle="bold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-            <RelativeLayout
-                xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:clickable="true"
+                    android:hint="시작 시간 설정"
+                    android:inputType="none"
+                    android:text=""
+                    app:layout_constraintTop_toTopOf="@+id/pro_time_a_button"
+                    app:met_baseColor="@color/myTextColor"
+                    app:met_iconPadding="0dp"
+                    app:met_primaryColor="@color/myTextColor"
+                    app:met_textColorHint="@color/myTextColor"></com.rengwuxian.materialedittext.MaterialEditText>
+
+                <Button
+                    android:id="@+id/pro_time_a_button"
+                    style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#00ff0000"
+                    android:text=""
+                    android:textColor="@android:color/white"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:background="#ffffff"
+                android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp">
-                <TimePicker
-                    android:id="@+id/pro_timePicker_b"
-                    android:layout_width="wrap_content"
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/pro_time_b"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:datePickerMode="spinner"
-                    android:timePickerMode="spinner"/>
-            </RelativeLayout>
+                    android:clickable="true"
+                    android:hint="종료 시간 설정"
+                    android:inputType="none"
+                    android:text=""
+                    app:layout_constraintTop_toTopOf="@+id/pro_time_b_button"
+                    app:met_baseColor="@color/myTextColor"
+                    app:met_iconPadding="0dp"
+                    app:met_primaryColor="@color/myTextColor"
+                    app:met_textColorHint="@color/myTextColor"></com.rengwuxian.materialedittext.MaterialEditText>
+
+                <Button
+                    android:id="@+id/pro_time_b_button"
+                    style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#00ff0000"
+                    android:text=""
+                    android:textColor="@android:color/white"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+<!--            <RelativeLayout-->
+<!--                xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="100dp"-->
+<!--                android:background="#ffffff">-->
+<!--                <TimePicker-->
+<!--                    android:id="@+id/pro_timePicker_a"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:datePickerMode="spinner"-->
+<!--                    android:timePickerMode="spinner"/>-->
+<!--            </RelativeLayout>-->
+<!--            <TextView-->
+<!--                android:text="                                  ~"-->
+<!--                android:textStyle="bold"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"/>-->
+<!--            <RelativeLayout-->
+<!--                xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="100dp"-->
+<!--                android:background="#ffffff"-->
+<!--                android:layout_marginBottom="20dp">-->
+<!--                <TimePicker-->
+<!--                    android:id="@+id/pro_timePicker_b"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:datePickerMode="spinner"-->
+<!--                    android:timePickerMode="spinner"/>-->
+<!--            </RelativeLayout>-->
 
             <TextView
                 android:text="제한수량"

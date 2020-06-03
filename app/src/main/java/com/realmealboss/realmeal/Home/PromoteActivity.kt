@@ -1,6 +1,7 @@
 package com.realmealboss.realmeal.Home
 
 import android.app.DatePickerDialog
+import android.app.TimePickerDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -34,6 +35,22 @@ class PromoteActivity : AppCompatActivity() {
 
     lateinit var iMyService: IMyService
 
+    val calendar: Calendar = Calendar.getInstance()
+    val cal = Calendar.getInstance()
+    val currentTime = calendar.timeInMillis
+
+    var ay = calendar.get(Calendar.YEAR)
+    var am = calendar.get(Calendar.MONTH)
+    var ad = calendar.get(Calendar.DAY_OF_MONTH)
+    var ah = cal.get(Calendar.HOUR_OF_DAY)
+    var ami = cal.get(Calendar.MINUTE)
+    var by = calendar.get(Calendar.YEAR)
+    var bm = calendar.get(Calendar.MONTH)
+    var bd = calendar.get(Calendar.DAY_OF_MONTH)
+    var bh = cal.get(Calendar.HOUR_OF_DAY)
+    var bmi = cal.get(Calendar.MINUTE)
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_promote)
@@ -44,7 +61,7 @@ class PromoteActivity : AppCompatActivity() {
 
         val menuList = ArrayList<OriginMenuModel>()
         val titleList = ArrayList<String>()
-        var selected:Int = 0
+        var selected = 0
 
         iMyService.getRestaurant(BossData.getOid()).enqueue(object : Callback<ResponseBody> {
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
@@ -102,18 +119,80 @@ class PromoteActivity : AppCompatActivity() {
             }
         }
 
+//        val calendar: Calendar = Calendar.getInstance()
+//        val cal = Calendar.getInstance()
+//        val currentTime = calendar.timeInMillis
+//
+//        var ay = calendar.get(Calendar.YEAR)
+//        var am = calendar.get(Calendar.MONTH)
+//        var ad = calendar.get(Calendar.DAY_OF_MONTH)
+//        var ah = cal.get(Calendar.HOUR_OF_DAY)
+//        var ami = cal.get(Calendar.MINUTE)
+//        var ay:Int
+//        var am:Int
+//        var ad:Int
+//        var ah:Int
+//        var ami:Int
+//        var by:Int
+//        var bm:Int
+//        var bd:Int
+//        var bh:Int
+//        var bmi:Int
+
+        pro_date_a_button.setOnClickListener{
+            val calendar: Calendar = Calendar.getInstance()
+            val datePickerDialog = DatePickerDialog(this,
+            DatePickerDialog.OnDateSetListener{view, year, month, dayOfMonth ->
+                pro_date_a.setText(""+year+"."+(month+1)+"."+dayOfMonth)
+                ay = year
+                am = month+1
+                ad = dayOfMonth
+            }, calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH))
+            .apply { datePicker.minDate = System.currentTimeMillis() }
+            .show()
+        }
+        pro_date_b_button.setOnClickListener{
+            val calendar: Calendar = Calendar.getInstance()
+            val datePickerDialog = DatePickerDialog(this,
+                DatePickerDialog.OnDateSetListener{view, year, month, dayOfMonth ->
+                    pro_date_b.setText(""+year+"."+(month+1)+"."+dayOfMonth)
+                    by = year
+                    bm = month+1
+                    bd = dayOfMonth
+                }, calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH))
+                .apply { datePicker.minDate = System.currentTimeMillis() }
+                .show()
+        }
+        pro_time_a_button.setOnClickListener{
+            val cal = Calendar.getInstance()
+            val timePickerDialog = TimePickerDialog(this,
+            TimePickerDialog.OnTimeSetListener{view, hourOfDay,minute->
+                pro_time_a.setText(""+hourOfDay+"."+minute)
+                ah = hourOfDay
+                ami = minute
+            },cal.get(Calendar.HOUR_OF_DAY),cal.get(Calendar.MINUTE),true)
+            timePickerDialog.show()
+        }
+        pro_time_b_button.setOnClickListener{
+            val timePickerDialog = TimePickerDialog(this,
+                TimePickerDialog.OnTimeSetListener{view, hourOfDay,minute->
+                    pro_time_b.setText(""+hourOfDay+"."+minute)
+                    bh = hourOfDay
+                    bmi = minute
+                },cal.get(Calendar.HOUR_OF_DAY),cal.get(Calendar.MINUTE),true)
+            timePickerDialog.show()
+        }
+
         //pro_datePicker_a.minDate = System.currentTimeMillis()
         //pro_datePicker_b.minDate = System.currentTimeMillis()
-        val calendar: Calendar = Calendar.getInstance()
-        val currentTime = calendar.timeInMillis
-
-        calendar.add(Calendar.YEAR, 1)
-        val nextYear = calendar.timeInMillis
-
-        pro_datePicker_a.minDate = currentTime
-        pro_datePicker_b.minDate = currentTime
-        pro_datePicker_a.maxDate = nextYear
-        pro_datePicker_b.maxDate = nextYear
+        //pro_datePicker_a.minDate = currentTime
+        //pro_datePicker_b.minDate = currentTime
+        //pro_datePicker_a.maxDate = nextYear
+        //pro_datePicker_b.maxDate = nextYear
 
         pro_menu_submit.setOnClickListener{
             var title: String = promote_menu_select.selectedItem.toString()
@@ -131,16 +210,16 @@ class PromoteActivity : AppCompatActivity() {
             }else if (pro_menu_forhere.isChecked){
                 method = "forhere"
             }else{ return@setOnClickListener }
-            var start_year: String = pro_datePicker_a.year.toString()
-            var start_month: String = (pro_datePicker_a.month+1).toString()
-            var start_date: String = (pro_datePicker_a.dayOfMonth+1).toString()
-            var start_hour: String = pro_timePicker_a.hour.toString()
-            var start_min: String = pro_timePicker_a.minute.toString()
-            var end_year: String = pro_datePicker_b.year.toString()
-            var end_month: String = (pro_datePicker_b.month+1).toString()
-            var end_date: String = (pro_datePicker_b.dayOfMonth+1).toString()
-            var end_hour: String = pro_timePicker_b.hour.toString()
-            var end_min: String = pro_timePicker_a.minute.toString()
+            var start_year: String = ay.toString()
+            var start_month: String = am.toString()
+            var start_date: String = ad.toString()
+            var start_hour: String = ah.toString()
+            var start_min: String = ami.toString()
+            var end_year: String = by.toString()
+            var end_month: String = bm.toString()
+            var end_date: String = bd.toString()
+            var end_hour: String = bh.toString()
+            var end_min: String = bmi.toString()
 
             iMyService.createMenu(id,discount,quantity,method,start_year,start_month,start_date,start_hour,start_min,end_year,end_month,end_date,end_hour,end_min)
                 .enqueue(object : Callback<ResponseBody>{
