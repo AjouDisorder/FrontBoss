@@ -39,30 +39,30 @@ class HomeActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        qrCodeScan.setOnClickListener{
-            IntentIntegrator(this).initiateScan()
-        }
+//        qrCodeScan.setOnClickListener{
+//            IntentIntegrator(this).initiateScan()
+//        }
     }
 
-    // Get the results:
-    override fun onActivityResult(
-        requestCode: Int,
-        resultCode: Int,
-        data: Intent?
-    ) {
-        val result =
-            IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
-        if (result != null) {
-            if (result.contents == null) {
-                Toast.makeText(this, "취소!!", Toast.LENGTH_LONG).show()
-            } else {
-                //Toast.makeText(this, "Scanned: " + result.contents, Toast.LENGTH_LONG).show()
-                Toast.makeText(this, "식권인증완료", Toast.LENGTH_LONG).show()
-            }
-        } else {
-            super.onActivityResult(requestCode, resultCode, data)
-        }
-    }
+//    // Get the results:
+//    override fun onActivityResult(
+//        requestCode: Int,
+//        resultCode: Int,
+//        data: Intent?
+//    ) {
+//        val result =
+//            IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
+//        if (result != null) {
+//            if (result.contents == null) {
+//                Toast.makeText(this, "취소!!", Toast.LENGTH_LONG).show()
+//            } else {
+//                //Toast.makeText(this, "Scanned: " + result.contents, Toast.LENGTH_LONG).show()
+//                Toast.makeText(this, "식권인증완료", Toast.LENGTH_LONG).show()
+//            }
+//        } else {
+//            super.onActivityResult(requestCode, resultCode, data)
+//        }
+//    }
 
     override fun onBackPressed() {
         super.onBackPressed()

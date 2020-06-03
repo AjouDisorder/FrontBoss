@@ -116,17 +116,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <Button
-                android:id="@+id/qrCodeScan"
-                android:text="QR 코드로 식권인증"
-                android:textColor="@android:color/white"
-                android:textSize="30sp"
-                android:textStyle="bold"
-                android:background="#4febe3"
-                android:layout_marginBottom="32dp"
-                style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+<!--            <Button-->
+<!--                android:id="@+id/qrCodeScan"-->
+<!--                android:text="QR 코드로 식권인증"-->
+<!--                android:textColor="@android:color/white"-->
+<!--                android:textSize="30sp"-->
+<!--                android:textStyle="bold"-->
+<!--                android:background="#4febe3"-->
+<!--                android:layout_marginBottom="32dp"-->
+<!--                style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content" />-->
+<!--        -->
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

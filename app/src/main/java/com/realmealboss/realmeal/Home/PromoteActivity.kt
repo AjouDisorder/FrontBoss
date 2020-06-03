@@ -171,7 +171,7 @@ class PromoteActivity : AppCompatActivity() {
             val cal = Calendar.getInstance()
             val timePickerDialog = TimePickerDialog(this,
             TimePickerDialog.OnTimeSetListener{view, hourOfDay,minute->
-                pro_time_a.setText(""+hourOfDay+"."+minute)
+                pro_time_a.setText(""+hourOfDay+":"+minute)
                 ah = hourOfDay
                 ami = minute
             },cal.get(Calendar.HOUR_OF_DAY),cal.get(Calendar.MINUTE),true)
@@ -180,7 +180,7 @@ class PromoteActivity : AppCompatActivity() {
         pro_time_b_button.setOnClickListener{
             val timePickerDialog = TimePickerDialog(this,
                 TimePickerDialog.OnTimeSetListener{view, hourOfDay,minute->
-                    pro_time_b.setText(""+hourOfDay+"."+minute)
+                    pro_time_b.setText(""+hourOfDay+":"+minute)
                     bh = hourOfDay
                     bmi = minute
                 },cal.get(Calendar.HOUR_OF_DAY),cal.get(Calendar.MINUTE),true)
