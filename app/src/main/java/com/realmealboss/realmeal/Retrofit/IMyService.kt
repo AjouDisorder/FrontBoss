@@ -90,6 +90,13 @@ interface IMyService{
     @GET("/boss/getPaidTicketList")
     fun getPaidTicketList(@Query("restaurant_id") id: String): Call<ResponseBody>
 
+    @FormUrlEncoded
+    @POST("/boss/setTicketDisable")
+    fun setTicketDisable(@Field("ticket_id") id: String): Call<ResponseBody>
+
     //판매내역관리
+    @GET("/boss/getCertifiedTicketList")
+    fun getCertifiedTicketList(@Query("restaurant_id") id: String): Call<ResponseBody>
+
 
 }

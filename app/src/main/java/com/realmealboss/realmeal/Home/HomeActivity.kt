@@ -3,8 +3,6 @@ package com.realmealboss.realmeal.Home
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
-import com.google.zxing.integration.android.IntentIntegrator
 import com.realmealboss.realmeal.BossData
 import com.realmealboss.realmeal.R
 import kotlinx.android.synthetic.main.activity_home.*
@@ -35,7 +33,7 @@ class HomeActivity : AppCompatActivity() {
             startActivity(intent)
         }
         sales_details_button.setOnClickListener{
-            val intent = Intent(this, SalesActivity::class.java)
+            val intent = Intent(this, SalesListActivity::class.java)
             startActivity(intent)
         }
 

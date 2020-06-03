@@ -26,6 +26,10 @@ class OrderListActivity : AppCompatActivity() {
 
     lateinit var iMyService: IMyService
 
+    private val valueList = ArrayList<String>()
+    private val idList = ArrayList<String>()
+    private var select = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_order_list)
@@ -35,7 +39,6 @@ class OrderListActivity : AppCompatActivity() {
         iMyService = retrofit.create(IMyService::class.java)
 
         val orderList = ArrayList<OrderModel>()
-        val valueList = ArrayList<String>()
 
         val adapter = OrderAdapter(orderList)
 
@@ -70,6 +73,10 @@ class OrderListActivity : AppCompatActivity() {
                         tv_ticketMethod.setBackgroundColor("#4febe3".toInt())
                     }
                     value = jsonObject.getString("value")
+                    var _id = jsonObject.getString("_id")
+
+                    valueList.add(i,value)
+                    idList.add(i,_id)
 
                     orderList.add(i, OrderModel(title,price,userName,method, value))
                     orderListView.adapter = adapter
@@ -77,8 +84,6 @@ class OrderListActivity : AppCompatActivity() {
                 }
             }
         })
-
-
         qrScan.setOnClickListener{
             IntentIntegrator(this).initiateScan()
         }
@@ -101,8 +106,22 @@ class OrderListActivity : AppCompatActivity() {
                 Toast.makeText(this, "Scanned: " + result, Toast.LENGTH_LONG).show()
                 Toast.makeText(this, "인증 완료", Toast.LENGTH_LONG).show()
 
-                result
+                select = valueList.indexOf(result)
+                iMyService.setTicketDisable(idList.get(select)).enqueue(object : Callback<ResponseBody>{
+                    override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
 
+                    }
+                    override fun onResponse(
+                        call: Call<ResponseBody>,
+                        response: Response<ResponseBody>
+                    ) {
+                        var result = response.body()?.string()
+                        println(result)
+                        val intent = Intent(this@OrderListActivity, OrderListActivity::class.java)
+                        startActivity(intent)
+                        finish()
+                    }
+                })
 
             }
         } else {

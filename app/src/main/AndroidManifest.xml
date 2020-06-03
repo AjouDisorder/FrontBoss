@@ -36,7 +36,7 @@
 
         <activity android:name=".Home.MartListActivity" />
         <activity android:name=".SearchAddressActivity" />
-        <activity android:name=".Home.SalesActivity" />
+        <activity android:name=".Home.SalesListActivity" />
         <activity android:name=".Home.OrderListActivity" />
         <activity android:name=".Home.PromoteActivity" />
         <activity android:name=".Home.MartAddActivity" />

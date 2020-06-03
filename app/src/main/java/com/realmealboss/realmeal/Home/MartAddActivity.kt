@@ -128,10 +128,10 @@ class MartAddActivity : AppCompatActivity() {
             Toast.makeText(this, lat +","+ lng, Toast.LENGTH_SHORT).show()
             println(BossData.getOid())
 
-            if(TextUtils.isEmpty(currentPhotoPath)){
-                Toast.makeText(this,"사진을 입력해주세요", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
+//            if(TextUtils.isEmpty(currentPhotoPath)){
+//                Toast.makeText(this,"사진을 입력해주세요", Toast.LENGTH_SHORT).show()
+//                return@setOnClickListener
+//            }
 
             val file = File(currentPhotoPath)
             //val requestUserId = RequestBody.create(MediaType.parse("multipart/form-data"),BossData.getROid())
