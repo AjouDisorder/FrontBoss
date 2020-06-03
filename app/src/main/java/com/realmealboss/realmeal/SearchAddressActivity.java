@@ -56,7 +56,7 @@ public class SearchAddressActivity extends AppCompatActivity {
         webView.setWebChromeClient(new WebChromeClient());
 
         // webview url load. php 파일 주소
-        webView.loadUrl("http://49.50.172.13/kakao_address2.php");
+        webView.loadUrl("http://101.101.211.145/kakao_address2.php");
 
     }
 

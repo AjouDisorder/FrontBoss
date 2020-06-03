@@ -83,6 +83,10 @@ interface IMyService{
                    @Field("end_min") end_min: String
                    ): Call<ResponseBody>
 
+    @GET("/boss/getMenuList")
+    fun getMenu(@Query("restaurant_id") id:String): Call<ResponseBody>
+
+
     //주문관리
     //판매내역관리
 

@@ -41,6 +41,7 @@ class PromoteActivity : AppCompatActivity() {
 
         val menuList = ArrayList<OriginMenuModel>()
         val titleList = ArrayList<String>()
+        val selected:Int = 0
 
         iMyService.getRestaurant(BossData.getOid()).enqueue(object : Callback<ResponseBody> {
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
@@ -76,44 +77,49 @@ class PromoteActivity : AppCompatActivity() {
                 }
                 val originMenuAdapter = ArrayAdapter(applicationContext,android.R.layout.simple_spinner_dropdown_item,titleList.toArray())
                 promote_menu_select.adapter = originMenuAdapter
-                promote_menu_select.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
-                    override fun onNothingSelected(parent: AdapterView<*>?) {
+            }
+        })
+        promote_menu_select.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
+            override fun onNothingSelected(parent: AdapterView<*>?) {
 
+            }
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                when(position) {
+                    0 -> {
                     }
-                    override fun onItemSelected(
-                        parent: AdapterView<*>?,
-                        view: View?,
-                        position: Int,
-                        id: Long
-                    ) {
-                        when(position) {
-                            0 -> {
-                            }
-                            1 -> {
-                            }
-                            else -> {
-                            }
-                        }
+                    1 -> {
+                    }
+                    else -> {
                     }
                 }
             }
-        })
-
+        }
 
         pro_menu_submit.setOnClickListener{
-            var name = pro_menu_name.text.toString()
-            var price = pro_menu_price.text.toString()
-            var quantity = pro_menu_limit.text.toString()
-
+            var title: String
+            var price: Number
+            var type: String
+            var id: String
+            var discount: String
+            var quantity: String = pro_menu_limit.text.toString()
+            var method: String
+            var start_year: String
+            var start_month: String
+            var start_date: String
+            var start_hour: String
+            var start_min: String
+            var end_year: String
+            var end_month: String
+            var end_date: String
+            var end_hour: String
+            var end_min: String
             //Check empty
-            if(TextUtils.isEmpty(name)){
-                Toast.makeText(this,"메뉴명을 입력해주세요", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
-            if(TextUtils.isEmpty(price)){
-                Toast.makeText(this,"메뉴가격을 입력해주세요", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
+
 
         }
 

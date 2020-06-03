@@ -68,7 +68,7 @@
                 />
 
             <TextView
-                android:text="할인율 (단위:%)"
+                android:text="할인율"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:layout_width="match_parent"
