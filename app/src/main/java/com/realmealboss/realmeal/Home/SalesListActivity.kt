@@ -1,5 +1,6 @@
 package com.realmealboss.realmeal.Home
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -77,5 +78,11 @@ class SalesListActivity : AppCompatActivity() {
                 }
             }
         })
+    }
+    override fun onBackPressed() {
+        //super.onBackPressed()
+        val intent = Intent(this, HomeActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 }
