@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
+import com.realmealboss.realmeal.Home.MartListActivity
 
 class IntroActivity : AppCompatActivity() {
 
@@ -32,7 +33,7 @@ class IntroActivity : AppCompatActivity() {
         // Runnable이 실행되면 ListActivity로 이동하는 코드
         //                      LoginActivity
         runnable = Runnable {
-            val intent = Intent(applicationContext, ListActivity::class.java)
+            val intent = Intent(applicationContext, MartListActivity::class.java)
             startActivity(intent)
         }
         // Handler를 생성하고 2000ms(2초)후 runnable을 실행

@@ -56,14 +56,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".LoginActivity" />
-        <activity
-            android:name=".DetailActivity"
-            android:label="@string/title_activity_detail"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".ListActivity"
-            android:label="@string/title_activity_list"
-            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".IntroActivity" />
     </application>
 
