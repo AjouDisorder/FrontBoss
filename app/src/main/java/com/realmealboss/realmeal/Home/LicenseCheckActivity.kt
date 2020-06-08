@@ -22,4 +22,10 @@ class LicenseCheckActivity : AppCompatActivity() {
             finish()
         }
     }
+    override fun onBackPressed() {
+        //super.onBackPressed()
+        val intent = Intent(this, HomeActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
 }

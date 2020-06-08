@@ -54,23 +54,23 @@ class OrderListActivity : AppCompatActivity() {
                 var userName:String
                 var method:String
                 var value:String
+                var quantity:Number
 
                 var jsonArray = JSONArray(result)
                 for (i in 0..(jsonArray.length()-1)){
                     var jsonObject: JSONObject = jsonArray.getJSONObject(i)
-                    title = jsonObject.getString("title")
+                    title = jsonObject.getString("menuName")
                     price = jsonObject.getInt("totalPrice")
                     userName = jsonObject.getString("userName")
                     method = jsonObject.getString("method")
+                    quantity = jsonObject.getInt("quantity")
+
                     if(method=="takeout"){
-                        method="방문포장"
-                        tv_ticketMethod.setBackgroundColor("#431F63".toInt())
+                        method="방문 포장"
                     }else if(method=="forhere"){
-                        method="매장식사"
-                        tv_ticketMethod.setBackgroundColor("#FF9FF3".toInt())
+                        method="매장 식사"
                     }else{
-                        method="나는둘다"
-                        tv_ticketMethod.setBackgroundColor("#4febe3".toInt())
+                        method="나는 둘다"
                     }
                     value = jsonObject.getString("value")
                     var _id = jsonObject.getString("_id")
@@ -78,7 +78,7 @@ class OrderListActivity : AppCompatActivity() {
                     valueList.add(i,value)
                     idList.add(i,_id)
 
-                    orderList.add(i, OrderModel(title,price,userName,method, value))
+                    orderList.add(i, OrderModel(title,price,userName,method, value,quantity))
                     orderListView.adapter = adapter
                     orderListView.layoutManager = LinearLayoutManager(this@OrderListActivity, RecyclerView.VERTICAL, false)
                 }
@@ -104,7 +104,6 @@ class OrderListActivity : AppCompatActivity() {
             } else {
                 val result = result.contents
                 Toast.makeText(this, "Scanned: " + result, Toast.LENGTH_LONG).show()
-                Toast.makeText(this, "인증 완료", Toast.LENGTH_LONG).show()
 
                 select = valueList.indexOf(result)
                 iMyService.setTicketDisable(idList.get(select)).enqueue(object : Callback<ResponseBody>{
@@ -117,6 +116,7 @@ class OrderListActivity : AppCompatActivity() {
                     ) {
                         var result = response.body()?.string()
                         println(result)
+                        Toast.makeText(this@OrderListActivity, "인증 완료", Toast.LENGTH_LONG).show()
                         val intent = Intent(this@OrderListActivity, OrderListActivity::class.java)
                         startActivity(intent)
                         finish()
@@ -127,6 +127,12 @@ class OrderListActivity : AppCompatActivity() {
         } else {
             super.onActivityResult(requestCode, resultCode, data)
         }
+    }
+    override fun onBackPressed() {
+        //super.onBackPressed()
+        val intent = Intent(this, HomeActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 
 }

@@ -19,8 +19,8 @@
 
         <TextView
             android:id="@+id/tv_ticketMethod"
-            android:text="매장식사"
-            android:textSize="25sp"
+            android:text="매장  식사"
+            android:textSize="26sp"
             android:textStyle="bold"
             android:textColor="@android:color/white"
             android:background="#431F63"
@@ -54,6 +54,29 @@
             android:textSize="25sp"
             app:layout_constraintStart_toEndOf="@+id/tv_ticketMethod"
             app:layout_constraintTop_toTopOf="@+id/tv_ticketMethod" />
+
+        <TextView
+            android:id="@+id/tv_ticketQuantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0  "
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/tv_originPrice6"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_originPrice6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="8dp"
+            android:text="장"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
 
         <TextView
             android:id="@+id/tv_ticketPrice"

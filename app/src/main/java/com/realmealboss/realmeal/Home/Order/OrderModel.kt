@@ -5,4 +5,5 @@ data class OrderModel(
     val price:Number,
     val userName:String,
     val method:String,
-    val value:String)
+    val value:String,
+    val quantity:Number)

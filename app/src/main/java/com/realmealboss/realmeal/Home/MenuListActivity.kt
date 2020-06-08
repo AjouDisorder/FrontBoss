@@ -141,6 +141,13 @@ class MenuListActivity : AppCompatActivity() {
 
     }
 
+    override fun onBackPressed() {
+        //super.onBackPressed()
+        val intent = Intent(this, HomeActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+
 //    fun addMenu(){
 //        val builder = AlertDialog.Builder(this, android.R.style.Theme_DeviceDefault_Light_Dialog_NoActionBar_MinWidth)
 //

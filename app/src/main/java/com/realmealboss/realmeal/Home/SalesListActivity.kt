@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.realmealboss.realmeal.BossData
 import com.realmealboss.realmeal.Home.Order.OrderAdapter
 import com.realmealboss.realmeal.Home.Order.OrderModel
+import com.realmealboss.realmeal.Home.Sales.SalesAdapter
+import com.realmealboss.realmeal.Home.Sales.SalesModel
 import com.realmealboss.realmeal.R
 import com.realmealboss.realmeal.Retrofit.IMyService
 import com.realmealboss.realmeal.Retrofit.RetrofitClient
@@ -32,9 +34,9 @@ class SalesListActivity : AppCompatActivity() {
         val retrofit = RetrofitClient.getInstance()
         iMyService = retrofit.create(IMyService::class.java)
 
-        val salesList = ArrayList<OrderModel>()
+        val salesList = ArrayList<SalesModel>()
 
-        val adapter = OrderAdapter(salesList)
+        val adapter = SalesAdapter(salesList)
 
         iMyService.getCertifiedTicketList(BossData.getROid()).enqueue(object : Callback<ResponseBody>{
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
@@ -69,7 +71,7 @@ class SalesListActivity : AppCompatActivity() {
                     value = jsonObject.getString("value")
                     var _id = jsonObject.getString("_id")
 
-                    salesList.add(i, OrderModel(title, price, userName, method, value))
+                    salesList.add(i, SalesModel(title, price, userName, method, value))
                     salesListView.adapter = adapter
                     salesListView.layoutManager = LinearLayoutManager(this@SalesListActivity, RecyclerView.VERTICAL, false)
                 }

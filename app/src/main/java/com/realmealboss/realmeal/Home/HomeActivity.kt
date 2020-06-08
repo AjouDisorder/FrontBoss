@@ -19,22 +19,27 @@ class HomeActivity : AppCompatActivity() {
         mart_info_button.setOnClickListener{
             val intent = Intent(this, MartAddActivity::class.java)
             startActivity(intent)
+            finish()
         }
         menu_info_button.setOnClickListener{
             val intent = Intent(this, MenuListActivity::class.java)
             startActivity(intent)
+            finish()
         }
         promotion_info_button.setOnClickListener{
             val intent = Intent(this, PromoteListActivity::class.java)
             startActivity(intent)
+            finish()
         }
         order_details_button.setOnClickListener{
             val intent = Intent(this, OrderListActivity::class.java)
             startActivity(intent)
+            finish()
         }
         sales_details_button.setOnClickListener{
             val intent = Intent(this, SalesListActivity::class.java)
             startActivity(intent)
+            finish()
         }
 
 //        qrCodeScan.setOnClickListener{

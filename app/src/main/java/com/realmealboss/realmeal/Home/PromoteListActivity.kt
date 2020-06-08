@@ -61,7 +61,7 @@ class PromoteListActivity : AppCompatActivity() {
                     quantity = jsonObject.getInt("quantity")
                     discount = jsonObject.getInt("discount")
                     originPrice = jsonObject.getJSONObject("originMenu").getInt("originPrice")
-                    price = originPrice - (originPrice*discount/100)
+                    price = originPrice - ((originPrice*discount)/100)
                     start_time = jsonObject.getString("startDateObject").substring(11,16)
                     end_time = jsonObject.getString("endDateObject").substring(11,16)
                     method = jsonObject.getString("method")

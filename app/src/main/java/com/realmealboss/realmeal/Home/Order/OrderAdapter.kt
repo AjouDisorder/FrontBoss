@@ -23,6 +23,7 @@ class OrderAdapter (val list:List<OrderModel>): RecyclerView.Adapter<OrderViewHo
         holder.containerView.tv_ticketUser.text = list[position].userName
         holder.containerView.tv_ticketMethod.text = list[position].method
         holder.containerView.tv_ticketValue.text = list[position].value
+        holder.containerView.tv_ticketQuantity.text = list[position].quantity.toString()
 
     }
 

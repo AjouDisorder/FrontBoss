@@ -26,7 +26,7 @@ class MartAdapter(val list:List<MartModel>, val layoutId: Int): RecyclerView.Ada
                 notifyDataSetChanged()
                 onItemSelectionChangedListener?.let{it(selectionList)}
                 */ //중복선택
-                notifyDataSetChanged()
+                //notifyDataSetChanged()
                 onItemSelectionChangedListener?.let{it(id as Long)}
             }
         })
@@ -39,7 +39,7 @@ class MartAdapter(val list:List<MartModel>, val layoutId: Int): RecyclerView.Ada
 
     override fun onBindViewHolder(holder: MartViewHolder, position: Int) {
         //holder.containerView.martImage.setImageResource(list[position].ImageId)
-        holder.containerView.martImage.setImageResource(restaurantTypeToIcons[list[position].type]!!)
+        holder.containerView.martImage.setImageResource(restaurantTypeToIcons[list[position].type] as Int)
 
         holder.containerView.martName.text = list[position].name
 
