@@ -26,6 +26,7 @@ import com.realmealboss.realmeal.*
 import com.realmealboss.realmeal.Retrofit.*
 import kotlinx.android.synthetic.main.activity_mart_add.*
 import okhttp3.*
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
@@ -136,7 +137,7 @@ class MartAddActivity : AppCompatActivity() {
             val file = File(currentPhotoPath)
             //val requestUserId = RequestBody.create(MediaType.parse("multipart/form-data"),BossData.getROid())
             var requestImage: MultipartBody.Part? = null
-            var requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file)
+            var requestFile = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), file)
             requestImage = MultipartBody.Part.createFormData("img", file.getName(), requestFile)
 
             println(requestFile)

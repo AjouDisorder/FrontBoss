@@ -82,4 +82,7 @@ dependencies {
     // Zxing QR코드
     implementation 'com.journeyapps:zxing-android-embedded:4.1.0'
 
+    // 부트페이
+    implementation 'com.github.bootpay:client_android_java:3.2.47'
+
 }
