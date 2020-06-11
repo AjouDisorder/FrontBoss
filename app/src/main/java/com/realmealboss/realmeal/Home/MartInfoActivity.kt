@@ -13,6 +13,7 @@ import com.realmealboss.realmeal.R
 import com.realmealboss.realmeal.Retrofit.IMyService
 import com.realmealboss.realmeal.Retrofit.RetrofitClient
 import com.realmealboss.realmeal.SearchAddressActivity
+import com.realmealboss.realmeal.SearchEditAddressActivity
 import kotlinx.android.synthetic.main.activity_mart_add.*
 import kotlinx.android.synthetic.main.activity_mart_info.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -40,7 +41,7 @@ class MartInfoActivity : AppCompatActivity() {
 
         mart_info_address_button.setOnClickListener{
             println(BossData.getOid())
-            val intent = Intent(this, SearchAddressActivity::class.java)
+            val intent = Intent(this, SearchEditAddressActivity::class.java)
             startActivity(intent)
             finish()
         }
@@ -103,8 +104,24 @@ class MartInfoActivity : AppCompatActivity() {
                         mart_info_intro.setText(description)
                         mart_info_address.setText(address)
                         mart_info_phone.setText(phone)
+                        for (k in 0..(items.size-1)){
+                            if (type == items.get(k)){
+                                mart_info_type.setSelection(k)
+                                break
+                            }
+                        }
                     }
                 }
+                if (intent.hasExtra("address")){
+                    val address = intent.getStringExtra("address")
+                    mart_info_address.setText(address)
+                }else{}
+                if (intent.hasExtra("lat")){
+                    lat = intent.getStringExtra("lat")
+                }else{}
+                if (intent.hasExtra("lng")){
+                    lng = intent.getStringExtra("lng")
+                }else{}
             }
         })
 

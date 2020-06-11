@@ -72,8 +72,9 @@ interface IMyService{
                          @Field("type") type: String
     ): Call<ResponseBody>
 
-    @DELETE("deleteOriginMenu")
-    fun deleteOriginMenu(@Query("originMenu_id") id: String): Call<ResponseBody>
+    @FormUrlEncoded
+    @POST("boss/deleteOriginMenu")
+    fun deleteOriginMenu(@Field("originMenu_id") id: String): Call<ResponseBody>
 
 
     //홍보글 관리

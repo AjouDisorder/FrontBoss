@@ -1,7 +1,9 @@
 package com.realmealboss.realmeal.Home.Menu
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.view.menu.MenuView
 import androidx.recyclerview.widget.RecyclerView
 import com.realmealboss.realmeal.R
 import kotlinx.android.synthetic.main.activity_menu_list.view.*
@@ -17,7 +19,18 @@ class MenuAdapter (val list: List<MenuModel>): RecyclerView.Adapter<MenuViewHold
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MenuViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_menu, parent, false)
-        return MenuViewHolder(view)
+        val viewHolder = MenuViewHolder(view)
+        println("1")
+        view.setOnClickListener (object : View.OnClickListener{
+            override fun onClick(v: View?) {
+                val id = v?.tag
+
+                println("2")
+                onItemSelectionChangedListener?.let{it(id as Long)}
+            }
+        })
+
+        return viewHolder
     }
 
     override fun getItemCount(): Int {
@@ -30,6 +43,15 @@ class MenuAdapter (val list: List<MenuModel>): RecyclerView.Adapter<MenuViewHold
         holder.containerView.tv_menuTypeOrigin.text = list[position].type
         holder.containerView.tv_originPriceOrigin.text = list[position].price.toString()
 
+        holder.containerView.tag = getItemId(position)
+        holder.containerView.isActivated = selectionList.contains(getItemId(position))
+
+    }
+    override fun getItemId(position: Int): Long {
+        //return super.getItemId(position)
+        return position.toLong()
     }
 
+    val selectionList = mutableListOf<Long>()
+    var onItemSelectionChangedListener:((Long)->Unit)? = null
 }

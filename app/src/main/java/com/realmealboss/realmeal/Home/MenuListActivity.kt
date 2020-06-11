@@ -20,6 +20,7 @@ import com.realmealboss.realmeal.Retrofit.RetrofitClient
 import kotlinx.android.synthetic.main.activity_menu_list.*
 import kotlinx.android.synthetic.main.activity_menu_list.menu_name
 import kotlinx.android.synthetic.main.activity_menu_list.menu_price
+import kotlinx.android.synthetic.main.item_menu.*
 import okhttp3.ResponseBody
 import org.json.JSONArray
 import org.json.JSONObject
@@ -43,6 +44,7 @@ class MenuListActivity : AppCompatActivity() {
 
 
         val menuList = ArrayList<MenuModel>()
+        val menuIdList = ArrayList<String>()
 
         val adapter = MenuAdapter(menuList)
 
@@ -70,7 +72,9 @@ class MenuListActivity : AppCompatActivity() {
                             title = originMenu.getString("title")
                             price = originMenu.getInt("originPrice")
                             type = originMenu.getString("type")
+                            var menuOid = originMenu.getString("_id")
 
+                            menuIdList.add(j,menuOid)
                             menuList.add(j, MenuModel(title,price,type))
                             menuListView.adapter = adapter
                             menuListView.layoutManager = LinearLayoutManager(this@MenuListActivity, RecyclerView.VERTICAL, false)
@@ -79,6 +83,26 @@ class MenuListActivity : AppCompatActivity() {
                 }
             }
         })
+
+        adapter.onItemSelectionChangedListener = {
+            println("select : $it")
+            println(menuIdList.get(it.toInt()))
+            iMyService.deleteOriginMenu(menuIdList.get(it.toInt())).enqueue(object : Callback<ResponseBody> {
+                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                }
+                override fun onResponse(
+                    call: Call<ResponseBody>,
+                    response: Response<ResponseBody>
+                ) {
+                    var result = response.body()?.string()
+                    println(result)
+                    val intent = Intent(this@MenuListActivity, MenuListActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                }
+            })
+        }
+
 
         //Spinner
         val items = resources.getStringArray(R.array.menu_type)
@@ -130,7 +154,6 @@ class MenuListActivity : AppCompatActivity() {
                     call: Call<ResponseBody>?,
                     response: Response<ResponseBody>?
                 ) {
-                    Toast.makeText(this@MenuListActivity,response?.body().toString(), Toast.LENGTH_SHORT).show()
                     println(response?.body().toString())
                     val intent = Intent(this@MenuListActivity, MenuListActivity::class.java)
                     startActivity(intent)
