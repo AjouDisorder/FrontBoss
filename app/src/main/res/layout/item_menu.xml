@@ -74,6 +74,18 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginRight="16dp" />
 
+        <Button
+            android:id="@+id/menu_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:text="메뉴 삭제"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:background="@android:color/holo_red_dark"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

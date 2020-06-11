@@ -21,7 +21,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".UserPayActivity"></activity>
+        <activity android:name=".Home.MartInfoActivity"></activity>
+        <activity android:name=".UserPayActivity" />
         <activity android:name=".Home.PromoteListActivity" />
         <activity android:name=".Home.MenuListActivity" />
         <activity android:name=".Home.LicenseCheckActivity" />

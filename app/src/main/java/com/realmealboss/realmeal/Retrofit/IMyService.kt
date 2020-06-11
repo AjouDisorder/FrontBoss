@@ -44,6 +44,18 @@ interface IMyService{
                          @Field("lng") lng : Double
     ): Call<ResponseBody>
 
+    @FormUrlEncoded
+    @POST("/boss/updateRestaurant")
+    fun updateRestaurant(@Field("restaurant_id") id:String,
+                         @Field("title") title: String,
+                         @Field("type") type: String,
+                         @Field("address") address: String,
+                         @Field("phone") phone: String,
+                         @Field("description") intro: String,
+                         @Field("lat") lat : Double,
+                         @Field("lng") lng : Double
+    ): Call<ResponseBody>
+
     @GET("/boss/getRestaurantList")
     fun getRestaurant(@Query("boss_id") id:String): Call<ResponseBody>
 

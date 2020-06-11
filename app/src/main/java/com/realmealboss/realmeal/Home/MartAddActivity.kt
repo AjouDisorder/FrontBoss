@@ -290,7 +290,7 @@ class MartAddActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         super.onBackPressed()
-        val intent = Intent(this@MartAddActivity, MartListActivity::class.java)
+        val intent = Intent(this, MartListActivity::class.java)
         startActivity(intent)
         finish()
     }

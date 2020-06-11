@@ -17,7 +17,7 @@ class HomeActivity : AppCompatActivity() {
         mart_home_title.text = BossData.getRTitle()
 
         mart_info_button.setOnClickListener{
-            val intent = Intent(this, MartAddActivity::class.java)
+            val intent = Intent(this, MartInfoActivity::class.java)
             startActivity(intent)
             finish()
         }
