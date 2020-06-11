@@ -20,12 +20,10 @@ class MenuAdapter (val list: List<MenuModel>): RecyclerView.Adapter<MenuViewHold
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MenuViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_menu, parent, false)
         val viewHolder = MenuViewHolder(view)
-        println("1")
         view.setOnClickListener (object : View.OnClickListener{
             override fun onClick(v: View?) {
                 val id = v?.tag
 
-                println("2")
                 onItemSelectionChangedListener?.let{it(id as Long)}
             }
         })

@@ -51,28 +51,28 @@ class SalesListActivity : AppCompatActivity() {
                 var userName: String
                 var method: String
                 var value: String
+                var quantity: Number
 
                 var jsonArray = JSONArray(result)
                 for (i in 0..(jsonArray.length() - 1)) {
                     var jsonObject: JSONObject = jsonArray.getJSONObject(i)
-                    title = jsonObject.getString("title")
+                    title = jsonObject.getString("menuName")
                     price = jsonObject.getInt("totalPrice")
                     userName = jsonObject.getString("userName")
                     method = jsonObject.getString("method")
+                    quantity = jsonObject.getInt("quantity")
+
                     if (method == "takeout") {
                         method = "방문포장"
-                        tv_ticketMethod.setBackgroundColor("#431F63".toInt())
                     } else if (method == "forhere") {
                         method = "매장식사"
-                        tv_ticketMethod.setBackgroundColor("#FF9FF3".toInt())
                     } else {
                         method = "나는둘다"
-                        tv_ticketMethod.setBackgroundColor("#4febe3".toInt())
                     }
                     value = jsonObject.getString("value")
                     var _id = jsonObject.getString("_id")
-
-                    salesList.add(i, SalesModel(title, price, userName, method, value))
+                    println("2")
+                    salesList.add(i, SalesModel(title, price, userName, method, value, quantity))
                     salesListView.adapter = adapter
                     salesListView.layoutManager = LinearLayoutManager(this@SalesListActivity, RecyclerView.VERTICAL, false)
                 }
