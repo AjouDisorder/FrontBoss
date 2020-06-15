@@ -23,7 +23,6 @@
         android:usesCleartextTraffic="true">
         <activity android:name=".SearchEditAddressActivity"></activity>
         <activity android:name=".Home.MartInfoActivity" />
-        <activity android:name=".UserPayActivity" />
         <activity android:name=".Home.PromoteListActivity" />
         <activity android:name=".Home.MenuListActivity" />
         <activity android:name=".Home.LicenseCheckActivity" />
