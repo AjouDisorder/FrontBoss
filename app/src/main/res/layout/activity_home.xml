@@ -41,7 +41,7 @@
                 android:layout_marginBottom="16dp">
                 <ImageView
                     android:id="@+id/mart_home_img"
-                    android:src="@drawable/img_bob"
+                    android:src="@drawable/chires1"
                     android:scaleType="centerCrop"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"/>

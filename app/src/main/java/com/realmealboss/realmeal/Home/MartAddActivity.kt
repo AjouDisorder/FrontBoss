@@ -134,29 +134,29 @@ class MartAddActivity : AppCompatActivity() {
 //                return@setOnClickListener
 //            }
 
-            val file = File(currentPhotoPath)
-            //val requestUserId = RequestBody.create(MediaType.parse("multipart/form-data"),BossData.getROid())
-            var requestImage: MultipartBody.Part? = null
-            var requestFile = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), file)
-            requestImage = MultipartBody.Part.createFormData("img", file.getName(), requestFile)
-
-            println(requestFile)
-            println(requestImage)
-
-            iMyService.createPicture(requestImage).enqueue(object : Callback<ResponseBody>{
-                override fun onFailure(call: Call<ResponseBody>?, t: Throwable?) {
-                    println("실패")
-                    println(t?.message.toString())
-                }
-                override fun onResponse(
-                    call: Call<ResponseBody>?,
-                    response: Response<ResponseBody>?
-                ) {
-                    var result = response?.body()?.string()
-                    println(result)
-
-                }
-            })
+//            val file = File(currentPhotoPath)
+//            //val requestUserId = RequestBody.create(MediaType.parse("multipart/form-data"),BossData.getROid())
+//            var requestImage: MultipartBody.Part? = null
+//            var requestFile = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), file)
+//            requestImage = MultipartBody.Part.createFormData("img", file.getName(), requestFile)
+//
+//            println(requestFile)
+//            println(requestImage)
+//
+//            iMyService.createPicture(requestImage).enqueue(object : Callback<ResponseBody>{
+//                override fun onFailure(call: Call<ResponseBody>?, t: Throwable?) {
+//                    println("실패")
+//                    println(t?.message.toString())
+//                }
+//                override fun onResponse(
+//                    call: Call<ResponseBody>?,
+//                    response: Response<ResponseBody>?
+//                ) {
+//                    var result = response?.body()?.string()
+//                    println(result)
+//
+//                }
+//            })
 
             iMyService.createRestaurant(BossData.getOid(), name, type, address, phone, intro, lat.toDouble(), lng.toDouble()).enqueue(object : Callback<ResponseBody> {
                 override fun onFailure(call: Call<ResponseBody>?, t: Throwable?) {

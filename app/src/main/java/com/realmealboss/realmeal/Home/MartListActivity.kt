@@ -38,11 +38,6 @@ class MartListActivity : AppCompatActivity() {
         val retrofit = RetrofitClient.getInstance()
         iMyService = retrofit.create(IMyService::class.java)
 
-        mart_add_button.setOnClickListener{
-            val intent = Intent(this, LicenseCheckActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
         val resIdList = ArrayList<String>()
         val resTitleList = ArrayList<String>()
         val martList = ArrayList<MartModel>()
@@ -51,7 +46,8 @@ class MartListActivity : AppCompatActivity() {
 
         iMyService.getRestaurant(BossData.getOid()).enqueue(object : Callback<ResponseBody> {
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                println("실패")
+                println("레스토랑 불러오기 실패")
+                println(t.toString())
             }
 
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
@@ -88,6 +84,11 @@ class MartListActivity : AppCompatActivity() {
         //martListView.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
         //martListView.layoutManager = GridLayoutManager(this, 2)
 
+        mart_add_button.setOnClickListener{
+            val intent = Intent(this, LicenseCheckActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
     }
 
     fun settingPermission(){

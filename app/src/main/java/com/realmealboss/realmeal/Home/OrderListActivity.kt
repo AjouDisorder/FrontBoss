@@ -72,7 +72,7 @@ class OrderListActivity : AppCompatActivity() {
                     }else{
                         method="나는 둘다"
                     }
-                    value = jsonObject.getString("value")
+                    value = jsonObject.getString("messageForBoss")
                     var _id = jsonObject.getString("_id")
 
                     valueList.add(i,value)
@@ -105,23 +105,29 @@ class OrderListActivity : AppCompatActivity() {
                 val result = result.contents
                 Toast.makeText(this, "Scanned: " + result, Toast.LENGTH_LONG).show()
 
-                select = valueList.indexOf(result)
-                iMyService.setTicketDisable(idList.get(select)).enqueue(object : Callback<ResponseBody>{
-                    override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                if (result in valueList){
+                    select = valueList.indexOf(result)
+                    iMyService.setTicketDisable(idList.get(select)).enqueue(object : Callback<ResponseBody>{
+                        override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
 
-                    }
-                    override fun onResponse(
-                        call: Call<ResponseBody>,
-                        response: Response<ResponseBody>
-                    ) {
-                        var result = response.body()?.string()
-                        println(result)
-                        Toast.makeText(this@OrderListActivity, "인증 완료", Toast.LENGTH_LONG).show()
-                        val intent = Intent(this@OrderListActivity, OrderListActivity::class.java)
-                        startActivity(intent)
-                        finish()
-                    }
-                })
+                        }
+                        override fun onResponse(
+                            call: Call<ResponseBody>,
+                            response: Response<ResponseBody>
+                        ) {
+                            var result = response.body()?.string()
+                            println(result)
+                            Toast.makeText(this@OrderListActivity, "인증 완료", Toast.LENGTH_LONG).show()
+                            val intent = Intent(this@OrderListActivity, OrderListActivity::class.java)
+                            startActivity(intent)
+                            finish()
+                        }
+                    })
+                } else{
+                    Toast.makeText(this@OrderListActivity, "유효하지 않은 식권입니다", Toast.LENGTH_LONG).show()
+                }
+
+
 
             }
         } else {
