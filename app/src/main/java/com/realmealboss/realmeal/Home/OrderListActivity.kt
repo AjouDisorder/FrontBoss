@@ -72,13 +72,14 @@ class OrderListActivity : AppCompatActivity() {
                     }else{
                         method="나는 둘다"
                     }
-                    value = jsonObject.getString("messageForBoss")
+                    value = jsonObject.getString("value")
                     var _id = jsonObject.getString("_id")
-
                     valueList.add(i,value)
                     idList.add(i,_id)
 
-                    orderList.add(i, OrderModel(title,price,userName,method, value,quantity))
+                    val messageForBoss = jsonObject.getString("messageForBoss")
+
+                    orderList.add(i, OrderModel(title,price,userName,method, messageForBoss, quantity))
                     orderListView.adapter = adapter
                     orderListView.layoutManager = LinearLayoutManager(this@OrderListActivity, RecyclerView.VERTICAL, false)
                 }
@@ -103,7 +104,7 @@ class OrderListActivity : AppCompatActivity() {
                 Toast.makeText(this, "취소!!", Toast.LENGTH_LONG).show()
             } else {
                 val result = result.contents
-                Toast.makeText(this, "Scanned: " + result, Toast.LENGTH_LONG).show()
+//                Toast.makeText(this, "Scanned: " + result, Toast.LENGTH_LONG).show()
 
                 if (result in valueList){
                     select = valueList.indexOf(result)
@@ -126,9 +127,6 @@ class OrderListActivity : AppCompatActivity() {
                 } else{
                     Toast.makeText(this@OrderListActivity, "유효하지 않은 식권입니다", Toast.LENGTH_LONG).show()
                 }
-
-
-
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data)
