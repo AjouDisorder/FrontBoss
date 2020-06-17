@@ -3,7 +3,11 @@ package com.realmealboss.realmeal.Home.Promote
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 import com.realmealboss.realmeal.R
+import kotlinx.android.synthetic.main.item_mart.view.*
 import kotlinx.android.synthetic.main.item_promote.view.*
 
 class PromoteAdapter (val list:List<PromoteModel>):RecyclerView.Adapter<PromoteViewHolder>(){
@@ -26,6 +30,16 @@ class PromoteAdapter (val list:List<PromoteModel>):RecyclerView.Adapter<PromoteV
     override fun onBindViewHolder(holder: PromoteViewHolder, position: Int) {
 
         holder.containerView.iv_menuPicture.setImageResource(menuTypeToIcons[list[position].type]!!)
+
+        val storage = Firebase.storage
+        val storageReference = storage.reference
+        val pathReference = storageReference.child("promotes/${list[position]._id}.jpg")
+        pathReference.downloadUrl.addOnSuccessListener {uri ->
+            Glide.with(holder.containerView)
+                .load(uri.toString())
+                .into(holder.containerView.iv_menuPicture)
+        }.addOnFailureListener{}
+
         holder.containerView.tv_menuTitle.text = list[position].title
         holder.containerView.tv_discount.text = list[position].discount.toString()
         holder.containerView.tv_discountedPrice.text = list[position].price.toString()
