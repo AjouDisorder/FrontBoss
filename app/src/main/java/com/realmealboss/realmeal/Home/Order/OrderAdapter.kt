@@ -1,5 +1,6 @@
 package com.realmealboss.realmeal.Home.Order
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -22,6 +23,13 @@ class OrderAdapter (val list:List<OrderModel>): RecyclerView.Adapter<OrderViewHo
         holder.containerView.tv_ticketPrice.text = list[position].price.toString()
         holder.containerView.tv_ticketUser.text = list[position].userName
         holder.containerView.tv_ticketMethod.text = list[position].method
+        if(list[position].method == "매장 식사") {
+            holder.containerView.tv_ticketMethod.setBackgroundColor(Color.parseColor("#431F63"))
+        }else if(list[position].method == "방문 포장"){
+            holder.containerView.tv_ticketMethod.setBackgroundColor(Color.parseColor("#FF9FF3"))
+        }else{
+            holder.containerView.tv_ticketMethod.setBackgroundColor(Color.parseColor("#fffeee"))
+        }
         holder.containerView.tv_ticketValue.text = list[position].value
         holder.containerView.tv_ticketQuantity.text = list[position].quantity.toString()
 

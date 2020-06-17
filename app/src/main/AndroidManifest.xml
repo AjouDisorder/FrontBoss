@@ -45,7 +45,6 @@
         <activity android:name=".Home.MartAddActivity" />
         <activity android:name=".Home.HomeActivity" />
         <activity android:name=".JoinActivity" />
-        <activity android:name=".RtrofitTestActivity" />
         <activity android:name=".KakaoInfoActivity" /> <!-- 카카오 -->
         <meta-data
             android:name="com.kakao.sdk.AppKey"
