@@ -65,8 +65,9 @@ class PromoteListActivity : AppCompatActivity() {
                     start_time = jsonObject.getString("startDateObject").substring(11,16)
                     end_time = jsonObject.getString("endDateObject").substring(11,16)
                     method = jsonObject.getString("method")
+                    var _id = jsonObject.getString("_id")
 
-                    promoteList.add(i, PromoteModel(title,type,discount,originPrice,price,start_time,end_time,quantity,method))
+                    promoteList.add(i, PromoteModel(title,type,discount,originPrice,price,start_time,end_time,quantity,method,_id))
                     promoteListView.adapter = adapter
                     promoteListView.layoutManager = LinearLayoutManager(this@PromoteListActivity, RecyclerView.VERTICAL, false)
                 }

@@ -17,6 +17,7 @@ import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Gallery
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.FileProvider
@@ -44,9 +45,10 @@ class MartAddActivity : AppCompatActivity() {
 
     lateinit var iMyService: IMyService
 
+    val GALLERY = 0
     var REQUEST_IMAGE_CAPTURE = 2
     var currentPhotoPath: String = ""
-    lateinit var tempSelectFile: File
+    var tempSelectFile: File? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -179,22 +181,22 @@ class MartAddActivity : AppCompatActivity() {
                     BossData.setROid(_id)
                     BossData.setRTitle(title)
 
-                    val storage = Firebase.storage
-                    val storageRef = storage.reference
-                    val imagesRef: StorageReference? = storageRef.child("marts/${_id}.jpg")
+                    if(currentPhotoPath != "") {
+                        val storage = Firebase.storage
+                        val storageRef = storage.reference
+                        val imagesRef: StorageReference? = storageRef.child("marts/${_id}.jpg")
 
-                    mart_add_img.isDrawingCacheEnabled = true
-                    mart_add_img.buildDrawingCache()
-                    val bitmap = (mart_add_img.drawable as BitmapDrawable).bitmap
-                    val baos = ByteArrayOutputStream()
-                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
-                    val data = baos.toByteArray()
-
-                    var uploadTask = imagesRef?.putBytes(data)
-                    uploadTask?.addOnFailureListener{
-                        println("firebase err")
-                    }?.addOnSuccessListener {
-                        println("firebase success")
+                        var uploadTask = imagesRef?.putFile(tempSelectFile!!.toUri())
+                        uploadTask?.continueWithTask() {
+                            return@continueWithTask imagesRef?.downloadUrl
+                        }?.addOnSuccessListener { uri ->
+                            println(uri.toString())
+                            Toast.makeText(this@MartAddActivity, "업로드 성공", Toast.LENGTH_LONG).show()
+                            val intent = Intent(this@MartAddActivity, HomeActivity::class.java)
+                            startActivity(intent)
+                            finish()
+                        }
+                    }else{
                         val intent = Intent(this@MartAddActivity, HomeActivity::class.java)
                         startActivity(intent)
                         finish()
@@ -265,7 +267,7 @@ class MartAddActivity : AppCompatActivity() {
                     "JPEG_" + date + ".jpeg")
                 val output:OutputStream = FileOutputStream(tempSelectFile)
                 image.compress(Bitmap.CompressFormat.JPEG, 100, output)
-                currentPhotoPath = tempSelectFile.absolutePath
+                currentPhotoPath = tempSelectFile!!.absolutePath
             }catch (ioe:IOException){
                 ioe.printStackTrace()
             }
@@ -294,6 +296,7 @@ class MartAddActivity : AppCompatActivity() {
 
         if(requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
             val file = File(currentPhotoPath)
+            tempSelectFile = file
             if (Build.VERSION.SDK_INT < 28) {
                 val bitmap = MediaStore.Images.Media
                     .getBitmap(contentResolver, Uri.fromFile(file))

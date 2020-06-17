@@ -63,7 +63,7 @@ class MartListActivity : AppCompatActivity() {
                     resIdList.add(_id)
                     resTitleList.add(title)
                     // 마트정보 GET
-                    martList.add(i, MartModel(R.drawable.img_bob, title, type))
+                    martList.add(i, MartModel(R.drawable.img_bob, title, type, _id))
                     martListView.adapter = adapter
                     martListView.layoutManager = LinearLayoutManager(this@MartListActivity, RecyclerView.VERTICAL, false)
                     //martListView.layoutManager = GridLayoutManager(this, 2)

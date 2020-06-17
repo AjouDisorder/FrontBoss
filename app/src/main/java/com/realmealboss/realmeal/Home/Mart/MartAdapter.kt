@@ -4,7 +4,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
+import com.realmealboss.realmeal.BossData
 import com.realmealboss.realmeal.R
+import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.item_mart.view.*
 
 class MartAdapter(val list:List<MartModel>, val layoutId: Int): RecyclerView.Adapter<MartViewHolder>() {
@@ -38,8 +43,16 @@ class MartAdapter(val list:List<MartModel>, val layoutId: Int): RecyclerView.Ada
     }
 
     override fun onBindViewHolder(holder: MartViewHolder, position: Int) {
-        //holder.containerView.martImage.setImageResource(list[position].ImageId)
         holder.containerView.martImage.setImageResource(restaurantTypeToIcons[list[position].type] as Int)
+
+        val storage = Firebase.storage
+        val storageReference = storage.reference
+        val pathReference = storageReference.child("marts/${list[position]._id}.jpg")
+        pathReference.downloadUrl.addOnSuccessListener {uri ->
+            Glide.with(holder.containerView)
+                .load(uri.toString())
+                .into(holder.containerView.martImage)
+        }.addOnFailureListener{}
 
         holder.containerView.martName.text = list[position].name
 

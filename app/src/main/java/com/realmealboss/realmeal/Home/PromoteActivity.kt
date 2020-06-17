@@ -21,6 +21,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.core.content.FileProvider
+import androidx.core.net.toUri
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.ktx.Firebase
@@ -232,41 +233,66 @@ class PromoteActivity : AppCompatActivity() {
                         val jsonObject = JSONObject(result)
                         val menuOid = jsonObject.getString("_id")
 
-                        val storage = Firebase.storage
-                        val storageRef = storage.reference
-                        val imagesRef: StorageReference? = storageRef.child("promotes/${menuOid}.jpg")
+                        if (currentPhotoPath != "") {
+                            val storage = Firebase.storage
+                            val storageRef = storage.reference
+                            val imagesRef: StorageReference? =
+                                storageRef.child("promotes/${menuOid}.jpg")
 
-                        promote_info_img.isDrawingCacheEnabled = true
-                        promote_info_img.buildDrawingCache()
-                        val bitmap = (promote_info_img.drawable as BitmapDrawable).bitmap
-                        val baos = ByteArrayOutputStream()
-                        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
-                        val data = baos.toByteArray()
+                            var uploadTask = imagesRef?.putFile(tempSelectFile.toUri())
+                            uploadTask?.continueWithTask() {
+                                return@continueWithTask imagesRef?.downloadUrl
+                            }?.addOnSuccessListener { uri ->
+                                println(uri.toString())
+                                Toast.makeText(this@PromoteActivity, "업로드 성공", Toast.LENGTH_LONG)
+                                    .show()
+                                iMyService.topicSend(BossData.getROid(), title + " 메뉴")
+                                    .enqueue(object : Callback<ResponseBody> {
+                                        override fun onFailure(
+                                            call: Call<ResponseBody>,
+                                            t: Throwable
+                                        ) {
 
-                        var uploadTask = imagesRef?.putBytes(data)
-                        uploadTask?.addOnFailureListener{
-                            println("firebase err")
-                        }?.addOnSuccessListener {
-                            println("firebase success")
-                            iMyService.topicSend(BossData.getROid(),title + " 메뉴").enqueue(object : Callback<ResponseBody>{
-                                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                                        }
 
-                                }
-                                override fun onResponse(
-                                    call: Call<ResponseBody>,
-                                    response: Response<ResponseBody>
-                                ) {
-                                    var result = response.body()?.string()
-                                    println(result)
+                                        override fun onResponse(
+                                            call: Call<ResponseBody>,
+                                            response: Response<ResponseBody>
+                                        ) {
+                                            var result = response.body()?.string()
+                                            println(result)
 
-                                }
-                            })
-                            val intent = Intent(this@PromoteActivity, PromoteListActivity::class.java)
+                                        }
+                                    })
+
+                                val intent = Intent(this@PromoteActivity, HomeActivity::class.java)
+                                startActivity(intent)
+                                finish()
+                            }
+                        }else{
+                            iMyService.topicSend(BossData.getROid(), title + " 메뉴")
+                                .enqueue(object : Callback<ResponseBody> {
+                                    override fun onFailure(
+                                        call: Call<ResponseBody>,
+                                        t: Throwable
+                                    ) {
+                                    }
+                                    override fun onResponse(
+                                        call: Call<ResponseBody>,
+                                        response: Response<ResponseBody>
+                                    ) {
+                                        var result = response.body()?.string()
+                                        println(result)
+                                    }
+                                })
+
+                            val intent = Intent(this@PromoteActivity, HomeActivity::class.java)
                             startActivity(intent)
                             finish()
                         }
                     }
                 })
+
         }
     }
 
@@ -340,6 +366,7 @@ class PromoteActivity : AppCompatActivity() {
 
         if(requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
             val file = File(currentPhotoPath)
+            tempSelectFile = file
             if (Build.VERSION.SDK_INT < 28) {
                 val bitmap = MediaStore.Images.Media
                     .getBitmap(contentResolver, Uri.fromFile(file))

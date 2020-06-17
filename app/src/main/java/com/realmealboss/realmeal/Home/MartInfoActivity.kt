@@ -19,6 +19,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.core.content.FileProvider
+import androidx.core.net.toUri
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.ktx.storage
@@ -190,22 +191,22 @@ class MartInfoActivity : AppCompatActivity() {
                     BossData.setROid(_id)
                     BossData.setRTitle(title)
 
-                    val storage = Firebase.storage
-                    val storageRef = storage.reference
-                    val imagesRef: StorageReference? = storageRef.child("marts/${_id}.jpg")
+                    if(currentPhotoPath != "") {
+                        val storage = Firebase.storage
+                        val storageRef = storage.reference
+                        val imagesRef: StorageReference? = storageRef.child("marts/${_id}.jpg")
 
-                    mart_info_img.isDrawingCacheEnabled = true
-                    mart_info_img.buildDrawingCache()
-                    val bitmap = (mart_info_img.drawable as BitmapDrawable).bitmap
-                    val baos = ByteArrayOutputStream()
-                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
-                    val data = baos.toByteArray()
-
-                    var uploadTask = imagesRef?.putBytes(data)
-                    uploadTask?.addOnFailureListener{
-                        println("firebase err")
-                    }?.addOnSuccessListener {
-                        println("firebase success")
+                        var uploadTask = imagesRef?.putFile(tempSelectFile!!.toUri())
+                        uploadTask?.continueWithTask() {
+                            return@continueWithTask imagesRef?.downloadUrl
+                        }?.addOnSuccessListener { uri ->
+                            println(uri.toString())
+                            Toast.makeText(this@MartInfoActivity, "업로드 성공", Toast.LENGTH_LONG).show()
+                            val intent = Intent(this@MartInfoActivity, HomeActivity::class.java)
+                            startActivity(intent)
+                            finish()
+                        }
+                    }else{
                         val intent = Intent(this@MartInfoActivity, HomeActivity::class.java)
                         startActivity(intent)
                         finish()
