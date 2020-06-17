@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.widget.Toast
+import com.google.firebase.iid.FirebaseInstanceId
 import com.realmealboss.realmeal.Retrofit.IMyService
 import com.realmealboss.realmeal.Retrofit.ResponseDTO
 import com.realmealboss.realmeal.Retrofit.RetrofitClient
@@ -31,6 +32,7 @@ class JoinActivity : AppCompatActivity() {
             var bossId = join_id.text.toString()
             var password = join_password.text.toString()
             var name = join_name.text.toString()
+            var bossToken = FirebaseInstanceId.getInstance().getToken().toString();
 
             //Check empty
             if(TextUtils.isEmpty(bossId)){
@@ -45,7 +47,7 @@ class JoinActivity : AppCompatActivity() {
                 Toast.makeText(this,"이름을 입력해주세요", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            iMyService.joinBoss(bossId, password, name).enqueue(object : Callback<ResponseDTO> {
+            iMyService.joinBoss(bossId, password, name, bossToken).enqueue(object : Callback<ResponseDTO> {
                 override fun onFailure(call: Call<ResponseDTO>?, t: Throwable?) {
 
                 }

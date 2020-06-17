@@ -229,6 +229,7 @@ class PromoteActivity : AppCompatActivity() {
                         call: Call<ResponseBody>,
                         response: Response<ResponseBody>
                     ) {
+                        iMyService.topicSend(BossData.getROid(),title)
                         val intent = Intent(this@PromoteActivity, PromoteListActivity::class.java)
                         startActivity(intent)
                         finish()

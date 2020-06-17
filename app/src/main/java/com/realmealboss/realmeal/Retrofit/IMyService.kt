@@ -20,7 +20,8 @@ interface IMyService{
     @POST("boss/signup")
     fun joinBoss(@Field("bossId") bossId: String,
                  @Field("password") password: String,
-                 @Field("name") name: String
+                 @Field("name") name: String,
+                 @Field("bossToken") bossToken: String
         //@Field("age") age: String,
         //@Field("sex") sex: String,
         //@Field("phone") phone: String
@@ -30,6 +31,12 @@ interface IMyService{
     @POST("boss/login")
     fun loginBoss(@Field("bossId") id: String,
                   @Field("password") password: String): Call<ResponseBInfo>
+
+    @FormUrlEncoded
+    @POST("sendPush2")
+    fun topicSend(@Field("topic") topic: String,
+                  @Field("menu") menu: String): Call<ResponseBody>
+
 
     //가게정보관리
     @FormUrlEncoded
