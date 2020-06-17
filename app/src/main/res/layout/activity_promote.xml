@@ -36,24 +36,6 @@
             app:layout_constraintTop_toBottomOf="@+id/home_title">
 
             <TextView
-                android:text="홍보글 타이틀"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-            <com.rengwuxian.materialedittext.MaterialEditText
-                android:id="@+id/pro_menu_name"
-                android:hint="홍보글 타이틀"
-                android:layout_marginBottom="20dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:met_primaryColor="@color/myTextColor"
-                app:met_baseColor="@color/myTextColor"
-                app:met_textColorHint="@color/myTextColor"
-                app:met_iconPadding="0dp">
-            </com.rengwuxian.materialedittext.MaterialEditText>
-
-            <TextView
                 android:text="기존 메뉴 선택"
                 android:textSize="20sp"
                 android:textStyle="bold"
@@ -157,39 +139,6 @@
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-<!--            <RelativeLayout-->
-<!--                xmlns:android="http://schemas.android.com/apk/res/android"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="100dp"-->
-<!--                android:background="#ffffff">-->
-<!--                <DatePicker-->
-<!--                    android:id="@+id/pro_datePicker_a"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:datePickerMode="spinner"-->
-<!--                    android:calendarViewShown="false"/>-->
-
-<!--            </RelativeLayout>-->
-<!--            <TextView-->
-<!--                android:text="                                   ~"-->
-<!--                android:textStyle="bold"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content" />-->
-<!--            <RelativeLayout-->
-<!--                xmlns:android="http://schemas.android.com/apk/res/android"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="100dp"-->
-<!--                android:background="#ffffff"-->
-<!--                android:layout_marginBottom="20dp">-->
-<!--                <DatePicker-->
-<!--                    android:id="@+id/pro_datePicker_b"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:datePickerMode="spinner"-->
-<!--                    android:calendarViewShown="false"/>-->
-
-<!--            </RelativeLayout>-->
-
             <TextView
                 android:text="제한 시간 설정"
                 android:textSize="20sp"
@@ -261,37 +210,6 @@
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-<!--            <RelativeLayout-->
-<!--                xmlns:android="http://schemas.android.com/apk/res/android"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="100dp"-->
-<!--                android:background="#ffffff">-->
-<!--                <TimePicker-->
-<!--                    android:id="@+id/pro_timePicker_a"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:datePickerMode="spinner"-->
-<!--                    android:timePickerMode="spinner"/>-->
-<!--            </RelativeLayout>-->
-<!--            <TextView-->
-<!--                android:text="                                  ~"-->
-<!--                android:textStyle="bold"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"/>-->
-<!--            <RelativeLayout-->
-<!--                xmlns:android="http://schemas.android.com/apk/res/android"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="100dp"-->
-<!--                android:background="#ffffff"-->
-<!--                android:layout_marginBottom="20dp">-->
-<!--                <TimePicker-->
-<!--                    android:id="@+id/pro_timePicker_b"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:datePickerMode="spinner"-->
-<!--                    android:timePickerMode="spinner"/>-->
-<!--            </RelativeLayout>-->
-
             <TextView
                 android:text="제한수량"
                 android:textSize="20sp"
@@ -337,6 +255,50 @@
                     android:text="방문포장"
                     android:textSize="20sp"/>
             </RadioGroup>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="메뉴 홍보글 사진"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/promote_info_img"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <Button
+                    android:id="@+id/promote_img_button"
+                    style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
+                    android:layout_width="160dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="10dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="#FF9FF3"
+                    android:text="앨범에서 사진 고르기"
+                    android:textColor="@android:color/white"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/promote_cam_button"
+                    style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
+                    android:layout_width="160dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="10dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="#FF9FF3"
+                    android:text="지금 사진 찍기"
+                    android:textColor="@android:color/white"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
 
             <TextView
                 android:text="메뉴 설명"

@@ -174,12 +174,12 @@
             <Button
                 android:id="@+id/mart_add_img_button"
                 style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
-                android:layout_width="150dp"
+                android:layout_width="160dp"
                 android:layout_height="30dp"
                 android:layout_margin="10dp"
                 android:layout_marginBottom="20dp"
                 android:background="#FF9FF3"
-                android:text="사진 고르기"
+                android:text="앨범에서 사진 고르기"
                 android:textColor="@android:color/white"
                 android:textSize="15sp"
                 android:textStyle="bold" />
@@ -187,12 +187,12 @@
             <Button
                 android:id="@+id/mart_add_cam_button"
                 style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
-                android:layout_width="150dp"
+                android:layout_width="160dp"
                 android:layout_height="30dp"
                 android:layout_margin="10dp"
                 android:layout_marginBottom="20dp"
                 android:background="#FF9FF3"
-                android:text="사진 찍기"
+                android:text="지금 사진 찍기"
                 android:textColor="@android:color/white"
                 android:textSize="15sp"
                 android:textStyle="bold" />

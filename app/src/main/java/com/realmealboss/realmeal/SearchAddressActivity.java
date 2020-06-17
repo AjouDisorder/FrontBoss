@@ -2,12 +2,16 @@ package com.realmealboss.realmeal;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebChromeClient;
+import android.webkit.WebResourceRequest;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.TextView;
 
@@ -62,7 +66,7 @@ public class SearchAddressActivity extends AppCompatActivity {
         });
 
         // webview url load. php 파일 주소
-        webView.loadUrl("http://101.101.211.145/kakao_address2.php");
+        webView.loadUrl("http://101.101.211.145/kakao_address3.php");
 
     }
 
