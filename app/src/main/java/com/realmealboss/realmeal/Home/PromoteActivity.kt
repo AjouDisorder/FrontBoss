@@ -230,9 +230,20 @@ class PromoteActivity : AppCompatActivity() {
                         response: Response<ResponseBody>
                     ) {
                         iMyService.topicSend(BossData.getROid(),title)
-                        val intent = Intent(this@PromoteActivity, PromoteListActivity::class.java)
-                        startActivity(intent)
-                        finish()
+                            .enqueue(object : Callback<ResponseBody>{
+                                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                                }
+                                override fun onResponse(
+                                    call: Call<ResponseBody>,
+                                    response: Response<ResponseBody>
+                                ){
+                                    val intent = Intent(this@PromoteActivity, PromoteListActivity::class.java)
+                                    startActivity(intent)
+                                    finish()
+
+                                }
+
+                            })
                     }
 
                 })
