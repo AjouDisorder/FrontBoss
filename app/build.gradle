@@ -91,5 +91,7 @@ dependencies {
 
     // 부트페이
     implementation 'com.github.bootpay:client_android_java:3.2.47'
+    implementation 'com.google.firebase:firebase-messaging:20.2.0'
+    implementation 'com.google.firebase:firebase-core:17.4.3'
 
 }

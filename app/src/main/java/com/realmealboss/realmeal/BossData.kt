@@ -11,6 +11,7 @@ class BossData{
         private lateinit var originMenuOid: String
 
 
+
         fun setOid(id:String){
             objectId = id
         }

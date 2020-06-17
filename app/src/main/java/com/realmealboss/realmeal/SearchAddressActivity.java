@@ -58,7 +58,12 @@ public class SearchAddressActivity extends AppCompatActivity {
         webView.addJavascriptInterface(new AndroidBridge(), "TestApp");
 
         // web client 를 chrome 으로 설정
-        webView.setWebChromeClient(new WebChromeClient());
+        webView.setWebChromeClient(new WebChromeClient(){
+            @Override
+            public void onCloseWindow(WebView window){
+
+            }
+        });
 
         // webview url load. php 파일 주소
         webView.loadUrl("http://101.101.211.145/kakao_address3.php");
