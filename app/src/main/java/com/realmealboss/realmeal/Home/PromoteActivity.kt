@@ -1,17 +1,31 @@
 package com.realmealboss.realmeal.Home
 
+import android.app.Activity
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.ImageDecoder
+import android.graphics.drawable.BitmapDrawable
+import android.net.Uri
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Environment
+import android.provider.MediaStore
 import android.text.TextUtils
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.core.content.FileProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.StorageReference
+import com.google.firebase.storage.ktx.storage
 import com.realmealboss.realmeal.BossData
 import com.realmealboss.realmeal.Home.Menu.MenuModel
 import com.realmealboss.realmeal.R
@@ -27,6 +41,8 @@ import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.*
+import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -50,6 +66,9 @@ class PromoteActivity : AppCompatActivity() {
     var bh = cal.get(Calendar.HOUR_OF_DAY)
     var bmi = cal.get(Calendar.MINUTE)
 
+    var REQUEST_IMAGE_CAPTURE = 2
+    var currentPhotoPath: String = ""
+    lateinit var tempSelectFile: File
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,6 +81,13 @@ class PromoteActivity : AppCompatActivity() {
         val menuList = ArrayList<OriginMenuModel>()
         val titleList = ArrayList<String>()
         var selected = 0
+
+        promote_img_button.setOnClickListener{
+            startUpload()
+        }
+        promote_cam_button.setOnClickListener{
+            startCapture()
+        }
 
         iMyService.getRestaurant(BossData.getOid()).enqueue(object : Callback<ResponseBody> {
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
@@ -119,26 +145,6 @@ class PromoteActivity : AppCompatActivity() {
             }
         }
 
-//        val calendar: Calendar = Calendar.getInstance()
-//        val cal = Calendar.getInstance()
-//        val currentTime = calendar.timeInMillis
-//
-//        var ay = calendar.get(Calendar.YEAR)
-//        var am = calendar.get(Calendar.MONTH)
-//        var ad = calendar.get(Calendar.DAY_OF_MONTH)
-//        var ah = cal.get(Calendar.HOUR_OF_DAY)
-//        var ami = cal.get(Calendar.MINUTE)
-//        var ay:Int
-//        var am:Int
-//        var ad:Int
-//        var ah:Int
-//        var ami:Int
-//        var by:Int
-//        var bm:Int
-//        var bd:Int
-//        var bh:Int
-//        var bmi:Int
-
         pro_date_a_button.setOnClickListener{
             val calendar: Calendar = Calendar.getInstance()
             val datePickerDialog = DatePickerDialog(this,
@@ -187,13 +193,6 @@ class PromoteActivity : AppCompatActivity() {
             timePickerDialog.show()
         }
 
-        //pro_datePicker_a.minDate = System.currentTimeMillis()
-        //pro_datePicker_b.minDate = System.currentTimeMillis()
-        //pro_datePicker_a.minDate = currentTime
-        //pro_datePicker_b.minDate = currentTime
-        //pro_datePicker_a.maxDate = nextYear
-        //pro_datePicker_b.maxDate = nextYear
-
         pro_menu_submit.setOnClickListener{
             var title: String = promote_menu_select.selectedItem.toString()
             selected = titleList.indexOf(title)
@@ -229,16 +228,133 @@ class PromoteActivity : AppCompatActivity() {
                         call: Call<ResponseBody>,
                         response: Response<ResponseBody>
                     ) {
-                        iMyService.topicSend(BossData.getROid(),title)
-                        val intent = Intent(this@PromoteActivity, PromoteListActivity::class.java)
-                        startActivity(intent)
-                        finish()
-                    }
+                        val result = response.body()?.string()
+                        val jsonObject = JSONObject(result)
+                        val menuOid = jsonObject.getString("_id")
 
+                        val storage = Firebase.storage
+                        val storageRef = storage.reference
+                        val imagesRef: StorageReference? = storageRef.child("promotes/${menuOid}.jpg")
+
+                        promote_info_img.isDrawingCacheEnabled = true
+                        promote_info_img.buildDrawingCache()
+                        val bitmap = (promote_info_img.drawable as BitmapDrawable).bitmap
+                        val baos = ByteArrayOutputStream()
+                        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+                        val data = baos.toByteArray()
+
+                        var uploadTask = imagesRef?.putBytes(data)
+                        uploadTask?.addOnFailureListener{
+                            println("firebase err")
+                        }?.addOnSuccessListener {
+                            println("firebase success")
+                            iMyService.topicSend(BossData.getROid(),title + " 메뉴").enqueue(object : Callback<ResponseBody>{
+                                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+
+                                }
+                                override fun onResponse(
+                                    call: Call<ResponseBody>,
+                                    response: Response<ResponseBody>
+                                ) {
+                                    var result = response.body()?.string()
+                                    println(result)
+
+                                }
+                            })
+                            val intent = Intent(this@PromoteActivity, PromoteListActivity::class.java)
+                            startActivity(intent)
+                            finish()
+                        }
+                    }
                 })
         }
-
     }
+
+    fun startCapture(){
+        Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
+            takePictureIntent.resolveActivity(packageManager)?.also {
+                val photoFile: File? = try{
+                    createImageFile()
+                }catch(ex: IOException){
+                    null
+                }
+                photoFile?.also{
+                    val photoURI : Uri = FileProvider.getUriForFile(
+                        this,
+                        "com.realmealboss.realmeal.fileprovider",
+                        it
+                    )
+                    takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
+                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
+                }
+            }
+        }
+    }
+    fun startUpload(){
+        val intent = Intent()
+        intent.setType("image/*")
+        intent.setAction(Intent.ACTION_GET_CONTENT)
+        startActivityForResult(intent, 1)
+    }
+    @Throws(IOException::class)
+    private fun createImageFile() : File{
+        val timeStamp : String = SimpleDateFormat("yyyy_MM_dd_HH_mm_ss").format(Date())
+        val storageDir : File? = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+        return File.createTempFile(
+            "JPEG_${timeStamp}_",
+            ".jpeg",
+            storageDir
+        ).apply{
+            currentPhotoPath = absolutePath
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(requestCode == 1 && resultCode == RESULT_OK){
+            val dataUri = data?.getData()
+            promote_info_img.setImageURI(dataUri)
+
+            try {
+                val input = dataUri?.let { contentResolver.openInputStream(it) }
+                val image = BitmapFactory.decodeStream(input)
+                promote_info_img.setImageBitmap(image)
+                input?.close()
+
+                val date = SimpleDateFormat("yyyy_MM_dd_hh_mm_ss").format(Date())
+                val storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+                //val storageDir = File(Environment.getExternalStorageDirectory().toString()+"/Pictures/Test")
+                if(!storageDir!!.exists()){
+                    Log.i("mCurrentPhotoPath1", storageDir.toString())
+                    storageDir.mkdirs()
+                }
+                tempSelectFile = File(storageDir,
+                    "JPEG_" + date + ".jpeg")
+                val output: OutputStream = FileOutputStream(tempSelectFile)
+                image.compress(Bitmap.CompressFormat.JPEG, 100, output)
+                currentPhotoPath = tempSelectFile.absolutePath
+            }catch (ioe: IOException){
+                ioe.printStackTrace()
+            }
+        }
+
+        if(requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
+            val file = File(currentPhotoPath)
+            if (Build.VERSION.SDK_INT < 28) {
+                val bitmap = MediaStore.Images.Media
+                    .getBitmap(contentResolver, Uri.fromFile(file))
+                promote_info_img.setImageBitmap(bitmap)
+            } else {
+                val decode = ImageDecoder.createSource(
+                    this.contentResolver,
+                    Uri.fromFile(file)
+                )
+                val bitmap = ImageDecoder.decodeBitmap(decode)
+                promote_info_img.setImageBitmap(bitmap)
+            }
+        }
+    }
+
     override fun onBackPressed() {
         //super.onBackPressed()
         val intent = Intent(this, PromoteListActivity::class.java)

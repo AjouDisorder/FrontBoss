@@ -5,6 +5,7 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.ImageDecoder
+import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -20,11 +21,15 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.FileProvider
 import androidx.core.net.toUri
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.StorageReference
+import com.google.firebase.storage.ktx.storage
 import com.gun0912.tedpermission.PermissionListener
 import com.gun0912.tedpermission.TedPermission
 import com.realmealboss.realmeal.*
 import com.realmealboss.realmeal.Retrofit.*
 import kotlinx.android.synthetic.main.activity_mart_add.*
+import kotlinx.android.synthetic.main.activity_promote.*
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import org.json.JSONObject
@@ -37,9 +42,9 @@ import java.util.*
 
 class MartAddActivity : AppCompatActivity() {
 
-    var REQUEST_IMAGE_CAPTURE = 2
-
     lateinit var iMyService: IMyService
+
+    var REQUEST_IMAGE_CAPTURE = 2
     var currentPhotoPath: String = ""
     lateinit var tempSelectFile: File
 
@@ -174,9 +179,26 @@ class MartAddActivity : AppCompatActivity() {
                     BossData.setROid(_id)
                     BossData.setRTitle(title)
 
-                    val intent = Intent(this@MartAddActivity, HomeActivity::class.java)
-                    startActivity(intent)
-                    finish()
+                    val storage = Firebase.storage
+                    val storageRef = storage.reference
+                    val imagesRef: StorageReference? = storageRef.child("marts/${_id}.jpg")
+
+                    mart_add_img.isDrawingCacheEnabled = true
+                    mart_add_img.buildDrawingCache()
+                    val bitmap = (mart_add_img.drawable as BitmapDrawable).bitmap
+                    val baos = ByteArrayOutputStream()
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+                    val data = baos.toByteArray()
+
+                    var uploadTask = imagesRef?.putBytes(data)
+                    uploadTask?.addOnFailureListener{
+                        println("firebase err")
+                    }?.addOnSuccessListener {
+                        println("firebase success")
+                        val intent = Intent(this@MartAddActivity, HomeActivity::class.java)
+                        startActivity(intent)
+                        finish()
+                    }
                 }
             })
         }
