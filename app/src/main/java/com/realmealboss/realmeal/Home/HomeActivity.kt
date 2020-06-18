@@ -23,9 +23,7 @@ class HomeActivity : AppCompatActivity() {
 
         pathReference.downloadUrl.addOnSuccessListener {uri ->
             println(uri.toString())
-            Glide.with(this)
-                .load(uri.toString())
-                .into(mart_home_img)
+            Glide.with(this).load(uri.toString()).into(mart_home_img)
         }.addOnFailureListener{}
 
         //val httpsReference = storage.getReferenceFromUrl(storageUrl.toString())

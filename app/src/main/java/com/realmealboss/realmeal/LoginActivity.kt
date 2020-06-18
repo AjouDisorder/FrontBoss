@@ -38,12 +38,10 @@ class LoginActivity : AppCompatActivity() {
 
         //event
         login_button.setOnClickListener{
-            println("123")
             loginUser(login_id.text.toString(),login_password.text.toString())
         }
 
         kakao_button.setOnClickListener {
-            //Toast.makeText(this,"Kakao",Toast.LENGTH_SHORT).show()
             val intent = Intent(this, KakaoInfoActivity::class.java)
             startActivity(intent)
         }
@@ -68,7 +66,6 @@ class LoginActivity : AppCompatActivity() {
         iMyService.loginBoss(id, password).enqueue(object : Callback<ResponseBInfo> {
             override fun onFailure(call: Call<ResponseBInfo>?, t: Throwable?) {
                 Toast.makeText(this@LoginActivity,"연결 오류!!",Toast.LENGTH_SHORT).show()
-                println("0")
             }
 
             override fun onResponse(
@@ -79,10 +76,8 @@ class LoginActivity : AppCompatActivity() {
                 if(response?.body()?.result.toString() == "login failed") {
                     Toast.makeText(this@LoginActivity,"로그인 정보가 없거나 일치하지 않습니다.",Toast.LENGTH_SHORT).show()
                 }else{
-                    println("1")
                     BossData.setOid(response?.body()?._id.toString())
                     BossData.setBid(response?.body()?.bossId.toString())
-                    println("2")
                     val intent = Intent(this@LoginActivity, MartListActivity::class.java)
                     startActivity(intent)
                     finish()
