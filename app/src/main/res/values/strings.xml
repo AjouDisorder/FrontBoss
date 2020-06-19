@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">RealMeal</string>
+    <string name="app_name">그때그밥</string>
     <string name="title_activity_list">ListActivity</string>
 
     <!-- 카카오 APP KEY -->
