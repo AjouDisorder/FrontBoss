@@ -39,6 +39,12 @@ interface IMyService{
                   @Field("menu") menu: String): Call<ResponseBody>
 
 
+    @FormUrlEncoded
+    @POST("sendPush2")
+    fun topicSend(@Field("topic") topic: String,
+                  @Field("menu") menu: String): Call<ResponseBody>
+
+
     //가게정보관리
     @FormUrlEncoded
     @POST("boss/createRestaurant")
