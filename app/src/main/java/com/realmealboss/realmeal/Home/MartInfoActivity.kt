@@ -20,6 +20,7 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.core.content.FileProvider
 import androidx.core.net.toUri
+import com.bumptech.glide.Glide
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.ktx.storage
@@ -29,6 +30,7 @@ import com.realmealboss.realmeal.Retrofit.IMyService
 import com.realmealboss.realmeal.Retrofit.RetrofitClient
 import com.realmealboss.realmeal.SearchAddressActivity
 import com.realmealboss.realmeal.SearchEditAddressActivity
+import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.activity_mart_add.*
 import kotlinx.android.synthetic.main.activity_mart_info.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -72,7 +74,14 @@ class MartInfoActivity : AppCompatActivity() {
         mart_info_cam_button.setOnClickListener{
             startCapture()
         }
+        val storage = Firebase.storage
+        val storageReference = storage.reference
+        val pathReference = storageReference.child("marts/${BossData.getROid()}.jpg")
 
+        pathReference.downloadUrl.addOnSuccessListener {uri ->
+            println(uri.toString())
+            Glide.with(this).load(uri.toString()).into(mart_info_img)
+        }.addOnFailureListener{}
 
         val items = resources.getStringArray(R.array.res_type)
         val typeAdapter = ArrayAdapter(applicationContext,android.R.layout.simple_spinner_dropdown_item,items)

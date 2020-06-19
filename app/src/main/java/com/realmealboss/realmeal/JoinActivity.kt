@@ -56,7 +56,6 @@ class JoinActivity : AppCompatActivity() {
                     call: Call<ResponseDTO>?,
                     response: Response<ResponseDTO>?
                 ) {
-                    Toast.makeText(this@JoinActivity,response?.body().toString(), Toast.LENGTH_SHORT).show()
                     println(response?.body().toString())
                     if(response?.body()?.result == "signup success") {
                         dup_text.text = ""
