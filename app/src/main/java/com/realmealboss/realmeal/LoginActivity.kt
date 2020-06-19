@@ -65,7 +65,7 @@ class LoginActivity : AppCompatActivity() {
             Toast.makeText(this,"비밀번호를 입력해 주세요",Toast.LENGTH_SHORT).show()
             return;
         }
-        var token = FirebaseInstanceId.getInstance().getToken().toString();
+        val token = FirebaseInstanceId.getInstance().getToken().toString();
 
         iMyService.loginBoss(id, password, token).enqueue(object : Callback<ResponseBInfo> {
             override fun onFailure(call: Call<ResponseBInfo>?, t: Throwable?) {
