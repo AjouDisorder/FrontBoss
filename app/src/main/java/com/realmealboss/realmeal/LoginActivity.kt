@@ -2,12 +2,13 @@ package com.realmealboss.realmeal
 
 import android.content.Intent
 import android.content.pm.PackageManager
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Base64
 import android.util.Log
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.iid.FirebaseInstanceId
 import com.realmealboss.realmeal.Home.MartListActivity
 import com.realmealboss.realmeal.Retrofit.IMyService
 import com.realmealboss.realmeal.Retrofit.ResponseBInfo
@@ -64,8 +65,9 @@ class LoginActivity : AppCompatActivity() {
             Toast.makeText(this,"비밀번호를 입력해 주세요",Toast.LENGTH_SHORT).show()
             return;
         }
+        var token = FirebaseInstanceId.getInstance().getToken().toString();
 
-        iMyService.loginBoss(id, password).enqueue(object : Callback<ResponseBInfo> {
+        iMyService.loginBoss(id, password, token).enqueue(object : Callback<ResponseBInfo> {
             override fun onFailure(call: Call<ResponseBInfo>?, t: Throwable?) {
                 Toast.makeText(this@LoginActivity,"연결 오류!!",Toast.LENGTH_SHORT).show()
                 println("0")

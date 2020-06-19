@@ -30,7 +30,9 @@ interface IMyService{
     @FormUrlEncoded
     @POST("boss/login")
     fun loginBoss(@Field("bossId") id: String,
-                  @Field("password") password: String): Call<ResponseBInfo>
+                  @Field("password") password: String,
+                  @Field("token") token : String
+    ): Call<ResponseBInfo>
 
     @FormUrlEncoded
     @POST("sendPush2")
