@@ -3,6 +3,10 @@ package com.realmealboss.realmeal.Home
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.ImageView
+import com.bumptech.glide.Glide
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 import com.realmealboss.realmeal.BossData
 import com.realmealboss.realmeal.R
 import kotlinx.android.synthetic.main.activity_home.*
@@ -13,7 +17,17 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
-        //mart_home_img
+        val storage = Firebase.storage
+        val storageReference = storage.reference
+        val pathReference = storageReference.child("marts/${BossData.getROid()}.jpg")
+
+        pathReference.downloadUrl.addOnSuccessListener {uri ->
+            println(uri.toString())
+            Glide.with(this).load(uri.toString()).into(mart_home_img)
+        }.addOnFailureListener{}
+
+        //val httpsReference = storage.getReferenceFromUrl(storageUrl.toString())
+
         mart_home_title.text = BossData.getRTitle()
 
         mart_info_button.setOnClickListener{

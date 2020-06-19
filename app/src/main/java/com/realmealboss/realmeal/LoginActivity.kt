@@ -31,7 +31,7 @@ class LoginActivity : AppCompatActivity() {
 
         //callback = SessionCallback()
         //Session.getCurrentSession().addCallback(callback)
-       //Session.getCurrentSession().checkAndImplicitOpen()
+        //Session.getCurrentSession().checkAndImplicitOpen()
 
         // Init retrofit API
         val retrofit = RetrofitClient.getInstance()

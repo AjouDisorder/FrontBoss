@@ -5,6 +5,7 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.ImageDecoder
+import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -16,15 +17,20 @@ import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Gallery
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.FileProvider
 import androidx.core.net.toUri
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.StorageReference
+import com.google.firebase.storage.ktx.storage
 import com.gun0912.tedpermission.PermissionListener
 import com.gun0912.tedpermission.TedPermission
 import com.realmealboss.realmeal.*
 import com.realmealboss.realmeal.Retrofit.*
 import kotlinx.android.synthetic.main.activity_mart_add.*
+import kotlinx.android.synthetic.main.activity_promote.*
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import org.json.JSONObject
@@ -37,11 +43,12 @@ import java.util.*
 
 class MartAddActivity : AppCompatActivity() {
 
-    var REQUEST_IMAGE_CAPTURE = 2
-
     lateinit var iMyService: IMyService
+
+    val GALLERY = 0
+    var REQUEST_IMAGE_CAPTURE = 2
     var currentPhotoPath: String = ""
-    lateinit var tempSelectFile: File
+    var tempSelectFile: File? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -126,8 +133,6 @@ class MartAddActivity : AppCompatActivity() {
                 Toast.makeText(this,"전화번호를 입력해주세요", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            Toast.makeText(this, lat +","+ lng, Toast.LENGTH_SHORT).show()
-            println(BossData.getOid())
 
 //            if(TextUtils.isEmpty(currentPhotoPath)){
 //                Toast.makeText(this,"사진을 입력해주세요", Toast.LENGTH_SHORT).show()
@@ -174,9 +179,26 @@ class MartAddActivity : AppCompatActivity() {
                     BossData.setROid(_id)
                     BossData.setRTitle(title)
 
-                    val intent = Intent(this@MartAddActivity, HomeActivity::class.java)
-                    startActivity(intent)
-                    finish()
+                    if(currentPhotoPath != "") {
+                        val storage = Firebase.storage
+                        val storageRef = storage.reference
+                        val imagesRef: StorageReference? = storageRef.child("marts/${_id}.jpg")
+
+                        var uploadTask = imagesRef?.putFile(tempSelectFile!!.toUri())
+                        uploadTask?.continueWithTask() {
+                            return@continueWithTask imagesRef?.downloadUrl
+                        }?.addOnSuccessListener { uri ->
+                            println(uri.toString())
+                            Toast.makeText(this@MartAddActivity, "업로드 성공", Toast.LENGTH_LONG).show()
+                            val intent = Intent(this@MartAddActivity, HomeActivity::class.java)
+                            startActivity(intent)
+                            finish()
+                        }
+                    }else{
+                        val intent = Intent(this@MartAddActivity, HomeActivity::class.java)
+                        startActivity(intent)
+                        finish()
+                    }
                 }
             })
         }
@@ -243,7 +265,7 @@ class MartAddActivity : AppCompatActivity() {
                     "JPEG_" + date + ".jpeg")
                 val output:OutputStream = FileOutputStream(tempSelectFile)
                 image.compress(Bitmap.CompressFormat.JPEG, 100, output)
-                currentPhotoPath = tempSelectFile.absolutePath
+                currentPhotoPath = tempSelectFile!!.absolutePath
             }catch (ioe:IOException){
                 ioe.printStackTrace()
             }
@@ -272,6 +294,7 @@ class MartAddActivity : AppCompatActivity() {
 
         if(requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
             val file = File(currentPhotoPath)
+            tempSelectFile = file
             if (Build.VERSION.SDK_INT < 28) {
                 val bitmap = MediaStore.Images.Media
                     .getBitmap(contentResolver, Uri.fromFile(file))
@@ -294,6 +317,4 @@ class MartAddActivity : AppCompatActivity() {
         startActivity(intent)
         finish()
     }
-
-
 }

@@ -33,7 +33,6 @@ interface IMyService{
                   @Field("password") password: String,
                   @Field("token") token : String
     ): Call<ResponseBInfo>
-
     @FormUrlEncoded
     @POST("sendPush2")
     fun topicSend(@Field("topic") topic: String,

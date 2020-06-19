@@ -9,6 +9,7 @@ data class PromoteModel(
     val start_time:String,
     val end_time:String,
     val quantity:Number,
-    val method:String
+    val method:String,
+    val _id:String
 
 )

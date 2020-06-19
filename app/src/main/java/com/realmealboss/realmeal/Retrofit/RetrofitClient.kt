@@ -11,10 +11,9 @@ object RetrofitClient {
     fun getInstance():Retrofit{
         if(instance == null)
             instance = Retrofit.Builder()
-                .baseUrl("http://192.168.35.129:3000") // 주소값 바꿔주기
+                .baseUrl("http://101.101.211.145:3000") // 주소값 바꿔주기
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
         return instance!!
     }
 }
-//101.101.211.145

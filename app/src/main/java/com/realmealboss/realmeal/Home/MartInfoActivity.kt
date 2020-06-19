@@ -1,19 +1,36 @@
 package com.realmealboss.realmeal.Home
 
+import android.app.Activity
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.ImageDecoder
+import android.graphics.drawable.BitmapDrawable
+import android.net.Uri
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Environment
+import android.provider.MediaStore
 import android.text.TextUtils
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.core.content.FileProvider
+import androidx.core.net.toUri
+import com.bumptech.glide.Glide
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.StorageReference
+import com.google.firebase.storage.ktx.storage
 import com.realmealboss.realmeal.BossData
 import com.realmealboss.realmeal.R
 import com.realmealboss.realmeal.Retrofit.IMyService
 import com.realmealboss.realmeal.Retrofit.RetrofitClient
 import com.realmealboss.realmeal.SearchAddressActivity
 import com.realmealboss.realmeal.SearchEditAddressActivity
+import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.activity_mart_add.*
 import kotlinx.android.synthetic.main.activity_mart_info.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -25,11 +42,17 @@ import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.io.File
+import java.io.*
+import java.text.SimpleDateFormat
+import java.util.*
 
 class MartInfoActivity : AppCompatActivity() {
 
     lateinit var iMyService: IMyService
+
+    var REQUEST_IMAGE_CAPTURE = 2
+    var currentPhotoPath: String = ""
+    lateinit var tempSelectFile: File
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,6 +68,20 @@ class MartInfoActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
+        mart_info_img_button.setOnClickListener{
+            startUpload()
+        }
+        mart_info_cam_button.setOnClickListener{
+            startCapture()
+        }
+        val storage = Firebase.storage
+        val storageReference = storage.reference
+        val pathReference = storageReference.child("marts/${BossData.getROid()}.jpg")
+
+        pathReference.downloadUrl.addOnSuccessListener {uri ->
+            println(uri.toString())
+            Glide.with(this).load(uri.toString()).into(mart_info_img)
+        }.addOnFailureListener{}
 
         val items = resources.getStringArray(R.array.res_type)
         val typeAdapter = ArrayAdapter(applicationContext,android.R.layout.simple_spinner_dropdown_item,items)
@@ -163,15 +200,136 @@ class MartInfoActivity : AppCompatActivity() {
                     BossData.setROid(_id)
                     BossData.setRTitle(title)
 
-                    val intent = Intent(this@MartInfoActivity, HomeActivity::class.java)
-                    startActivity(intent)
-                    finish()
+                    if(currentPhotoPath != "") {
+                        val storage = Firebase.storage
+                        val storageRef = storage.reference
+                        val imagesRef: StorageReference? = storageRef.child("marts/${_id}.jpg")
+
+                        var uploadTask = imagesRef?.putFile(tempSelectFile!!.toUri())
+                        uploadTask?.continueWithTask() {
+                            return@continueWithTask imagesRef?.downloadUrl
+                        }?.addOnSuccessListener { uri ->
+                            println(uri.toString())
+                            Toast.makeText(this@MartInfoActivity, "업로드 성공", Toast.LENGTH_LONG).show()
+                            val intent = Intent(this@MartInfoActivity, HomeActivity::class.java)
+                            startActivity(intent)
+                            finish()
+                        }
+                    }else{
+                        val intent = Intent(this@MartInfoActivity, HomeActivity::class.java)
+                        startActivity(intent)
+                        finish()
+                    }
                 }
             })
         }
-
-
     }
+
+    fun startCapture(){
+        Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
+            takePictureIntent.resolveActivity(packageManager)?.also {
+                val photoFile: File? = try{
+                    createImageFile()
+                }catch(ex: IOException){
+                    null
+                }
+                photoFile?.also{
+                    val photoURI : Uri = FileProvider.getUriForFile(
+                        this,
+                        "com.realmealboss.realmeal.fileprovider",
+                        it
+                    )
+                    takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
+                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
+                }
+            }
+        }
+    }
+    fun startUpload(){
+        val intent = Intent()
+        intent.setType("image/*")
+        intent.setAction(Intent.ACTION_GET_CONTENT)
+        startActivityForResult(intent, 1)
+    }
+    @Throws(IOException::class)
+    private fun createImageFile() : File{
+        val timeStamp : String = SimpleDateFormat("yyyy_MM_dd_HH_mm_ss").format(Date())
+        val storageDir : File? = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+        return File.createTempFile(
+            "JPEG_${timeStamp}_",
+            ".jpeg",
+            storageDir
+        ).apply{
+            currentPhotoPath = absolutePath
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(requestCode == 1 && resultCode == RESULT_OK){
+            val dataUri = data?.getData()
+            mart_info_img.setImageURI(dataUri)
+
+            try {
+                val input = dataUri?.let { contentResolver.openInputStream(it) }
+                val image = BitmapFactory.decodeStream(input)
+                mart_info_img.setImageBitmap(image)
+                input?.close()
+
+                val date = SimpleDateFormat("yyyy_MM_dd_hh_mm_ss").format(Date())
+                val storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+                if(!storageDir!!.exists()){
+                    Log.i("mCurrentPhotoPath1", storageDir.toString())
+                    storageDir.mkdirs()
+                }
+                tempSelectFile = File(storageDir,
+                    "JPEG_" + date + ".jpeg")
+                val output: OutputStream = FileOutputStream(tempSelectFile)
+                image.compress(Bitmap.CompressFormat.JPEG, 100, output)
+                currentPhotoPath = tempSelectFile.absolutePath
+            }catch (ioe: IOException){
+                ioe.printStackTrace()
+            }
+            /*
+            try {
+                val input = dataUri?.let { contentResolver.openInputStream(it) }
+                val image = BitmapFactory.decodeStream(input)
+                mart_add_img.setImageBitmap(image)
+                input?.close()
+
+                val date = SimpleDateFormat("yyyy_MM_dd_hh_mm_ss").format(Date())
+                val storageDir = File(Environment.getExternalStorageDirectory().toString()+"/Pictures/Test")
+                if(!storageDir.exists()){
+                    Log.i("mCurrentPhotoPath1", storageDir.toString())
+                    storageDir.mkdirs()
+                }
+                tempSelectFile = File(storageDir,
+                    "temp_" + date + ".jpeg")
+                val output:OutputStream = FileOutputStream(tempSelectFile)
+                image.compress(Bitmap.CompressFormat.JPEG, 100, output)
+            }catch (ioe:IOException){
+                ioe.printStackTrace()
+            }*/
+
+        }
+
+        if(requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
+            val file = File(currentPhotoPath)
+            if (Build.VERSION.SDK_INT < 28) {
+                val bitmap = MediaStore.Images.Media
+                    .getBitmap(contentResolver, Uri.fromFile(file))
+                mart_info_img.setImageBitmap(bitmap)
+            } else {
+                val decode = ImageDecoder.createSource(
+                    this.contentResolver,
+                    Uri.fromFile(file)
+                )
+                val bitmap = ImageDecoder.decodeBitmap(decode)
+                mart_info_img.setImageBitmap(bitmap)
+            }
+        }
+    }
+
 
     override fun onBackPressed() {
         super.onBackPressed()

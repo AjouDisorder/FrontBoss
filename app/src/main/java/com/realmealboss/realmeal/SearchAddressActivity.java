@@ -10,6 +10,7 @@ import android.os.Message;
 import android.util.Log;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebChromeClient;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.TextView;
@@ -56,31 +57,8 @@ public class SearchAddressActivity extends AppCompatActivity {
         // JavaScript이벤트에 대응할 함수를 정의 한 클래스를 붙여줌
         webView.addJavascriptInterface(new AndroidBridge(), "TestApp");
 
-        webView.setWebChromeClient(new WebChromeClient());
-
         // web client 를 chrome 으로 설정
-        /*webView.setWebChromeClient(new WebChromeClient()
-        {
-            @Override
-            public boolean onCreateWindow(WebView view, boolean dialog,
-                                          boolean userGesture, Message resultMsg){
-                WebView newWebView = new WebView(SearchAddressActivity.this);
-                WebSettings webSettings = newWebView.getSettings();
-                webSettings.setJavaScriptEnabled(true);
-                final Dialog dialog1 = new Dialog(SearchAddressActivity.this);
-                dialog1.setContentView(newWebView);
-                dialog1.show();
-                newWebView.setWebChromeClient(new WebChromeClient() {
-                    @Override
-                    public void onCloseWindow(WebView window) {
-                        dialog1.dismiss();
-                    }
-                });
-                ((WebView.WebViewTransport)resultMsg.obj).setWebView(newWebView);
-                resultMsg.sendToTarget();
-                return true;
-            }
-        });*/
+        webView.setWebChromeClient(new WebChromeClient());
 
         // webview url load. php 파일 주소
         webView.loadUrl("http://101.101.211.145/kakao_address3.php");

@@ -8,20 +8,12 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:5150194836:android:c7bb4c171a1fc044aec881",
+        "mobilesdk_app_id": "1:5150194836:android:9be1c9bf7b8f720baec881",
         "android_client_info": {
           "package_name": "com.realmealboss.realmeal"
         }
       },
       "oauth_client": [
-        {
-          "client_id": "5150194836-n93lkubo1ba3evth534auusjve4280ah.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.realmealboss.realmeal",
-            "certificate_hash": "f2ae5701cf2b8f4f908ad75ad85e1ef899a6e098"
-          }
-        },
         {
           "client_id": "5150194836-dq09e8aaijtglja0knrqnd1quv921bq1.apps.googleusercontent.com",
           "client_type": 3
