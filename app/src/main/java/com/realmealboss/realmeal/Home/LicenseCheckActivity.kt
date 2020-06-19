@@ -24,7 +24,7 @@ class LicenseCheckActivity : AppCompatActivity() {
     }
     override fun onBackPressed() {
         //super.onBackPressed()
-        val intent = Intent(this, HomeActivity::class.java)
+        val intent = Intent(this, MartListActivity::class.java)
         startActivity(intent)
         finish()
     }
