@@ -3,8 +3,10 @@ package com.realmealboss.realmeal.Home.Mart
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import com.realmealboss.realmeal.BossData
@@ -43,7 +45,6 @@ class MartAdapter(val list:List<MartModel>, val layoutId: Int): RecyclerView.Ada
     }
 
     override fun onBindViewHolder(holder: MartViewHolder, position: Int) {
-        holder.containerView.martImage.setImageResource(restaurantTypeToIcons[list[position].type] as Int)
 
         val storage = Firebase.storage
         val storageReference = storage.reference
@@ -51,8 +52,12 @@ class MartAdapter(val list:List<MartModel>, val layoutId: Int): RecyclerView.Ada
         pathReference.downloadUrl.addOnSuccessListener {uri ->
             Glide.with(holder.containerView)
                 .load(uri.toString())
+                .transition(DrawableTransitionOptions.withCrossFade(700))
                 .into(holder.containerView.martImage)
-        }.addOnFailureListener{}
+        }.addOnFailureListener{
+            holder.containerView.martImage.setImageResource(restaurantTypeToIcons[list[position].type] as Int)
+            holder.containerView.martImage.startAnimation(AnimationUtils.loadAnimation(holder.containerView.context, R.anim.fadein))
+        }
 
         holder.containerView.martName.text = list[position].name
 

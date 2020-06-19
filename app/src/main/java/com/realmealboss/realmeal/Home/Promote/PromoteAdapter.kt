@@ -2,8 +2,10 @@ package com.realmealboss.realmeal.Home.Promote
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import com.realmealboss.realmeal.R
@@ -29,7 +31,6 @@ class PromoteAdapter (val list:List<PromoteModel>):RecyclerView.Adapter<PromoteV
 
     override fun onBindViewHolder(holder: PromoteViewHolder, position: Int) {
 
-        holder.containerView.iv_menuPicture.setImageResource(menuTypeToIcons[list[position].type]!!)
 
         val storage = Firebase.storage
         val storageReference = storage.reference
@@ -37,8 +38,12 @@ class PromoteAdapter (val list:List<PromoteModel>):RecyclerView.Adapter<PromoteV
         pathReference.downloadUrl.addOnSuccessListener {uri ->
             Glide.with(holder.containerView)
                 .load(uri.toString())
+                .transition(DrawableTransitionOptions.withCrossFade(700))
                 .into(holder.containerView.iv_menuPicture)
-        }.addOnFailureListener{}
+        }.addOnFailureListener{
+            holder.containerView.iv_menuPicture.setImageResource(menuTypeToIcons[list[position].type]!!)
+            holder.containerView.iv_menuPicture.startAnimation(AnimationUtils.loadAnimation(holder.containerView.context, R.anim.fadein))
+        }
 
         holder.containerView.tv_menuTitle.text = list[position].title
         holder.containerView.tv_discount.text = list[position].discount.toString()

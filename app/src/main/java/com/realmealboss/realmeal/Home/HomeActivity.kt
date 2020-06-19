@@ -1,15 +1,19 @@
 package com.realmealboss.realmeal.Home
 
 import android.content.Intent
+import android.graphics.drawable.Drawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import com.realmealboss.realmeal.BossData
 import com.realmealboss.realmeal.R
 import kotlinx.android.synthetic.main.activity_home.*
+import kotlinx.android.synthetic.main.item_promote.view.*
 
 class HomeActivity : AppCompatActivity() {
 
@@ -23,8 +27,14 @@ class HomeActivity : AppCompatActivity() {
 
         pathReference.downloadUrl.addOnSuccessListener {uri ->
             println(uri.toString())
-            Glide.with(this).load(uri.toString()).into(mart_home_img)
-        }.addOnFailureListener{}
+            Glide.with(this)
+                .load(uri.toString())
+                .transition(DrawableTransitionOptions.withCrossFade(700))
+                .into(mart_home_img)
+        }.addOnFailureListener{
+            mart_home_img.setImageDrawable(getDrawable(R.drawable.chires1))
+            mart_home_img.startAnimation(AnimationUtils.loadAnimation(this, R.anim.fadein))
+        }
 
         //val httpsReference = storage.getReferenceFromUrl(storageUrl.toString())
 
