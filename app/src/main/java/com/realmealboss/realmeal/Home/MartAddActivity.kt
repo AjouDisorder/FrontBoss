@@ -133,8 +133,6 @@ class MartAddActivity : AppCompatActivity() {
                 Toast.makeText(this,"전화번호를 입력해주세요", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            Toast.makeText(this, lat +","+ lng, Toast.LENGTH_SHORT).show()
-            println(BossData.getOid())
 
 //            if(TextUtils.isEmpty(currentPhotoPath)){
 //                Toast.makeText(this,"사진을 입력해주세요", Toast.LENGTH_SHORT).show()
@@ -319,6 +317,4 @@ class MartAddActivity : AppCompatActivity() {
         startActivity(intent)
         finish()
     }
-
-
 }
