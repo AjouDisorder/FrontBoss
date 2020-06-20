@@ -79,7 +79,7 @@ class OrderListActivity : AppCompatActivity() {
 
                     val messageForBoss = jsonObject.getString("messageForBoss")
 
-                    orderList.add(i, OrderModel(title,price,userName,method, messageForBoss, quantity))
+                    orderList.add(0, OrderModel(title,price,userName,method, messageForBoss, quantity))
                     orderListView.adapter = adapter
                     orderListView.layoutManager = LinearLayoutManager(this@OrderListActivity, RecyclerView.VERTICAL, false)
                 }

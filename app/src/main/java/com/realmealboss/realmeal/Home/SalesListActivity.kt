@@ -71,7 +71,7 @@ class SalesListActivity : AppCompatActivity() {
                     }
                     value = jsonObject.getString("value")
                     var _id = jsonObject.getString("_id")
-                    salesList.add(i, SalesModel(title, price, userName, method, value, quantity))
+                    salesList.add(0, SalesModel(title, price, userName, method, value, quantity))
                     salesListView.adapter = adapter
                     salesListView.layoutManager = LinearLayoutManager(this@SalesListActivity, RecyclerView.VERTICAL, false)
                 }
